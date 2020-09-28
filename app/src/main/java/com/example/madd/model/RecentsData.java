@@ -4,6 +4,7 @@ public class RecentsData {
 
     String placeName;
     String countryName;
+
     String price;
     Integer imageUrl;
 
