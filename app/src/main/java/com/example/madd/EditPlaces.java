@@ -7,22 +7,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class EditPlaces extends AppCompatActivity {
 
-    Button home;
-
+    Button updatebtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_edit_places);
 
-        home=findViewById(R.id.button2);
-        home.setOnClickListener(new View.OnClickListener() {
+        updatebtn= findViewById(R.id.editsubmit);
+
+        updatebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, PlaceActivity.class);
+                Intent intent = new Intent(EditPlaces.this, DetailsActivity.class);
                 startActivity(intent);
             }
+
         });
     }
 }
