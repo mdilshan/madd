@@ -1,21 +1,16 @@
 package com.example.madd;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.madd.adapter.RecentsAdapter;
-import com.example.madd.model.RecentData;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.madd.adapter.RecentHotelAdapter;
 
 public class HotelContentList extends AppCompatActivity {
 
     RecyclerView recentRecycler;
-    RecentsAdapter recentsAdapter;
+    RecentHotelAdapter recentHotelAdapter;
 
 //    public HotelContentList(RecyclerView recentRecycler, RecentsAdapter recentsAdapter) {
 //        this.recentRecycler = recentRecycler;

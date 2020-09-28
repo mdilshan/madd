@@ -7,9 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.example.madd.adapter.AllHotelsAdapter;
-import com.example.madd.adapter.TopHotelsAdapter;
-import com.example.madd.model.RecentData;
-import com.example.madd.model.TopHotelsData;
 import com.example.madd.model.AllHotelsData;
 
 import java.util.ArrayList;

@@ -2,7 +2,7 @@ package com.example.madd.model;
 
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView;
 
-public class RecentData {
+public class RecentHotelData {
 
     String hotelName;
     String CityName;
@@ -13,7 +13,7 @@ public class RecentData {
 
 
 
-    public RecentData(String hotelName, String CityName, String Price,Integer imageUrl) {
+    public RecentHotelData(String hotelName, String CityName, String Price, Integer imageUrl) {
         this.hotelName = hotelName;
         this.CityName = CityName;
         this.price = Price;

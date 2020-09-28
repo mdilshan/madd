@@ -9,9 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.madd.adapter.RecentsAdapter;
+import com.example.madd.adapter.RecentHotelAdapter;
 import com.example.madd.adapter.TopHotelsAdapter;
-import com.example.madd.model.RecentData;
+import com.example.madd.model.RecentHotelData;
 import com.example.madd.model.TopHotelsData;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.List;
 public class HotelMainPage extends AppCompatActivity {
     Button SeeAll;
     RecyclerView recentRecycler, topHotelsRecycler;
-    RecentsAdapter recentsAdapter;
+    RecentHotelAdapter recentHotelAdapter;
     TopHotelsAdapter topHotelsAdapters;
 
     @Override
@@ -38,19 +38,19 @@ public class HotelMainPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-     List<RecentData> recentDataList = new ArrayList<>();
+     List<RecentHotelData> recentHotelDataList = new ArrayList<>();
 
 
 
 
-        recentDataList.add(new RecentData("New Grand", "Chilaw", "From Rs.12,000", R.drawable.hotel10));
-        recentDataList.add(new RecentData("Fresh Up","Hambantota","From Rs.7499",R.drawable.hotel2));
-         recentDataList.add(new RecentData("New Grand","Chilaw","From Rs.12,000",R.drawable.hotel1));
-        recentDataList.add(new RecentData("Fresh Up","Hambantota","From Rs.7499",R.drawable.hotel11));
-        recentDataList.add(new RecentData("New Grand","Chilaw","From Rs.12,000",R.drawable.hotel3));
-        recentDataList.add(new RecentData("Fresh Up","Hambantota","From Rs.7499",R.drawable.hotel4));
+        recentHotelDataList.add(new RecentHotelData("New Grand", "Chilaw", "From Rs.12,000", R.drawable.hotel10));
+        recentHotelDataList.add(new RecentHotelData("Fresh Up","Hambantota","From Rs.7499",R.drawable.hotel2));
+         recentHotelDataList.add(new RecentHotelData("New Grand","Chilaw","From Rs.12,000",R.drawable.hotel1));
+        recentHotelDataList.add(new RecentHotelData("Fresh Up","Hambantota","From Rs.7499",R.drawable.hotel11));
+        recentHotelDataList.add(new RecentHotelData("New Grand","Chilaw","From Rs.12,000",R.drawable.hotel3));
+        recentHotelDataList.add(new RecentHotelData("Fresh Up","Hambantota","From Rs.7499",R.drawable.hotel4));
 
-        setRecentRecycler(recentDataList);
+        setRecentRecycler(recentHotelDataList);
 
         List<TopHotelsData> topPlacesDataList = new ArrayList<>();
         topPlacesDataList.add(new TopHotelsData("The Ballroom","Matale","From Rs.500",R.drawable.hotel5));
@@ -62,13 +62,13 @@ public class HotelMainPage extends AppCompatActivity {
         setTopHotelsRecycler(topPlacesDataList);
 }
 
-    private  void setRecentRecycler(List<RecentData> recentsDataList){
+    private  void setRecentRecycler(List<RecentHotelData> recentsDataList){
 
         recentRecycler = findViewById(R.id.recent_recycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         recentRecycler.setLayoutManager(layoutManager);
-        recentsAdapter = new RecentsAdapter(this, recentsDataList);
-        recentRecycler.setAdapter(recentsAdapter);
+        recentHotelAdapter = new RecentHotelAdapter(this, recentsDataList);
+        recentRecycler.setAdapter(recentHotelAdapter);
 
     }
 

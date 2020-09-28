@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.madd.R;
-import com.example.madd.model.RecentData;
 import com.example.madd.model.TopHotelsData;
 
 import java.util.List;
