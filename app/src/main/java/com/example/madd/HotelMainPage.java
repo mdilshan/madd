@@ -9,7 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.madd.adapter.RecentsAdapter;
+import com.example.madd.adapter.AllHotelsAdapter;
+import com.example.madd.adapter.RecentHotelAdapter;
 import com.example.madd.adapter.TopHotelsAdapter;
 import com.example.madd.model.RecentData;
 import com.example.madd.model.TopHotelsData;
@@ -20,7 +21,7 @@ import java.util.List;
 public class HotelMainPage extends AppCompatActivity {
     Button SeeAll;
     RecyclerView recentRecycler, topHotelsRecycler;
-    RecentsAdapter recentsAdapter;
+    RecentHotelAdapter recentsAdapter;
     TopHotelsAdapter topHotelsAdapters;
 
     @Override
@@ -67,7 +68,7 @@ public class HotelMainPage extends AppCompatActivity {
         recentRecycler = findViewById(R.id.recent_recycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         recentRecycler.setLayoutManager(layoutManager);
-        recentsAdapter = new RecentsAdapter(this, recentsDataList);
+        recentsAdapter = new RecentHotelAdapter(this, recentsDataList);
         recentRecycler.setAdapter(recentsAdapter);
 
     }

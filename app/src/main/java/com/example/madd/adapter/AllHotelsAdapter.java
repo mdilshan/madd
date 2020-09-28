@@ -1,6 +1,7 @@
 package com.example.madd.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.madd.DetailsActivity;
+import com.example.madd.HotelDetails;
 import com.example.madd.R;
 import com.example.madd.model.AllHotelsData;
-import com.example.madd.model.TopHotelsData;
+import com.example.madd.model.RecentData;
+import com.example.madd.model.RecentsData;
 
 import java.util.List;
 
@@ -66,5 +70,6 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.AllH
     }
 
 
-    }
+
+}
 
