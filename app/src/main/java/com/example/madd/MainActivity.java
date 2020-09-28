@@ -9,18 +9,28 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button home;
+    //Button home;
+    Button GuideBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+    /* SwaythaView
         home=findViewById(R.id.button2);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, PlaceActivity.class);
+*/
+        GuideBtn = findViewById(R.id.guide);
+
+        GuideBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, GuideHome.class);
+
                 startActivity(intent);
             }
         });

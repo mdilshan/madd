@@ -14,6 +14,10 @@
         <activity android:name=".EditPlaces" />
         <activity android:name=".DetailsActivity" />
         <activity android:name=".AddPlaces" />
+        <activity android:name=".GuideJoin"></activity>
+        <activity android:name=".GuideEdit"></activity>
+        <activity android:name=".GuideDetails" />
+        <activity android:name=".GuideHome" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
