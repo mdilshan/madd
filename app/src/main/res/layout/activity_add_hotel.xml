@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8E8E8"
+    tools:context=".AddHotel">
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="0dp"
+        android:layout_height="190dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/join_header_bg" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="0dp"
+        android:layout_height="190dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/join_bottom_bg" />
+
+    <EditText
+        android:id="@+id/etHotelName"
+        android:layout_width="248dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/hotelname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.552"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+    <EditText
+        android:id="@+id/etPlace"
+        android:layout_width="248dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/hotelLocation"
+        app:layout_constraintEnd_toEndOf="@+id/etHotelName"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/etHotelName"
+        app:layout_constraintTop_toBottomOf="@+id/etHotelName" />
+
+    <EditText
+        android:id="@+id/etHotelAbout"
+        android:layout_width="249dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="@string/hotelAbout1"
+        app:layout_constraintEnd_toEndOf="@+id/etPlace"
+        app:layout_constraintStart_toStartOf="@+id/etPlace"
+        app:layout_constraintTop_toBottomOf="@+id/etPlace" />
+
+    <Button
+        android:id="@+id/btnaddHotel"
+        android:layout_width="248dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="64dp"
+        android:background="@drawable/book_button_bg"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Add Hotel"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/etHotelAbout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/etHotelAbout"
+        app:layout_constraintTop_toBottomOf="@+id/etHotelAbout" />
+
+    <TextView
+        android:id="@+id/etAddNewHotel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Add New Hotel"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView9" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
