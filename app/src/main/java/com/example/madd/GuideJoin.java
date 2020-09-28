@@ -7,21 +7,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class GuideJoin extends AppCompatActivity {
 
-    Button GuideBtn;
-
+    Button joinsubmit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_guide_join);
 
-        GuideBtn = findViewById(R.id.guide);
+        joinsubmit = findViewById(R.id.joinsubmit);
 
-        GuideBtn.setOnClickListener(new View.OnClickListener() {
+        joinsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, GuideHome.class);
+                Intent intent = new Intent(GuideJoin.this, GuideDetails.class);
                 startActivity(intent);
             }
         });

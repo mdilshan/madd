@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">madd</string>
+    <string name="app_name">Lankan Travelers</string>
+    <string name="dialog_message">Join With </string>
+    <string name="dialog_title"> Us</string>
 </resources>
