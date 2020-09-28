@@ -9,6 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PlaceActivity"></activity>
+        <activity android:name=".PlaceSeeAll" />
+        <activity android:name=".EditPlaces" />
+        <activity android:name=".DetailsActivity" />
+        <activity android:name=".AddPlaces" />
         <activity android:name=".GuideJoin"></activity>
         <activity android:name=".GuideEdit"></activity>
         <activity android:name=".GuideDetails" />
