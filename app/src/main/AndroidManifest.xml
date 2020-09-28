@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewHotel"></activity>
+        <activity android:name=".HotelDetails"></activity>
+        <activity android:name=".AddHotel" />
+        <activity android:name=".HotelSeeAll" />
+        <activity android:name=".HotelMainPage" />
+        <activity android:name=".ViewHotel" />
         <activity android:name=".HotelContentList">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

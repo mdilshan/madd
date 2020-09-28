@@ -8,18 +8,27 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-Button GuideHotel;
+Button Hotel,addHotel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GuideHotel = findViewById(R.id.hotel1);
+        Hotel = findViewById(R.id.hotel1);
+        addHotel = findViewById(R.id.btnAddHotel);
 
-        GuideHotel.setOnClickListener(new View.OnClickListener() {
+        Hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ViewHotel.class);
+                Intent intent = new Intent(MainActivity.this, HotelMainPage.class);
+                startActivity(intent);
+            }
+        });
+
+        addHotel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(MainActivity.this,AddNewHotel.class);
                 startActivity(intent);
             }
         });

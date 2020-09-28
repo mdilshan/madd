@@ -2,6 +2,7 @@ package com.example.madd.adapter;
 
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.madd.HotelDetails;
 import com.example.madd.R;
 import com.example.madd.model.RecentData;
 
@@ -41,6 +43,15 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
             holder.hotelName.setText(recentDataList.get(position).getHotelName());
             holder.price.setText(recentDataList.get(position).getPrice());
             holder.hotelImage.setImageResource(recentDataList.get(position).getImageUrl());
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   Intent i = new Intent(context, HotelDetails.class);
+                    context.startActivity(i);
+                }
+            });
+
     }
 
     @Override

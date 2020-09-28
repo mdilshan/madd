@@ -2,4 +2,9 @@
     <string name="app_name">madd</string>
     <string name="dialog_message">Join With </string>
     <string name="dialog_title"> Us</string>
+    <string name="See_All">See all</string>
+    <string name="hotelname">Hotel Name</string>
+    <string name="hotelLocation">Location</string>
+    <string name="hotelAbout" />
+    <string name="hotelAbout1">Hotel About</string>
 </resources>
