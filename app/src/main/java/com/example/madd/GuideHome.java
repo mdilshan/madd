@@ -14,6 +14,7 @@ import com.example.madd.model.GuidesTopData;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class GuideHome extends AppCompatActivity {
 
     RecyclerView guideRecentRecycler, guideTopRecycler;
