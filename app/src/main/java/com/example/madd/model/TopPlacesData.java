@@ -3,8 +3,8 @@ package com.example.madd.model;
 public class TopPlacesData {
 
     String placeName;
-    String countryName;
-    String price;
+    String cityName;
+    String distance;
     Integer imageUrl;
 
     public Integer getImageUrl() {
@@ -15,10 +15,10 @@ public class TopPlacesData {
         this.imageUrl = imageUrl;
     }
 
-    public TopPlacesData(String placeName, String countryName, String price, Integer imageUrl) {
+    public TopPlacesData(String placeName, String cityName, String distance, Integer imageUrl) {
         this.placeName = placeName;
-        this.countryName = countryName;
-        this.price = price;
+        this.cityName = cityName;
+        this.distance = distance;
         this.imageUrl = imageUrl;
     }
 
@@ -30,19 +30,19 @@ public class TopPlacesData {
         this.placeName = placeName;
     }
 
-    public String getCountryName() {
-        return countryName;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
-    public String getPrice() {
-        return price;
+    public String getDistance() {
+        return distance;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 }

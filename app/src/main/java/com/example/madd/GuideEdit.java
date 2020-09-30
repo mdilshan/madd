@@ -15,7 +15,7 @@ public class GuideEdit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_edit);
 
-        editsubmit = findViewById(R.id.editsubmit);
+        editsubmit = findViewById(R.id.saveSubmit);
 
         editsubmit.setOnClickListener(new View.OnClickListener() {
             @Override

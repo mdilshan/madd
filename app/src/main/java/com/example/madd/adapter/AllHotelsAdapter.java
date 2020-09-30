@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.madd.R;
 import com.example.madd.model.AllHotelsData;
-import com.example.madd.model.TopHotelsData;
 
 import java.util.List;
 
@@ -58,7 +57,7 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.AllH
         hotelImage = itemView.findViewById(R.id.hotel_image);
         hotelName = itemView.findViewById(R.id.hotel_name);
         cityName = itemView.findViewById(R.id.city_name);
-        price = itemView.findViewById(R.id.price);
+        price = itemView.findViewById(R.id.distance);
 
 
         }

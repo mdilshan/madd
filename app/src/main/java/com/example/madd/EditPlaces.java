@@ -15,7 +15,7 @@ public class EditPlaces extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_places);
 
-        updatebtn= findViewById(R.id.editsubmit);
+        updatebtn= findViewById(R.id.updateSubmit);
 
         updatebtn.setOnClickListener(new View.OnClickListener() {
             @Override

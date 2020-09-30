@@ -33,11 +33,11 @@ Button Hotel,addHotel;
         });
 
         addHotel.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            Intent intent = new Intent(MainActivity.this, AddNewHotel.class);
-                                        }
-                                    });
+            @Override
+            public void onClick(View view)
+            { Intent intent = new Intent(MainActivity.this, AddNewHotel.class);
+            }
+        });
     /* SwaythaView
         home=findViewById(R.id.button2);
         home.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +50,7 @@ Button Hotel,addHotel;
         GuideBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, GuideHome.class);
+                Intent intent = new Intent(MainActivity.this, PlaceActivity.class);
 
                 startActivity(intent);
             }
@@ -58,5 +58,4 @@ Button Hotel,addHotel;
     }
 }
 
-    }
-}
+
