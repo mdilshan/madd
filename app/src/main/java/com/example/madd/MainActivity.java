@@ -32,19 +32,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-       /* addHotel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            { Intent intent = new Intent(MainActivity.this, AddNewHotel.class);
-            }
-        });*/
-    /* SwaythaView
-        home=findViewById(R.id.button2);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, PlaceActivity.class);
-*/
 
         place.setOnClickListener(new View.OnClickListener() {
             @Override
