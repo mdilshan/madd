@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".HotelDetails"></activity>
 
         <activity android:name=".HotelSeeAll" />
@@ -33,15 +40,12 @@
         <activity android:name=".GuideEdit"></activity>
         <activity android:name=".GuideDetails" />
         <activity android:name=".GuideHome" />
-
-        <activity android:name=".MainActivity">
-            <intent-filter>
+        <activity android:name=".Reviews" android:label="Reviews">
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter> -->
         </activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
