@@ -53,21 +53,21 @@ public class PlaceActivity extends AppCompatActivity {
         // Now here we will add some dummy data in our model class
 
         List<RecentsData> recentsDataList = new ArrayList<>();
-        recentsDataList.add(new RecentsData("Temple of Tooth Relic","Kandy","From Rs.2000",R.drawable.im3));
-        recentsDataList.add(new RecentsData("Angel falls","Nuwareliya","From Rs.3000",R.drawable.im2));
-        recentsDataList.add(new RecentsData("Light House","Colombo","From Rs.3000",R.drawable.im1));
-        recentsDataList.add(new RecentsData("Sigiriya","Sigiriya","From Rs.1500",R.drawable.im6));
-        recentsDataList.add(new RecentsData("Elephant Hall","Pinnawala","From Rs.2500",R.drawable.im5));
-        recentsDataList.add(new RecentsData("Thirukoneswaram Temple","Trincomalee","From Rs.4000",R.drawable.im4));
+        recentsDataList.add(new RecentsData("Temple of Tooth Relic","Kandy","50km",R.drawable.im3));
+        recentsDataList.add(new RecentsData("Angel falls","Nuwareliya","75km",R.drawable.im2));
+        recentsDataList.add(new RecentsData("Light House","Colombo","190km",R.drawable.im1));
+        recentsDataList.add(new RecentsData("Sigiriya","Sigiriya","200km",R.drawable.im6));
+        recentsDataList.add(new RecentsData("Elephant Hall","Pinnawala","250km",R.drawable.im5));
+        recentsDataList.add(new RecentsData("Thirukoneswaram Temple","Trincomalee","120km",R.drawable.im4));
 
         setRecentRecycler(recentsDataList);
 
         List<TopPlacesData> topPlacesDataList = new ArrayList<>();
-        topPlacesDataList.add(new TopPlacesData("Narigama Beach","Hikkaduwa","Rs.2000 - Rs.3000",R.drawable.slide1));
-        topPlacesDataList.add(new TopPlacesData("Adams Peak","Ratnapura","Rs.2500 - Rs.3400",R.drawable.slide2));
-        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","$200 - $500",R.drawable.slide1));
-        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","$200 - $500",R.drawable.slide2));
-        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","$200 - $500",R.drawable.slide1));
+        topPlacesDataList.add(new TopPlacesData("Narigama Beach","Hikkaduwa","200km",R.drawable.slide1));
+        topPlacesDataList.add(new TopPlacesData("Adams Peak","Ratnapura","150km",R.drawable.slide2));
+        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","100km",R.drawable.slide1));
+        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","250km",R.drawable.slide2));
+        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","120km",R.drawable.slide1));
 
         setTopPlacesRecycler(topPlacesDataList);
     }

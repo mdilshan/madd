@@ -40,9 +40,9 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
     @Override
     public void onBindViewHolder(@NonNull RecentsViewHolder holder, int position) {
 
-        holder.cityName.setText(recentsDataList.get(position).getCountryName());
+        holder.cityName.setText(recentsDataList.get(position).getCityName());
         holder.placeName.setText(recentsDataList.get(position).getPlaceName());
-        holder.price.setText(recentsDataList.get(position).getPrice());
+        holder.distance.setText(recentsDataList.get(position).getDistance());
         holder.placeImage.setImageResource(recentsDataList.get(position).getImageUrl());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +63,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
     public static final class RecentsViewHolder extends RecyclerView.ViewHolder{
 
         ImageView placeImage;
-        TextView placeName, cityName, price;
+        TextView placeName, cityName, distance;
 
         public RecentsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,7 +71,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
             placeImage = itemView.findViewById(R.id.place_image);
             placeName = itemView.findViewById(R.id.place_name);
             cityName = itemView.findViewById(R.id.city_name);
-            price = itemView.findViewById(R.id.price);
+            distance = itemView.findViewById(R.id.distance);
 
         }
     }

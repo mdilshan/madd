@@ -31,10 +31,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        place.setOnClickListener((view) -> {
-            Intent intent = new Intent(MainActivity.this, PlaceActivity.class);
-            startActivity(intent);
+
+
+        place.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PlaceActivity.class);
+
+                startActivity(intent);
+            }
         });
+
 
         guides.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,4 +52,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
+
+
+
+
+

@@ -68,7 +68,7 @@ public class RecentHotelAdapter extends RecyclerView.Adapter<RecentHotelAdapter.
         hotelImage = itemView.findViewById(R.id.hotel_image);
         hotelName = itemView.findViewById(R.id.hotel_name);
         cityName = itemView.findViewById(R.id.city_name);
-        price = itemView.findViewById(R.id.price);
+        price = itemView.findViewById(R.id.distance);
 
 
         }
