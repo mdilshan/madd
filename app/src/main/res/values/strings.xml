@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">madd</string>
     <string name="title_activity_reviews">ScrollingActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -91,4 +90,12 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="app_name">VacationTourApp</string>
+    <string name="dialog_message">Join With </string>
+    <string name="dialog_title"> Us</string>
+    <string name="See_All">See all</string>
+    <string name="hotelname">Hotel Name</string>
+    <string name="hotelLocation">Location</string>
+    <string name="hotelAbout" />
+    <string name="hotelAbout1">Hotel About</string>
 </resources>
