@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.madd.model.PlaceDto;
+import com.example.madd.model.RecentsData;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -36,19 +38,29 @@ public class AddPlaces extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                PlaceName = view.findViewById(R.id.etPlace);
-                PlaceLocation = view.findViewById(R.id.etPlaceLocation);
-                PlaceDescription = view.findViewById(R.id.etPlaceAbout);
+                EditText placeName = view.findViewById(R.id.etPlace);
+                EditText placeLocation = view.findViewById(R.id.etPlaceLocation);
+                EditText placeDescription = view.findViewById(R.id.etPlaceAbout);
                 Log.d(TAG, "onClick: " + PlaceName);
+                // me data attributes wens ne ? eke thiyana tika okkoma ganda one
+                // Texts fields wlin,
+                // 1) place name
+                // 2)
+                String id = "abcd-asd-3sdasd";//UUID.randomUUID().toString();
+                Log.d(TAG, "onClick: UUID" + id);
+                String user_id = "user_1";
+                PlaceDto new_place = new PlaceDto(
+                        id,
+                        user_id,
+                        "Temple of Tooth"/*placeName.getText().toString()*/,
+                        "kandy"/*placeLocation.getText().toString()*/,
+                        "Lorem ipsum"/*placeDescription.getText().toString()*/,
+                        "http://abcd.com");
 
-                Map<String, Object> user = new HashMap<>();
-                user.put("Place name", "Temple of Tooth Relic");
-                user.put("Place location", "Kandy");
-                user.put("Place Description", "Lorem Ipsum");
 
                 // Add a new document with a generated ID
-                db.collection("users")
-                        .add(user)
+                db.collection("places")
+                        .add(new_place)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {

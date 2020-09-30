@@ -5,17 +5,17 @@ public class RecentsData {
     String placeName;
     String cityName;
     String distance;
-    Integer imageUrl;
+    int imageUrl;
 
-    public Integer getImageUrl() {
+    public int getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(Integer imageUrl) {
+    public void setImageUrl(int  imageUrl) {
         this.imageUrl = imageUrl;
     }
 
-    public RecentsData(String placeName, String cityName, String distance, Integer imageUrl) {
+    public RecentsData(String placeName, String cityName, String distance, int imageUrl) {
         this.placeName = placeName;
         this.cityName = cityName;
         this.distance = distance;
