@@ -6,10 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.example.madd.model.PlaceDto;
 import com.example.madd.model.RecentsData;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,38 +24,36 @@ import java.util.UUID;
 public class AddPlaces extends AppCompatActivity {
     private static final String TAG = "AddPlaces";
 
-    EditText PlaceName,PlaceLocation,PlaceDescription;
     Button addsubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_places);
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         addsubmit = findViewById(R.id.addSubmit);
+        final EditText placeName = (EditText) findViewById(R.id.etPlace);
+        final EditText placeLocation = (EditText) findViewById(R.id.etPlaceLocation);
+        EditText placeDescription = (EditText) findViewById(R.id.etPlaceAbout);
 
         addsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                EditText placeName = view.findViewById(R.id.etPlace);
-                EditText placeLocation = view.findViewById(R.id.etPlaceLocation);
-                EditText placeDescription = view.findViewById(R.id.etPlaceAbout);
-                Log.d(TAG, "onClick: " + PlaceName);
-                // me data attributes wens ne ? eke thiyana tika okkoma ganda one
-                // Texts fields wlin,
-                // 1) place name
-                // 2)
-                String id = "abcd-asd-3sdasd";//UUID.randomUUID().toString();
-                Log.d(TAG, "onClick: UUID" + id);
+
+                Log.d(TAG, "onClick: " + placeName.getText().toString());
+                String id = UUID.randomUUID().toString();
+
                 String user_id = "user_1";
-                PlaceDto new_place = new PlaceDto(
+                final PlaceDto new_place = new PlaceDto(
                         id,
                         user_id,
-                        "Temple of Tooth"/*placeName.getText().toString()*/,
-                        "kandy"/*placeLocation.getText().toString()*/,
-                        "Lorem ipsum"/*placeDescription.getText().toString()*/,
-                        "http://abcd.com");
+
+                        placeName.getText().toString(),
+                        placeLocation.getText().toString(),
+                        placeLocation.getText().toString(),
+                        "https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                );
 
 
                 // Add a new document with a generated ID
@@ -65,6 +63,7 @@ public class AddPlaces extends AppCompatActivity {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Intent intent = new Intent(AddPlaces.this, DetailsActivity.class);
+                                intent.putExtra("item_id", new_place.id);
                                 startActivity(intent);
                                 Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                             }
