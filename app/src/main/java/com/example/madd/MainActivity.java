@@ -21,7 +21,7 @@ Button Hotel,addHotel;
         setContentView(R.layout.activity_main);
 
 
-        Hotel = findViewById(R.id.hotel1);
+        Hotel = findViewById(R.id.hotels);
         addHotel = findViewById(R.id.btnAddHotelm);
 
         Hotel.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +45,7 @@ Button Hotel,addHotel;
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, PlaceActivity.class);
 */
-        GuideBtn = findViewById(R.id.guide);
+        GuideBtn = findViewById(R.id.guideBtn);
 
         GuideBtn.setOnClickListener(new View.OnClickListener() {
             @Override
