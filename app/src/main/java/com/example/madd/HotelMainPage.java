@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.madd.adapter.RecentHotelAdapter;
 import com.example.madd.adapter.TopHotelsAdapter;
@@ -19,6 +20,7 @@ import java.util.List;
 
 public class HotelMainPage extends AppCompatActivity {
     Button SeeAll;
+    ImageButton AddHotel;
     RecyclerView recentRecycler, topHotelsRecycler;
     RecentHotelAdapter recentHotelAdapter;
     TopHotelsAdapter topHotelsAdapters;
@@ -30,6 +32,15 @@ public class HotelMainPage extends AppCompatActivity {
 
     // Now here we will add some dummy data in our model class
         SeeAll  = findViewById(R.id.btnSeeAll);
+        AddHotel = findViewById(R.id.btnHotelAdd1);
+
+        AddHotel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HotelMainPage.this,AddNewHotel.class);
+                startActivity(intent);
+            }
+        });
 
         SeeAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +49,8 @@ public class HotelMainPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+//
      List<RecentHotelData> recentHotelDataList = new ArrayList<>();
 
 

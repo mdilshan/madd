@@ -22,7 +22,7 @@ Button Hotel,addHotel;
 
 
         Hotel = findViewById(R.id.hotel1);
-        addHotel = findViewById(R.id.btnAddHotel);
+        addHotel = findViewById(R.id.btnAddHotelm);
 
         Hotel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,5 +58,4 @@ Button Hotel,addHotel;
     }
 }
 
-    }
-}
+
