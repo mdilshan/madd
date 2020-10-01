@@ -31,16 +31,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+/**
+ * Review Screen
+ * @Author - https://github.com/mdilshan
+ */
 public class Reviews extends AppCompatActivity {
     private static final String TAG = "Reviews";
     ArrayList<ReviewInterface> items;
-    float overall_rating = 0.0f;
+    double overall_rating = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviews);
-        //seed();
+        //Utils.seed();
         items = new ArrayList<ReviewInterface>();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -73,7 +77,7 @@ public class Reviews extends AppCompatActivity {
                 RatingBar summaryRating = (RatingBar) findViewById(R.id.ratingBarSummary);
 
                 summary.setText(String.format("%1.1f", overall_rating));
-                summaryRating.setRating(overall_rating);
+                summaryRating.setRating((float)overall_rating);
             }
         });
 

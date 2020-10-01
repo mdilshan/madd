@@ -7,25 +7,29 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Utils {
-    public static float getAverage(int length, float sum) {
-        Float cal = sum / length;
+    public static double getAverage(int length, double sum) {
+        double cal = sum / length;
         return roundFloat(cal, 1);
     }
 
-    public static float roundFloat(float d, int place) {
-        BigDecimal bd = new BigDecimal(Float.toString(d));
-        bd = bd.setScale(place, BigDecimal.ROUND_HALF_UP);
-        return bd.floatValue();
+    public static double roundFloat(double d, int place) {
+        DecimalFormat df = new DecimalFormat("0.0");
+        BigDecimal bd = new BigDecimal(Double.toString(d));
+        bd = bd.setScale(place, RoundingMode.HALF_UP);
+        System.out.println(bd.floatValue());
+        return bd.doubleValue();
     }
 
     /**
      * Use to seed the review data collection on firestore
      */
-    public void seed() {
+    public static void seed() {
         ArrayList<ReviewInterface> items = new ArrayList<ReviewInterface>();
         items.add(new ReviewInterface("user_23", "Swyatha ", "2020-09-12", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt", 3.0));
         items.add(new ReviewInterface("user_24","Suwathi", "2020-09-12", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitatio", 1.8));

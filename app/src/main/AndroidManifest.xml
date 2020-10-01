@@ -18,7 +18,7 @@
         </activity>
 
         <activity android:name=".HotelDetails"></activity>
-
+        <activity android:name=".testActivities.ReviewTestActivity"></activity>
         <activity android:name=".HotelSeeAll" />
         <activity android:name=".HotelMainPage" />
         <activity android:name=".ViewHotel" />
