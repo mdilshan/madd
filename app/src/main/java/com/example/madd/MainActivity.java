@@ -31,7 +31,7 @@ Button Hotel,addHotel;
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, HotelMainPage.class);
+                Intent intent = new Intent(MainActivity.this, Reviews.class); //HotelMainPage.class
                 startActivity(intent);
             }
         });

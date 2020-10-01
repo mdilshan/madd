@@ -17,7 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".HotelDetails" />
+        <activity android:name=".testActivities.ReviewTestActivity"></activity>
+>>>>>>> 65f2549f92e5e849e1803f1fc7303d595aa5b1e7
         <activity android:name=".HotelSeeAll" />
         <activity android:name=".HotelMainPage" />
         <activity android:name=".ViewHotel" />

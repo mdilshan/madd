@@ -1,8 +1,12 @@
 package com.example.madd;
 
-import org.junit.Test;
+        import com.example.madd.util.Utils;
 
-import static org.junit.Assert.*;
+        import org.hamcrest.CoreMatchers;
+        import org.junit.Assert;
+        import org.junit.Test;
+
+        import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

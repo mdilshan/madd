@@ -48,7 +48,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(context, DetailsActivity.class);
+                Intent i= new Intent(context, DetailsActivity.class);
                 context.startActivity(i);
             }
         });

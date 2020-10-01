@@ -39,7 +39,7 @@
         </TextView>
 
         <ImageButton
-            android:id="@+id/edit"
+            android:id="@+id/editReviewBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -78,7 +78,7 @@
             android:theme="@style/RatingBar" />
 
         <ImageButton
-            android:id="@+id/delete"
+            android:id="@+id/deleteReviewBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/label1"

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.madd.model.PlaceDto;
@@ -33,40 +34,40 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         Bundle extras = getIntent().getExtras();
-        String item_id = extras.getString("item_id");
-
-        if (item_id == null) {
-            Log.e(TAG, "onCreate: Item Id is null");
-        } else {
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            CollectionReference col = db.collection("places");
-            col
-                    .whereEqualTo("id", item_id)
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Map<String, Object> d = document.getData();
-                                    PlaceDto data = new PlaceDto(
-                                            (String) d.get("id"),
-                                            (String) d.get("user_id"),
-                                            (String) d.get("name"),
-                                            (String) d.get("location"),
-                                            (String) d.get("description"),
-                                            (String) d.get("img_url")
-                                    );
-                                    // SET data to the View
+        if(extras != null) {
+            String item_id = extras.getString("item_id");
+            if (item_id == null) {
+                Log.e(TAG, "onCreate: Item Id is null");
+            } else {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                CollectionReference col = db.collection("places");
+                col
+                        .whereEqualTo("id", item_id)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Map<String, Object> d = document.getData();
+                                        PlaceDto data = new PlaceDto(
+                                                (String) d.get("id"),
+                                                (String) d.get("user_id"),
+                                                (String) d.get("name"),
+                                                (String) d.get("location"),
+                                                (String) d.get("description"),
+                                                (String) d.get("img_url")
+                                        );
+                                        // SET data to the View
+                                    }
+                                } else {
+                                    Log.e(TAG, "onComplete: ", task.getException());
                                 }
-                            } else {
-                                Log.e(TAG, "onComplete: ", task.getException());
                             }
-                        }
-                    });
+                        });
 
+            }
         }
-
         ImageView deleteProfile = findViewById(R.id.deleteBtn);
 
         builder = new AlertDialog.Builder(this);
@@ -143,5 +144,14 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
+        TextView review = (TextView) findViewById(R.id.reviewTxt);
+        review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailsActivity.this, Reviews.class);
+                intent.putExtra("id", "dummyId");
+                startActivity(intent);
+            }
+        });
     }
 }
