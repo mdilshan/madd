@@ -17,7 +17,7 @@ Button Hotel,addHotel;
     //Button home;
     TextView GuideBtn;
 
-    //@SuppressLint("WrongViewCast")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +36,7 @@ Button Hotel,addHotel;
             }
         });
 
+
 //        addHotel.setOnClickListener(new View.OnClickListener() {
 //                                        @Override
 //                                        public void onClick(View view) {
@@ -51,15 +52,33 @@ Button Hotel,addHotel;
 */
 
 
-        GuideBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, GuideHome.class);
+       // GuideBtn.setOnClickListener(new View.OnClickListener() {
 
-                startActivity(intent);
-            }
-        });
+
+//        place.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, PlaceActivity.class);
+//
+//                startActivity(intent);
+//            }
+//        });
+//
+//
+//        guides.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, GuideHome.class);
+//
+//                startActivity(intent);
+//            }
+//        });
+//    }
+
+//}
+//}
+
+
+        }
     }
-}
-
-
