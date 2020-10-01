@@ -49,6 +49,7 @@ Button Hotel,addHotel;
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, PlaceActivity.class);
+<<<<<<< HEAD
 */
 
 
@@ -82,3 +83,23 @@ Button Hotel,addHotel;
 
         }
     }
+=======
+
+                startActivity(intent);
+            }
+        });
+
+
+        guides.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, GuideHome.class);
+
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+
+>>>>>>> 4a5653173b4ba4aef4802f4ecc709c027e2727ec

@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".EditHotel"></activity>
+=======
+        <activity android:name=".GuideSeeAll"></activity>
+        <activity android:name=".HotelDetails" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,9 +23,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".HotelDetails" />
         <activity android:name=".testActivities.ReviewTestActivity"></activity>
->>>>>>> 65f2549f92e5e849e1803f1fc7303d595aa5b1e7
+
         <activity android:name=".HotelSeeAll" />
         <activity android:name=".HotelMainPage" />
         <activity android:name=".ViewHotel" />
@@ -57,5 +61,4 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 </manifest>
