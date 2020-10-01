@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.example.madd.model.PlaceDto;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,11 +34,13 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+
         Bundle extras = getIntent().getExtras();
         String item_id = extras.getString("item_id");
 
         if (item_id == null) {
             Log.e(TAG, "onCreate: Item Id is null");
+
         } else {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             CollectionReference col = db.collection("places");
@@ -77,12 +81,28 @@ public class DetailsActivity extends AppCompatActivity {
 
                 //Uncomment the below code to Set the message and title from the strings.xml file
                 builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
+                final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                 //Setting message manually and performing action on button click
                 builder.setMessage("Do you need to delete your Account ?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+
+                                db.collection("places").document("xYGi8aqkM6fZ3dtYE4vR").delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d(TAG, "Data deleted successfully: ");
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.d(TAG, "Error while deleting data: " + e.getMessage());
+                                            }
+                                        });
+
                                 Toast.makeText(getApplicationContext(), "your account is deleted successfully",
                                         Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(DetailsActivity.this, PlaceActivity.class);
