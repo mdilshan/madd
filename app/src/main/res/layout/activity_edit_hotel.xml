@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddPlaces">
+    android:background="#E8E8E8"
+    tools:context=".EditHotel">
 
     <ImageView
         android:id="@+id/imageView9"
@@ -25,65 +26,65 @@
         app:srcCompat="@drawable/join_bottom_bg" />
 
     <EditText
-        android:id="@+id/etHotelLocation"
+        android:id="@+id/etedHotelName"
         android:layout_width="248dp"
         android:layout_height="41dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Place Name"
+        android:text="@string/hotelname"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.552"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
     <EditText
-        android:id="@+id/etPlaceLocation"
+        android:id="@+id/etedHotelLocation"
         android:layout_width="248dp"
         android:layout_height="42dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Location"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etHotelLocation" />
+        android:text="@string/hotelLocation"
+        app:layout_constraintEnd_toEndOf="@+id/etedHotelName"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/etedHotelName"
+        app:layout_constraintTop_toBottomOf="@+id/etedHotelName" />
 
     <EditText
-        android:id="@+id/etPlaceAbout"
+        android:id="@+id/etedHotelAbout"
         android:layout_width="249dp"
         android:layout_height="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:text="description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPlaceLocation" />
+        android:text="@string/hotelAbout1"
+        app:layout_constraintEnd_toEndOf="@+id/etedHotelLocation"
+        app:layout_constraintStart_toStartOf="@+id/etedHotelLocation"
+        app:layout_constraintTop_toBottomOf="@+id/etedHotelLocation" />
 
     <Button
-        android:id="@+id/addSubmit"
+        android:id="@+id/btnSaveHotel"
         android:layout_width="248dp"
         android:layout_height="45dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/book_button_bg"
         android:fontFamily="@font/rubik_medium"
-        android:text="Add "
+        android:text="Save"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPlaceAbout" />
+        app:layout_constraintEnd_toEndOf="@+id/etedHotelAbout"
+        app:layout_constraintStart_toStartOf="@+id/etedHotelAbout"
+        app:layout_constraintTop_toBottomOf="@+id/etedHotelAbout" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/etEditHotel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="84dp"
         android:fontFamily="@font/roboto_bold"
-        android:text="Add Place"
+        android:text="Edit Hotel Profile"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

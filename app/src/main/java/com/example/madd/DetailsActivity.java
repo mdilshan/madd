@@ -85,8 +85,8 @@ public class DetailsActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
                                 Toast.makeText(getApplicationContext(), "your account is deleted successfully",
                                         Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(DetailsActivity.this, PlaceActivity.class);
-                                startActivity(intent);
+//                                Intent intent = new Intent(DetailsActivity.this, PlaceActivity.class);
+//                                startActivity(intent);
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

@@ -9,7 +9,7 @@
     tools:context=".HotelContentList">
 
     <TextView
-        android:id="@+id/etAddNewHotel"
+        android:id="@+id/etEditHotel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -77,12 +77,12 @@
             android:paddingStart="16dp"
             android:text="Search Restaurants"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@+id/imageView4"
+            app:layout_constraintEnd_toEndOf="@+id/btnBack"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/btnBack"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="16dp"
@@ -213,7 +213,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAddNewHotel"
+        app:layout_constraintTop_toBottomOf="@+id/etEditHotel"
         app:srcCompat="@drawable/final_rect" />
 
     <ImageView
