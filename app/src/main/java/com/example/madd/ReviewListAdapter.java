@@ -19,7 +19,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-
+/**
+ * Custom ArrayAdapter for listing Reviews
+ * @Author - https://github.com/mdilshan
+ */
 public class ReviewListAdapter extends ArrayAdapter<ReviewInterface> {
     private static final String TAG = "ReviewListAdapter";
     private final Activity context;
@@ -38,23 +41,26 @@ public class ReviewListAdapter extends ArrayAdapter<ReviewInterface> {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
 
+        // Reusing Inflater
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.review_item, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
+            if(!items.get(position).name.equals("You")) {
+                viewHolder.editButton.setVisibility(View.INVISIBLE);
+                viewHolder.deletBUtton.setVisibility(View.INVISIBLE);
+            }
         }
 
-        ImageButton editButton = (ImageButton) convertView.findViewById(R.id.editReviewBtn);
-        ImageButton deletBUtton = (ImageButton) convertView.findViewById(R.id.deleteReviewBtn);
-        if(!items.get(position).name.equals("You")) {
-            editButton.setVisibility(View.INVISIBLE);
-            deletBUtton.setVisibility(View.INVISIBLE);
-        }
+        //ImageButton editButton = (ImageButton) convertView.findViewById(R.id.editReviewBtn);
+        //ImageButton deletBUtton = (ImageButton) convertView.findViewById(R.id.deleteReviewBtn);
+
+        // set
         if (items.get(position).name.equals("You")) {
             Log.d(TAG, "getView: ---------------------------------------" + items.get(position).name);
-            editButton.setOnClickListener(new Button.OnClickListener() {
+            viewHolder.editButton.setOnClickListener(new Button.OnClickListener() {
                 final View editView = layoutInflater.inflate(R.layout.edit_review, null);
                 final EditText input = (EditText) editView.findViewById(R.id.editText);
                 final RatingBar ratingBar = (RatingBar) editView.findViewById(R.id.ratingBarEdit);
@@ -107,7 +113,7 @@ public class ReviewListAdapter extends ArrayAdapter<ReviewInterface> {
                 }
             });
 
-            deletBUtton.setOnClickListener(new Button.OnClickListener() {
+            viewHolder.deletBUtton.setOnClickListener(new Button.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -152,8 +158,8 @@ public class ReviewListAdapter extends ArrayAdapter<ReviewInterface> {
                 }
             });
 
-            editButton.setVisibility(View.VISIBLE);
-            deletBUtton.setVisibility(View.VISIBLE);
+            viewHolder.editButton.setVisibility(View.VISIBLE);
+            viewHolder.deletBUtton.setVisibility(View.VISIBLE);
         }
         viewHolder.img.setImageResource(R.drawable.profile_pic);
         viewHolder.name.setText(items.get(position).name);
@@ -173,13 +179,16 @@ public class ReviewListAdapter extends ArrayAdapter<ReviewInterface> {
         final TextView posted_by;
         final RatingBar rating;
         final TextView comment;
-
+        final ImageButton editButton;
+        final ImageButton deletBUtton;
         ViewHolder(View v) {
             this.img = (ImageView) v.findViewById(R.id.icon);
             this.name = (TextView) v.findViewById(R.id.label);
             this.posted_by = (TextView) v.findViewById(R.id.label1);
             this.rating = (RatingBar) v.findViewById(R.id.ratingBar);
             this.comment = (TextView) v.findViewById(R.id.comment);
+            this.editButton = (ImageButton) v.findViewById(R.id.editReviewBtn);
+            this.deletBUtton = (ImageButton) v.findViewById(R.id.deleteReviewBtn);
         }
 
     }

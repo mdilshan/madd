@@ -1,5 +1,9 @@
 package com.example.madd;
 
+/**
+ * Model class used by ReviewListAdapter
+ * @Author - https://github.com/mdilshan
+ */
 public class ReviewInterface {
     public String id;
     public String name;
