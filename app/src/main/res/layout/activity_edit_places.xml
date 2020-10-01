@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".EditPlaces">
 
+    <EditText
+        android:id="@+id/editURL"
+        android:layout_width="249dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="9dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPlaceAbout" />
+
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="0dp"
@@ -25,57 +37,56 @@
         app:srcCompat="@drawable/join_bottom_bg" />
 
     <EditText
-        android:id="@+id/etPlace"
+        android:id="@+id/editPlace"
         android:layout_width="248dp"
         android:layout_height="41dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="52dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Place Name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
     <EditText
-        android:id="@+id/etPlaceLocation"
+        android:id="@+id/editPlaceLocation"
         android:layout_width="248dp"
         android:layout_height="42dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="9dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPlace" />
+        app:layout_constraintTop_toBottomOf="@+id/editPlace" />
 
     <EditText
-        android:id="@+id/etPlaceAbout"
+        android:id="@+id/editPlaceAbout"
         android:layout_width="249dp"
         android:layout_height="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:text="Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPlaceLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/editPlaceLocation" />
 
     <Button
         android:id="@+id/updateSubmit"
         android:layout_width="248dp"
         android:layout_height="45dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginTop="31dp"
         android:background="@drawable/book_button_bg"
         android:fontFamily="@font/rubik_medium"
         android:text="Update"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPlaceAbout" />
+        app:layout_constraintTop_toBottomOf="@+id/editURL" />
 
     <TextView
         android:id="@+id/textView13"

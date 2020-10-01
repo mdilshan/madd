@@ -36,6 +36,7 @@ public class AddPlaces extends AppCompatActivity {
         final EditText placeName = (EditText) findViewById(R.id.etPlace);
         final EditText placeLocation = (EditText) findViewById(R.id.etPlaceLocation);
         final EditText placeDescription = (EditText) findViewById(R.id.etPlaceAbout);
+        final EditText placeURL = (EditText) findViewById(R.id.etURL);
 
         addsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +44,6 @@ public class AddPlaces extends AppCompatActivity {
 
                 Log.d(TAG, "onClick: " + placeName.getText().toString());
                 String id = UUID.randomUUID().toString();
-
                 String user_id = "user_2";
 
                 final PlaceDto new_place = new PlaceDto(
@@ -52,7 +52,7 @@ public class AddPlaces extends AppCompatActivity {
                         placeName.getText().toString(),
                         placeLocation.getText().toString(),
                         placeDescription.getText().toString(),
-                        "https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                        placeURL.getText().toString()
                 );
 
 
