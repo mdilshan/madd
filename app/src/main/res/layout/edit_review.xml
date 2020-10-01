@@ -16,7 +16,7 @@
         android:paddingRight="16dp" >
 
         <RatingBar
-            android:id="@+id/ratingBar"
+            android:id="@+id/ratingBarEdit"
             android:layout_width="236dp"
             android:layout_height="58dp"
             android:numStars="5"
@@ -33,7 +33,7 @@
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ratingBar"
+            android:layout_below="@id/ratingBarEdit"
             >
 
             <requestFocus />
