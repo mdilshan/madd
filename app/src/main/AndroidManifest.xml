@@ -11,6 +11,13 @@
         android:theme="@style/AppTheme">
         <activity android:name=".GuideSeeAll"></activity>
         <activity android:name=".HotelDetails" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".testActivities.ReviewTestActivity"></activity>
         <activity android:name=".HotelSeeAll" />
         <activity android:name=".HotelMainPage" />
         <activity android:name=".ViewHotel" />
@@ -31,11 +38,11 @@
         <activity android:name=".GuideEdit" />
         <activity android:name=".GuideDetails" />
         <activity android:name=".GuideHome" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
+        <activity android:name=".Reviews" android:label="Reviews">
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter> -->
         </activity>
         <meta-data
             android:name="preloaded_fonts"

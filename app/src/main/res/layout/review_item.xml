@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingTop="10dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="4px"
+            android:layout_marginRight="10px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="4px">
+        </ImageView>
+
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/label"
+            android:textColor="#374761"
+            android:fontFamily="@font/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@+id/icon"
+            android:textSize="15dip"
+            android:textStyle="bold" >
+        </TextView>
+
+        <ImageButton
+            android:id="@+id/editReviewBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/label"
+            android:background="@null"
+            android:contentDescription="Edit Review"
+            android:paddingTop="5dp"
+            android:src="@drawable/edit"
+            android:visibility="invisible" />
+
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/label1"
+            android:textColor="#727477"
+            android:fontFamily="@font/regular"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_below="@+id/label"
+            android:textSize="16dip"
+            android:textStyle="bold" >
+        </TextView>
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="236dp"
+            android:layout_height="40dp"
+            android:numStars="5"
+            android:padding="0dp"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:stepSize="0.1"
+            android:layout_below="@+id/icon"
+            android:layout_alignParentLeft="true"
+            android:transformPivotX="0dp"
+            android:transformPivotY="0dp"
+            android:theme="@style/RatingBar" />
+
+        <ImageButton
+            android:id="@+id/deleteReviewBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/label1"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/ratingBar"
+            android:layout_toRightOf="@+id/ratingBar"
+            android:background="@null"
+            android:contentDescription="Delete Review"
+            android:paddingTop="5dp"
+            android:src="@drawable/delete"
+            android:visibility="invisible" />
+
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/comment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingBottom="10dip"
+            android:fontFamily="@font/medium"
+            android:textSize="16dip"
+            android:text="sample"
+            android:layout_below="@+id/ratingBar"
+            android:layout_alignParentLeft="true"
+            android:textStyle="bold" >
+        </TextView>
+    </RelativeLayout>
+</LinearLayout>
+
+

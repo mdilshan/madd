@@ -50,7 +50,7 @@ public class GuideEdit extends AppCompatActivity {
         edit_image = findViewById(R.id.edit_image);
 
         readData(id);
-        editsubmit = findViewById(R.id.editsubmit);
+        editsubmit = findViewById(R.id.saveSubmit);
 
         editsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +89,6 @@ public class GuideEdit extends AppCompatActivity {
                 } else {
                     edit_guide_name.setError("Value Required");
                 }
-
             }
         });
 
@@ -111,10 +110,6 @@ public class GuideEdit extends AppCompatActivity {
 
     }
 
-
-//    public void onUpdateClicked(View view) {
-//
-//    }
     public void toastResult(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

@@ -15,6 +15,7 @@
       },
       "oauth_client": [
         {
+<<<<<<< HEAD
           "client_id": "248062270681-j4vea6gt6lofrj45pd9de229bc29ui7u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -23,6 +24,9 @@
           }
         },
         {
+=======
+<<<<<<< HEAD
+>>>>>>> 65f2549f92e5e849e1803f1fc7303d595aa5b1e7
           "client_id": "248062270681-vmucl0bs58qkrg2anj8sprmaiaqi6bj6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -39,6 +43,11 @@
           }
         },
         {
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 5d33abcf6ba361aa6989a571bb45f0ecc64f2770
+>>>>>>> 65f2549f92e5e849e1803f1fc7303d595aa5b1e7
           "client_id": "248062270681-f69iq5aavds7932ldchts5nfqlput215.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
