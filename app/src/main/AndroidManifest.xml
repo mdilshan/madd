@@ -9,15 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".GuideSeeAll"></activity>
+        <activity android:name=".HotelDetails" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".HotelDetails"></activity>
         <activity android:name=".testActivities.ReviewTestActivity"></activity>
         <activity android:name=".HotelSeeAll" />
         <activity android:name=".HotelMainPage" />
@@ -30,14 +29,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddNewHotel" />
-
-        <activity android:name=".PlaceActivity"></activity>
+        <activity android:name=".PlaceActivity" />
         <activity android:name=".PlaceSeeAll" />
         <activity android:name=".EditPlaces" />
         <activity android:name=".DetailsActivity" />
         <activity android:name=".AddPlaces" />
-        <activity android:name=".GuideJoin"></activity>
-        <activity android:name=".GuideEdit"></activity>
+        <activity android:name=".GuideJoin" />
+        <activity android:name=".GuideEdit" />
         <activity android:name=".GuideDetails" />
         <activity android:name=".GuideHome" />
         <activity android:name=".Reviews" android:label="Reviews">
@@ -50,5 +48,4 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 </manifest>

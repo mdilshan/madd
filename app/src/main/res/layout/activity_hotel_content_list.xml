@@ -28,7 +28,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/guide_see_all"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/final_rect" />
 
@@ -94,7 +94,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/guide_see_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -114,9 +114,9 @@
         android:text="See All"
         android:textColor="@color/design_default_color_on_secondary"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintBottom_toBottomOf="@+id/guide_see_all"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/guide_see_all" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -125,7 +125,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/guide_see_all"
         app:srcCompat="@drawable/final_rect" />
 
     <ImageView
