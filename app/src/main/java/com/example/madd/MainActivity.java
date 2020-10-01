@@ -2,10 +2,12 @@ package com.example.madd;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,18 +15,20 @@ Button Hotel,addHotel;
 
 
     //Button home;
-    Button GuideBtn;
+    TextView GuideBtn;
 
+    //@SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        GuideBtn = findViewById(R.id.guideBtn);
 
         Hotel = findViewById(R.id.hotels);
-        addHotel = findViewById(R.id.btnAddHotelm);
+        //addHotel = findViewById(R.id.btnAddHotelm);
 
         Hotel.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, HotelMainPage.class);
@@ -32,12 +36,12 @@ Button Hotel,addHotel;
             }
         });
 
-        addHotel.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            Intent intent = new Intent(MainActivity.this, AddNewHotel.class);
-                                        }
-                                    });
+//        addHotel.setOnClickListener(new View.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(View view) {
+//                                            Intent intent = new Intent(MainActivity.this, AddNewHotel.class);
+//                                        }
+//                                    });
     /* SwaythaView
         home=findViewById(R.id.button2);
         home.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +49,7 @@ Button Hotel,addHotel;
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, PlaceActivity.class);
 */
-        GuideBtn = findViewById(R.id.guideBtn);
+
 
         GuideBtn.setOnClickListener(new View.OnClickListener() {
             @Override

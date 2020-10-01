@@ -51,15 +51,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintTop_toBottomOf="@+id/textView27"
+    />
 
-<<<<<<< HEAD
-    <Button
-        android:id="@+id/btnAddHotelm"
-=======
+<!--<<<<<<< HEAD-->
+<!--    <Button-->
+<!--        android:id="@+id/btnAddHotelm"-->
+<!--=======-->
     <TextView
         android:id="@+id/textView9"
->>>>>>> 5d33abcf6ba361aa6989a571bb45f0ecc64f2770
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/regular"
