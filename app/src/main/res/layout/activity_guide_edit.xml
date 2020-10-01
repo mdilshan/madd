@@ -12,6 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="190dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/join_header_bg" />
@@ -26,19 +27,32 @@
         app:srcCompat="@drawable/join_bottom_bg" />
 
     <EditText
-        android:id="@+id/etPlace"
+        android:id="@+id/edit_place"
         android:layout_width="248dp"
         android:layout_height="41dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_guide_name" />
+
+    <EditText
+        android:id="@+id/edit_guide_name"
+        android:layout_width="248dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
     <EditText
-        android:id="@+id/etPlaceLocation"
+        android:id="@+id/edit_price"
         android:layout_width="248dp"
         android:layout_height="42dp"
         android:layout_marginTop="16dp"
@@ -46,11 +60,12 @@
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPlace" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_place" />
 
     <EditText
-        android:id="@+id/etPlaceAbout"
+        android:id="@+id/edit_image"
         android:layout_width="249dp"
         android:layout_height="44dp"
         android:layout_marginTop="16dp"
@@ -59,7 +74,7 @@
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPlaceLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_price" />
 
     <Button
         android:id="@+id/saveSubmit"
@@ -67,7 +82,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="64dp"
         android:layout_marginRight="64dp"
         android:background="@drawable/book_button_bg"
@@ -76,8 +91,9 @@
         android:textColor="#FFFFFF"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPlaceAbout" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_image" />
 
     <TextView
         android:id="@+id/textView16"
