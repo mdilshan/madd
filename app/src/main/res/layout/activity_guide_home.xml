@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-        android:layout_height="220dp"
+        android:layout_height="176dp"
         android:background="@drawable/home_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -88,7 +88,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/guide_see_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -168,4 +168,5 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/hotel" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

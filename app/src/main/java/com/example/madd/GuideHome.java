@@ -4,12 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.madd.adapter.GuideRecentsAdapter;
 import com.example.madd.adapter.GuideTopAdapter;
 import com.example.madd.model.GuideRecentsData;
 import com.example.madd.model.GuidesTopData;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +22,28 @@ import java.util.List;
 
 public class GuideHome extends AppCompatActivity {
 
+    FirebaseFirestore myDB;
     RecyclerView guideRecentRecycler, guideTopRecycler;
     GuideRecentsAdapter guideRecentsAdapter;
     GuideTopAdapter guideTopAdapter;
-
+    TextView SeeAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_home);
+
+        SeeAll  = findViewById(R.id.guide_see_all);
+
+        SeeAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GuideHome.this, GuideSeeAll.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         List<GuideRecentsData> guideRecentsDataList =  new ArrayList<>();
         guideRecentsDataList.add(new GuideRecentsData("John Cena","Colombo","500","5",R.drawable.recentimage1));

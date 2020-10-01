@@ -26,40 +26,55 @@
         app:srcCompat="@drawable/join_bottom_bg" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/input_place"
         android:layout_width="248dp"
         android:layout_height="41dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="Place"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_guide_name" />
+
+    <EditText
+        android:id="@+id/input_guide_name"
+        android:layout_width="248dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name Of Guide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/input_price"
         android:layout_width="248dp"
         android:layout_height="42dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="Price"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/input_place" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/input_image"
         android:layout_width="249dp"
         android:layout_height="44dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
+        android:text="Image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintTop_toBottomOf="@+id/input_price" />
 
     <Button
         android:id="@+id/joinsubmit"
@@ -67,17 +82,18 @@
         android:layout_height="45dp"
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="64dp"
         android:layout_marginRight="64dp"
         android:background="@drawable/book_button_bg"
         android:fontFamily="@font/rubik_medium"
+        android:onClick="onAddClicked"
         android:text="Join As Guide"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+        app:layout_constraintTop_toBottomOf="@+id/input_image" />
 
     <TextView
         android:id="@+id/textView13"
