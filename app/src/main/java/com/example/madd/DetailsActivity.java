@@ -3,12 +3,17 @@ package com.example.madd;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +24,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -27,53 +34,49 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DetailsActivity extends AppCompatActivity {
-    private static final String TAG = "DetailsActivity";
+    FirebaseFirestore myDB;
+    TextView edit_guide_name,edit_place,edit_price,edit_image;
+    Button joinBtn;
+    ImageButton editbutton,deletebutton;
     AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        myDB = FirebaseFirestore.getInstance();
 
+        Intent intent = getIntent();
+        final String ids = intent.getStringExtra("ids");
 
-        Bundle extras = getIntent().getExtras();
-
-        if(extras != null) {
-            String item_id = extras.getString("item_id");
-            if (item_id == null) {
-                Log.e(TAG, "onCreate: Item Id is null");
-            } else {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                CollectionReference col = db.collection("places");
-                col
-                        .whereEqualTo("id", item_id)
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        Map<String, Object> d = document.getData();
-                                        PlaceDto data = new PlaceDto(
-                                                (String) d.get("id"),
-                                                (String) d.get("user_id"),
-                                                (String) d.get("name"),
-                                                (String) d.get("location"),
-                                                (String) d.get("description"),
-                                                (String) d.get("img_url")
-                                        );
-                                        // SET data to the View
-                                    }
-                                } else {
-                                    Log.e(TAG, "onComplete: ", task.getException());
-
-                                }
-                            }
-                        });
-
+        joinBtn = findViewById(R.id.joinbutton);
+        editbutton = (ImageButton) findViewById(R.id.editbtn);
+        joinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailsActivity.this, AddPlaces.class);
+                startActivity(intent);
             }
-        }
-        ImageView deleteProfile = findViewById(R.id.deleteBtn);
+        });
+
+        editbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DocumentReference documentReference = myDB.collection("places").document(ids);
+                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Intent intent = new Intent(DetailsActivity.this, EditPlaces.class);
+                            intent.putExtra("ids",ids);
+                            startActivity(intent);
+                        }
+                    }
+                });
+            }
+        });
+
+        ImageView deleteProfile = findViewById(R.id.deletebtn);
 
         builder = new AlertDialog.Builder(this);
 
@@ -82,40 +85,36 @@ public class DetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //Uncomment the below code to Set the message and title from the strings.xml file
-                builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
-                final FirebaseFirestore db = FirebaseFirestore.getInstance();
+                builder.setMessage(R.string.dialog_message) .setTitle(R.string.dialog_title);
 
                 //Setting message manually and performing action on button click
                 builder.setMessage("Do you need to delete your Account ?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-
-                                db.collection("places").document("xYGi8aqkM6fZ3dtYE4vR").delete()
+                                myDB.collection("places").document(ids).delete()
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                Log.d(TAG, "Data deleted successfully: ");
+                                                Toast.makeText(getApplicationContext(),"your account is deleted successfully",
+                                                        Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(DetailsActivity.this,PlaceActivity.class);
+                                                startActivity(intent);
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Log.d(TAG, "Error while deleting data: " + e.getMessage());
+                                                toastResult("Error while deleting the data : " + e.getMessage());
                                             }
                                         });
-
-                                Toast.makeText(getApplicationContext(), "your account is deleted successfully",
-                                        Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(DetailsActivity.this, PlaceActivity.class);
-                                startActivity(intent);
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 //  Action for 'NO' Button
                                 dialog.cancel();
-                                Toast.makeText(getApplicationContext(), "you choose no action for alertbox",
+                                Toast.makeText(getApplicationContext(),"you choose no action for alertbox",
                                         Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -126,53 +125,19 @@ public class DetailsActivity extends AppCompatActivity {
                 alert.show();
             }
         });
+    }
 
-        ImageView editProfile = findViewById(R.id.editButton);
+    public void toastResult(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 
-        builder = new AlertDialog.Builder(this);
-
-        editProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //Uncomment the below code to Set the message and title from the strings.xml file
-                builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
-
-                //Setting message manually and performing action on button click
-                builder.setMessage("Do you need to edit your Account ?")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Toast.makeText(getApplicationContext(), "your can edit the information",
-                                        Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(DetailsActivity.this, EditPlaces.class);
-                                startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                //  Action for 'NO' Button
-                                dialog.cancel();
-                                Toast.makeText(getApplicationContext(), "you choose no action for alertbox",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                //Creating dialog box
-                AlertDialog alert = builder.create();
-                //Setting the title manually
-                alert.setTitle("Edit Profile");
-                alert.show();
-            }
-        });
-
-        TextView review = (TextView) findViewById(R.id.reviewTxt);
-        review.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DetailsActivity.this, Reviews.class);
-                intent.putExtra("id", "dummyId");
-                startActivity(intent);
-            }
-        });
+    public static void hideKeyboard(Activity activity) {
+        View view = activity.findViewById(android.R.id.content);
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            assert imm != null;
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
+

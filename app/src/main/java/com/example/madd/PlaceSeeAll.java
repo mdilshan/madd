@@ -4,41 +4,66 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 import android.widget.Button;
 
+import com.example.madd.adapter.AllGuideAdapter;
+import com.example.madd.adapter.AllPlaceAdapter;
 import com.example.madd.adapter.TopPlacesAdapter;
+import com.example.madd.model.AllGuideData;
+import com.example.madd.model.AllPlaceData;
 import com.example.madd.model.TopPlacesData;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceSeeAll extends AppCompatActivity {
 
-    RecyclerView topPlacesRecycler;
-    TopPlacesAdapter topPlacesAdapter;
+    RecyclerView allPlaceRecycler;
+    AllPlaceAdapter allPlaceAdapter;
+    FirebaseFirestore myDB;
+    List<AllPlaceData> allPlaceDataList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_see_all);
-
-        List<TopPlacesData> topPlacesDataList = new ArrayList<>();
-        topPlacesDataList.add(new TopPlacesData("Narigama Beach","Hikkaduwa","200km",R.drawable.slide1));
-        topPlacesDataList.add(new TopPlacesData("Adams Peak","Ratnapura","100km",R.drawable.slide2));
-        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","80km",R.drawable.slide1));
-        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","120km",R.drawable.slide2));
-        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","90km",R.drawable.slide1));
-
-        setTopPlacesRecycler(topPlacesDataList);
-    }
-    private  void setTopPlacesRecycler(List<TopPlacesData> topPlacesDataList){
-
-        topPlacesRecycler = findViewById(R.id.see_all_places_recycler);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        topPlacesRecycler.setLayoutManager(layoutManager);
-        topPlacesAdapter = new TopPlacesAdapter(this, topPlacesDataList);
-        topPlacesRecycler.setAdapter(topPlacesAdapter);
+        myDB = FirebaseFirestore.getInstance();
+        readData();
 
     }
+    void readData() {
+        myDB.collection("places").addSnapshotListener(new EventListener<QuerySnapshot>() {
+
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                if (e != null)
+                    toastResult(e.getMessage());
+                allPlaceDataList.clear();
+                for (DocumentSnapshot doc : documentSnapshots) {
+                    allPlaceDataList.add(new AllPlaceData(doc.getId(),doc.getString("placeName"),doc.getString("placeLocation"),doc.getString("distance"),doc.getString("rating"),R.drawable.hotel2));
+//                    allGuideDataList.add(new AllGuideData(doc.getString("description"),doc.getString("location"),doc.getString("name"),doc.getString("name"),R.drawable.hotel2));
+                }
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PlaceSeeAll.this, RecyclerView.VERTICAL, false);
+                allPlaceRecycler.setLayoutManager(layoutManager);
+                allPlaceAdapter = new AllPlaceAdapter(PlaceSeeAll.this, allPlaceDataList);
+                allPlaceRecycler.setAdapter(allPlaceAdapter);
+            }
+        });
+
+    }
+
+    public void toastResult(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
 }
