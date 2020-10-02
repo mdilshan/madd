@@ -30,7 +30,7 @@ import java.util.UUID;
 public class AddPlaces extends AppCompatActivity {
     FirebaseFirestore myDB;
     Button addsubmit;
-    TextView place_Name,place_Location,place_Description,place_URL;
+    TextView place_Name, place_Location, place_Description, place_URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,23 +44,26 @@ public class AddPlaces extends AppCompatActivity {
         place_Description = findViewById(R.id.etPlaceAbout);
         place_URL = findViewById(R.id.etURL);
 
-        //  addsubmit=findViewById(R.id.addSubmit);
-        //  addsubmit.setOnClickListener(new View.OnClickListener() {
-        //      @Override
-        //      public void onClick(View view) {
-        //     }
+        addsubmit = findViewById(R.id.addSubmit);
+        addsubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onAddClicked(view);
+            }
+        });
     }
-        public void onAddClicked(View view) {
-            hideKeyboard(this);
-            if (place_Name.getText().toString().length() > 0
-                    ||place_Location.getText().toString().length() > 0
-                    ||place_Description .getText().toString().length() > 0
-                    ||place_URL.getText().toString().length() > 0 ) {
-                Map<String, Object> data = new HashMap<>();
-                data.put("place_name", place_Name.getText().toString());
-                data.put("place_location", place_Location.getText().toString());
-                data.put("place_description", place_Description.getText().toString());
-                data.put("imageUrl", place_URL.getText().toString());
+
+    public void onAddClicked(View view) {
+        hideKeyboard(this);
+        if (place_Name.getText().toString().length() > 0
+                || place_Location.getText().toString().length() > 0
+                || place_Description.getText().toString().length() > 0
+                || place_URL.getText().toString().length() > 0) {
+            Map<String, Object> data = new HashMap<>();
+            data.put("place_name", place_Name.getText().toString());
+            data.put("place_location", place_Location.getText().toString());
+            data.put("place_description", place_Description.getText().toString());
+            data.put("imageUrl", place_URL.getText().toString());
            /* CollectionReference solarSystem = myDB.collection("myData");
             solarSystem.add(data);
             myDB.collection("myData").document("1").set(data)
@@ -82,37 +85,39 @@ public class AddPlaces extends AppCompatActivity {
                             toastResult("Error while adding the data : " + e.getMessage());
                         }
                     });*/
-                myDB.collection("places")
-                        .add(data)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                toastResult("Data added successfully");
-                                Intent intent = new Intent(AddPlaces.this, DetailsActivity.class);
-                                startActivity(intent);
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                toastResult("Error while adding the data : " + e.getMessage());
-                            }
-                        });
+            myDB.collection("places")
+                    .add(data)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            toastResult("Data added successfully");
+                            Intent intent = new Intent(AddPlaces.this, DetailsActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            toastResult("Error while adding the data : " + e.getMessage());
+                        }
+                    });
 
-            } else {
-                place_Name.setError("Value Required");
-            }
+        } else {
+            place_Name.setError("Value Required");
         }
-        public static void hideKeyboard(Activity activity) {
-            View view = activity.findViewById(android.R.id.content);
-            if (view != null) {
-                InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                assert imm != null;
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        View view = activity.findViewById(android.R.id.content);
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            assert imm != null;
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-        public void toastResult(String message) {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        }
+    }
+
+    public void toastResult(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 
 }

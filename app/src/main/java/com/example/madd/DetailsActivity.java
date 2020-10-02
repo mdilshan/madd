@@ -34,30 +34,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DetailsActivity extends AppCompatActivity {
-    FirebaseFirestore myDB;
-    TextView edit_guide_name,edit_place,edit_price,edit_image;
-    Button joinBtn;
-    ImageButton editbutton,deletebutton;
-    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-        myDB = FirebaseFirestore.getInstance();
+        final FirebaseFirestore myDB = FirebaseFirestore.getInstance();
 
         Intent intent = getIntent();
         final String ids = intent.getStringExtra("ids");
 
-        joinBtn = findViewById(R.id.joinbutton);
-        editbutton = (ImageButton) findViewById(R.id.editbtn);
+        //joinBtn = findViewById(R.id.joinbutton);
+        final ImageButton editbutton = (ImageButton) findViewById(R.id.editButton);
+        /*
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DetailsActivity.this, AddPlaces.class);
                 startActivity(intent);
             }
-        });
+        }); */
 
         editbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +64,7 @@ public class DetailsActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(DetailsActivity.this, EditPlaces.class);
-                            intent.putExtra("ids",ids);
+                            intent.putExtra("ids", ids);
                             startActivity(intent);
                         }
                     }
@@ -76,16 +72,14 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
-        ImageView deleteProfile = findViewById(R.id.deletebtn);
-
-        builder = new AlertDialog.Builder(this);
+        final ImageView deleteProfile = findViewById(R.id.deleteBtnPlace);
 
         deleteProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailsActivity.this);
                 //Uncomment the below code to Set the message and title from the strings.xml file
-                builder.setMessage(R.string.dialog_message) .setTitle(R.string.dialog_title);
+                builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
 
                 //Setting message manually and performing action on button click
                 builder.setMessage("Do you need to delete your Account ?")
@@ -96,9 +90,9 @@ public class DetailsActivity extends AppCompatActivity {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                Toast.makeText(getApplicationContext(),"your account is deleted successfully",
+                                                Toast.makeText(getApplicationContext(), "your account is deleted successfully",
                                                         Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(DetailsActivity.this,PlaceActivity.class);
+                                                Intent intent = new Intent(DetailsActivity.this, PlaceActivity.class);
                                                 startActivity(intent);
                                             }
                                         })
@@ -114,7 +108,7 @@ public class DetailsActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
                                 //  Action for 'NO' Button
                                 dialog.cancel();
-                                Toast.makeText(getApplicationContext(),"you choose no action for alertbox",
+                                Toast.makeText(getApplicationContext(), "you choose no action for alertbox",
                                         Toast.LENGTH_SHORT).show();
                             }
                         });
