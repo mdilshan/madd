@@ -4,10 +4,9 @@ public class AllGuideData {
 
     String GuideName;
     String Place;
-    String Price;
     String Rating;
     Integer ImageUrl;
-
+Float RatingBar;
     public String getDocument() {
         return Document;
     }
@@ -17,6 +16,11 @@ public class AllGuideData {
     }
 
     String Document;
+
+    public Float getRatingBar() {
+        this.RatingBar = Float.parseFloat(Rating);
+        return RatingBar;
+    }
 
     public String getGuideName() {
         return GuideName;
@@ -32,14 +36,6 @@ public class AllGuideData {
 
     public void setPlace(String place) {
         Place = place;
-    }
-
-    public String getPrice() {
-        return Price;
-    }
-
-    public void setPrice(String price) {
-        Price = price;
     }
 
     public String getRating() {
@@ -58,12 +54,13 @@ public class AllGuideData {
         ImageUrl = imageUrl;
     }
 
-    public AllGuideData(String document,String GuideName, String Place, String Price, String Rating, Integer ImageUrl) {
+    public AllGuideData(String document,String GuideName, String Place, String Rating, Integer ImageUrl) {
         this.GuideName = GuideName;
         this.Place = Place;
-        this.Price = Price;
+        this.Rating = Rating;
         this.ImageUrl =ImageUrl;
         this.Document = document;
+        this.RatingBar = Float.parseFloat(Rating);
     }
 
 }

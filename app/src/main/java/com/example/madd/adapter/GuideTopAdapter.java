@@ -38,7 +38,7 @@ public class GuideTopAdapter extends RecyclerView.Adapter<GuideTopAdapter.GuideT
 
         holder.guidePlace.setText(guidesTopDataList.get(position).getPlace());
         holder.PlaceguideName.setText(guidesTopDataList.get(position).getGuideName());
-        holder.price.setText(guidesTopDataList.get(position).getPrice());
+        holder.rating.setText(guidesTopDataList.get(position).getPrice());
         holder.PlaceImage.setImageResource(guidesTopDataList.get(position).getImageUrl());
     }
 
@@ -51,7 +51,7 @@ public class GuideTopAdapter extends RecyclerView.Adapter<GuideTopAdapter.GuideT
     public static final class GuideTopViewHolder extends RecyclerView.ViewHolder{
 
         ImageView PlaceImage;
-        TextView PlaceguideName,guidePlace,price;
+        TextView PlaceguideName,guidePlace,rating;
 
 
         public GuideTopViewHolder(@NonNull View itemView) {
@@ -60,7 +60,7 @@ public class GuideTopAdapter extends RecyclerView.Adapter<GuideTopAdapter.GuideT
             PlaceImage = itemView.findViewById(R.id.place_image);
             PlaceguideName = itemView.findViewById(R.id.guide_name);
             guidePlace = itemView.findViewById(R.id.guide_place);
-            price = itemView.findViewById(R.id.guide_price);
+            rating = itemView.findViewById(R.id.guide_review_avg);
         }
     }
 }

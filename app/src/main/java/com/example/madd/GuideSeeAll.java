@@ -1,13 +1,11 @@
 package com.example.madd;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
-import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import com.example.madd.adapter.AllGuideAdapter;
 import com.example.madd.model.AllGuideData;
@@ -48,7 +46,7 @@ public class GuideSeeAll extends AppCompatActivity {
                 allGuideDataList.clear();
 //                allGuideDataList.add(new AllGuideData("Fresh Up","Hambantota","From Rs.7499","5",R.drawable.hotel2));
                 for (DocumentSnapshot doc : documentSnapshots) {
-                    allGuideDataList.add(new AllGuideData(doc.getId(),doc.getString("guide_name"),doc.getString("place"),doc.getString("price"),doc.getString("rating"),R.drawable.hotel2));
+                    allGuideDataList.add(new AllGuideData(doc.getId(),doc.getString("guide_name"),doc.getString("place"),doc.getString("rating"),R.drawable.hotel2));
 //                    allGuideDataList.add(new AllGuideData(doc.getString("description"),doc.getString("location"),doc.getString("name"),doc.getString("name"),R.drawable.hotel2));
                 }
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GuideSeeAll.this, RecyclerView.VERTICAL, false);

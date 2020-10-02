@@ -51,8 +51,8 @@ public class HotelSeeAll extends AppCompatActivity {
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(HotelSeeAll.this, RecyclerView.VERTICAL, false);
                  allHotelRecycler.setLayoutManager(layoutManager);
-                    allHotelsAdapter = new AllHotelsAdapter(HotelSeeAll.this, allHotelDataList);
-                allHotelRecycler.setAdapter(allHotelsAdapter);
+                 allHotelsAdapter = new AllHotelsAdapter(HotelSeeAll.this, allHotelDataList);
+                 allHotelRecycler.setAdapter(allHotelsAdapter);
             }
         });
     }
