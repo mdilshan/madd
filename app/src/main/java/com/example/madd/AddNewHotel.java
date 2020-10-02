@@ -90,8 +90,8 @@ public class AddNewHotel extends AppCompatActivity {
                            @Override
                            public void onSuccess(DocumentReference documentReference) {
                                toastResult("Data added successfully");
-//                               Intent intent = new Intent(AddNewHotel.this, HotelMainPage.class);
-//                               startActivity(intent);
+                            Intent intent = new Intent(AddNewHotel.this, HotelMainPage.class);
+                               startActivity(intent);
                            }
                        })
                        .addOnFailureListener(new OnFailureListener() {

@@ -7,6 +7,9 @@ public class Hoteldto {
     public String hotel_location;
     public String hotel_description;
     public String hotel_img_url;
+    public String hotel_price;
+
+
 
     public Hoteldto() {
     }
@@ -66,5 +69,13 @@ public class Hoteldto {
 
     public void setHotel_img_url(String hotel_img_url) {
         this.hotel_img_url = hotel_img_url;
+    }
+
+    public String getHotel_price() {
+        return hotel_price;
+    }
+
+    public void setHotel_price(String hotel_price) {
+        this.hotel_price = hotel_price;
     }
 }

@@ -15,14 +15,14 @@ Button Hotel,addHotel;
 
 
     //Button home;
-    TextView GuideBtn;
+    TextView guides;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        GuideBtn = findViewById(R.id.guideBtn);
+        guides = findViewById(R.id.guideBtn);
 
         Hotel = findViewById(R.id.hotels);
         //addHotel = findViewById(R.id.btnAddHotelm);
@@ -81,13 +81,13 @@ Button Hotel,addHotel;
 //}
 
 
-        }
-    }
-=======
-
-                startActivity(intent);
-            }
-        });
+//        }
+//    }
+//
+//
+//                startActivity(intent);
+//            }
+//        });
 
 
         guides.setOnClickListener(new View.OnClickListener() {
@@ -102,4 +102,4 @@ Button Hotel,addHotel;
 }
 
 
->>>>>>> 4a5653173b4ba4aef4802f4ecc709c027e2727ec
+

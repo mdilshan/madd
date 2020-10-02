@@ -3,19 +3,41 @@ package com.example.madd.model;
 public class AllHotelsData {
 
     String hotelName;
-    String CityName;
+    String location;
+    String about;
     String price;
     Integer imageUrl;
+    String Rating;
+    String Document;
 
 
+    public AllHotelsData(String id, String hotel_name, String about, String location, String rating, int hotel2) {
+        this.hotelName = hotel_name;
+        this.location = location;
+        //this.price = Price;
+        this.about = about;
+        this.imageUrl =hotel2;
+        this.Document = id;
 
+    }
 
+//    public AllHotelsData(String id, String hotel_name, String place, String location, String rating, int hotel2) {
+//    }
 
-    public AllHotelsData(String hotelName, String CityName, String Price, Integer imageUrl) {
-        this.hotelName = hotelName;
-        this.CityName = CityName;
-        this.price = Price;
-        this.imageUrl =imageUrl;
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
+    }
+
+    public String getDocument() {
+        return Document;
+    }
+
+    public void setDocument(String document) {
+        Document = document;
     }
 
     public String getHotelName() {
@@ -27,11 +49,11 @@ public class AllHotelsData {
     }
 
     public String getCityName() {
-        return CityName;
+        return location;
     }
 
     public void setCityName(String cityName) {
-        CityName = cityName;
+        location = cityName;
     }
 
     public String getPrice() {

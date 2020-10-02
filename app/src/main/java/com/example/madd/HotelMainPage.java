@@ -14,11 +14,13 @@ import com.example.madd.adapter.RecentHotelAdapter;
 import com.example.madd.adapter.TopHotelsAdapter;
 import com.example.madd.model.RecentHotelData;
 import com.example.madd.model.TopHotelsData;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HotelMainPage extends AppCompatActivity {
+    FirebaseFirestore myDB;
     Button SeeAll;
     ImageButton AddHotel;
     RecyclerView recentRecycler, topHotelsRecycler;
@@ -52,10 +54,6 @@ public class HotelMainPage extends AppCompatActivity {
 
 //
      List<RecentHotelData> recentHotelDataList = new ArrayList<>();
-
-
-
-
         recentHotelDataList.add(new RecentHotelData("New Grand", "Chilaw", "From Rs.12,000", R.drawable.hotel10));
         recentHotelDataList.add(new RecentHotelData("Fresh Up","Hambantota","From Rs.7499",R.drawable.hotel2));
          recentHotelDataList.add(new RecentHotelData("New Grand","Chilaw","From Rs.12,000",R.drawable.hotel1));
