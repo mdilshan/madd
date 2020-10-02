@@ -32,6 +32,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="John Cena"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/place_image"
         app:layout_constraintTop_toTopOf="@+id/place_image" />
 
@@ -41,20 +43,35 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:text="Kandy"
+        android:textSize="18sp"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="@+id/guide_name"
         app:layout_constraintTop_toBottomOf="@+id/guide_name" />
 
-    <TextView
-        android:id="@+id/guide_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="16dp"
-        android:text="5000LKR"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <RatingBar
+        android:id="@+id/guide_rating_bar"
+        style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
+        android:layout_width="80dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="8dp"
+        android:background="#FFFFFF"
+        android:max="5"
+        android:rating="3.5"
         app:layout_constraintStart_toStartOf="@+id/guide_place"
-        app:layout_constraintTop_toBottomOf="@+id/guide_place"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/guide_place" />
+
+    <TextView
+        android:id="@+id/guide_review_avg"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="0.0"
+        app:layout_constraintEnd_toEndOf="@+id/ratingBar"
+        app:layout_constraintStart_toEndOf="@+id/guide_rating_bar"
+        app:layout_constraintTop_toTopOf="@+id/guide_rating_bar" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -64,4 +81,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/arrow_icon" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
