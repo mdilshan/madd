@@ -18,13 +18,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 public class GuideJoin extends AppCompatActivity {
     FirebaseFirestore myDB;
     Button joinsubmit;
-    TextView input_guide_name,input_place,input_price,input_image;
+    TextView input_guide_name,input_place,input_mobile,input_image,input_about;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +35,9 @@ public class GuideJoin extends AppCompatActivity {
 
         input_guide_name = findViewById(R.id.input_guide_name);
         input_place = findViewById(R.id.input_place);
-        input_price = findViewById(R.id.input_price);
+        input_mobile = findViewById(R.id.input_mobile);
         input_image = findViewById(R.id.input_image);
+        input_about = findViewById(R.id.input_about);
 
 
 //        joinsubmit = findViewById(R.id.joinsubmit);
@@ -51,54 +53,40 @@ public class GuideJoin extends AppCompatActivity {
 
     public void onAddClicked(View view) {
 
-
+        String date = LocalDate.now().toString();
         hideKeyboard(this);
         if (input_guide_name.getText().toString().length() > 0
                 ||input_place.getText().toString().length() > 0
-                ||input_price.getText().toString().length() > 0
-                ||input_image.getText().toString().length() > 0 ) {
+                ||input_mobile.getText().toString().length() > 0
+                ||input_image.getText().toString().length() > 0
+                ||input_about.getText().toString().length() > 0 ) {
             Map<String, Object> data = new HashMap<>();
             data.put("guide_name", input_guide_name.getText().toString());
             data.put("place", input_place.getText().toString());
-            data.put("price", input_price.getText().toString());
+            data.put("mobile", input_mobile.getText().toString());
             data.put("imageUrl", input_image.getText().toString());
-           /* CollectionReference solarSystem = myDB.collection("myData");
-            solarSystem.add(data);
-            myDB.collection("myData").document("1").set(data)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            toastResult("Data added successfully");
-                        }
-                    })
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            toastResult("Data add Completed");
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            toastResult("Error while adding the data : " + e.getMessage());
-                        }
-                    });*/
-            myDB.collection("guides")
-                    .add(data)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            toastResult("Data added successfully");
-                            Intent intent = new Intent(GuideJoin.this, GuideDetails.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            toastResult("Error while adding the data : " + e.getMessage());
-                        }
-                    });
+            data.put("about", input_about.getText().toString());
+            data.put("rating", "0.0");
+            data.put("joined_on", date);
+           try {
+               myDB.collection("guides")
+                       .add(data)
+                       .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                           @Override
+                           public void onSuccess(DocumentReference documentReference) {
+                               toastResult("Data added successfully");
+                               Intent intent = new Intent(GuideJoin.this, GuideDetails.class);
+                               startActivity(intent);
+                           }
+                       })
+                       .addOnFailureListener(new OnFailureListener() {
+                           @Override
+                           public void onFailure(@NonNull Exception e) {
+                               toastResult("Error while adding the data : " + e.getMessage());
+                           }
+                       });
+
+           }catch (Exception e){}
 
         } else {
             input_guide_name.setError("Value Required");

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,7 +43,8 @@ public class AllGuideAdapter extends RecyclerView.Adapter<AllGuideAdapter.AllGui
 
         holder.PlaceguideName.setText(allGuidesDataList.get(position).getGuideName());
         holder.guidePlace.setText(allGuidesDataList.get(position).getPlace());
-        holder.price.setText(allGuidesDataList.get(position).getPrice());
+        holder.GuideRating.setText(allGuidesDataList.get(position).getRating());
+        holder.GuideRatingBAR.setRating(allGuidesDataList.get(position).getRatingBar());
         holder.PlaceImage.setImageResource(allGuidesDataList.get(position).getImageUrl());
         holder.document = (allGuidesDataList.get(position).getDocument());
 
@@ -65,7 +67,8 @@ public class AllGuideAdapter extends RecyclerView.Adapter<AllGuideAdapter.AllGui
     class AllGuidesViewHolder extends RecyclerView.ViewHolder{
 
         ImageView PlaceImage;
-        TextView PlaceguideName,guidePlace,price;
+        TextView PlaceguideName,guidePlace,GuideRating;
+        RatingBar GuideRatingBAR;
         String document;
 
         public AllGuidesViewHolder(@NonNull View itemView) {
@@ -73,7 +76,8 @@ public class AllGuideAdapter extends RecyclerView.Adapter<AllGuideAdapter.AllGui
             PlaceImage = itemView.findViewById(R.id.place_image);
             PlaceguideName = itemView.findViewById(R.id.guide_name);
             guidePlace = itemView.findViewById(R.id.guide_place);
-            price = itemView.findViewById(R.id.guide_price);
+            GuideRating = itemView.findViewById(R.id.guide_review_avg);
+            GuideRatingBAR = itemView.findViewById(R.id.guide_rating_bar);
         }
     }
 

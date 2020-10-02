@@ -12,21 +12,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.madd.adapter.AllGuideAdapter;
-import com.example.madd.model.AllGuideData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,28 +57,34 @@ public class GuideEdit extends AppCompatActivity {
                     data.put("place", edit_place.getText().toString());
                     data.put("price", edit_price.getText().toString());
                     data.put("image", edit_image.getText().toString());
-                        myDB.collection("guides").document(id).update(data)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                toastResult("Data updated successfully");
-                            }
-                        })
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                toastResult("Data update Completed");
+                    try {
 
-                                Intent intent = new Intent(GuideEdit.this, GuideDetails.class);
-                                startActivity(intent);
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                toastResult("Error while updating the data : " + e.getMessage());
-                            }
-                        });
+                        myDB.collection("guides").document(id).update(data)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        toastResult("Data updated successfully");
+                                    }
+                                })
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        toastResult("Data update Completed");
+
+                                        Intent intent = new Intent(GuideEdit.this, GuideDetails.class);
+                                        intent.putExtra("ids",id);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        toastResult("Error while updating the data : " + e.getMessage());
+                                    }
+                                });
+                    }catch (Exception e){
+
+                    }
                 } else {
                     edit_guide_name.setError("Value Required");
                 }
@@ -95,18 +94,21 @@ public class GuideEdit extends AppCompatActivity {
     }
 
     void readData(String id) {
-        DocumentReference documentReference = myDB.collection("guides").document(id);
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    edit_guide_name.setText(task.getResult().get("guide_name").toString());
-                    edit_place.setText(task.getResult().get("place").toString());
-                    edit_price.setText(task.getResult().get("price").toString());
-                    edit_image.setText(task.getResult().get("imageUrl").toString());
+        try {
+
+            DocumentReference documentReference = myDB.collection("guides").document(id);
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        edit_guide_name.setText(task.getResult().get("guide_name").toString());
+                        edit_place.setText(task.getResult().get("place").toString());
+                        edit_price.setText(task.getResult().get("price").toString());
+                        edit_image.setText(task.getResult().get("imageUrl").toString());
+                    }
                 }
-            }
-        });
+            });
+        }catch (Exception e){}
 
     }
 
