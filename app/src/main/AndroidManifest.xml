@@ -21,13 +21,13 @@
         <activity android:name=".HotelSeeAll" />
         <activity android:name=".HotelMainPage" />
         <activity android:name=".ViewHotel" />
-        <activity android:name=".HotelContentList">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--        <activity android:name=".HotelContentList">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
         <activity android:name=".AddNewHotel" />
         <activity android:name=".PlaceActivity" />
         <activity android:name=".PlaceSeeAll" />

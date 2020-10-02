@@ -1,8 +1,5 @@
 package com.example.madd;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,7 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -25,19 +27,28 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class GuideDetails extends AppCompatActivity {
     FirebaseFirestore myDB;
-    TextView edit_guide_name,edit_place,edit_price,edit_image;
+    TextView guide_joined,guide_name,guide_star,guide_about;
+    ImageView profile_image;
     Button joinbtn;
-    ImageButton editbtn,deletebtn;
+    ImageButton editbtn;
+
     AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_details);
 
-        myDB = FirebaseFirestore.getInstance();
-
         Intent intent = getIntent();
-        final String id = intent.getStringExtra("ids");
+        final String ids = intent.getStringExtra("ids");
+
+        myDB = FirebaseFirestore.getInstance();
+        profile_image = findViewById(R.id.profile_image);
+        guide_name= findViewById(R.id.guide_name);
+        guide_joined= findViewById(R.id.guide_joined);
+        guide_star= findViewById(R.id.guide_star);
+        guide_about= findViewById(R.id.guide_about);
+
+        readData(ids);
 
         joinbtn = findViewById(R.id.joinbtn);
         editbtn = (ImageButton) findViewById(R.id.editbtn);
@@ -51,13 +62,13 @@ public class GuideDetails extends AppCompatActivity {
         editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DocumentReference documentReference = myDB.collection("guides").document(id);
+                DocumentReference documentReference = myDB.collection("guides").document(ids);
                 documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(GuideDetails.this, GuideEdit.class);
-                            intent.putExtra("ids",id);
+                            intent.putExtra("ids",ids);
                             startActivity(intent);
                         }
                     }
@@ -80,10 +91,22 @@ public class GuideDetails extends AppCompatActivity {
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Toast.makeText(getApplicationContext(),"your account is deleted successfully",
-                                        Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(GuideDetails.this, GuideHome.class);
-                                startActivity(intent);
+                                myDB.collection("guides").document(ids).delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(getApplicationContext(),"your account is deleted successfully",
+                                                        Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(GuideDetails.this, GuideHome.class);
+                                                startActivity(intent);
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                toastResult("Error while deleting the data : " + e.getMessage());
+                                            }
+                                        });
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -101,6 +124,25 @@ public class GuideDetails extends AppCompatActivity {
                 alert.show();
             }
         });
+
+    }
+    void readData(String ids) {
+        hideKeyboard(this);
+        try {
+            DocumentReference documentReference = myDB.collection("guides").document(ids);
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        guide_name.setText(task.getResult().get("guide_name").toString());
+                        guide_joined.setText(task.getResult().get("place").toString());
+//                        guide_about.setText(task.getResult().get("guide_about").toString());
+//                        guide_joined.setText(task.getResult().get("joined_on").toString());
+                    }
+                }
+            });
+
+        }catch (Exception e){}
     }
 
     public void toastResult(String message) {
