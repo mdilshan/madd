@@ -56,10 +56,10 @@ public class GuideJoin extends AppCompatActivity {
         String date = LocalDate.now().toString();
         hideKeyboard(this);
         if (input_guide_name.getText().toString().length() > 0
-                ||input_place.getText().toString().length() > 0
-                ||input_mobile.getText().toString().length() > 0
-                ||input_image.getText().toString().length() > 0
-                ||input_about.getText().toString().length() > 0 ) {
+                &&input_place.getText().toString().length() > 0
+                &&input_mobile.getText().toString().length() > 0
+                &&input_image.getText().toString().length() > 0
+                &&input_about.getText().toString().length() > 0) {
             Map<String, Object> data = new HashMap<>();
             data.put("guide_name", input_guide_name.getText().toString());
             data.put("place", input_place.getText().toString());
@@ -76,6 +76,7 @@ public class GuideJoin extends AppCompatActivity {
                            public void onSuccess(DocumentReference documentReference) {
                                toastResult("Data added successfully");
                                Intent intent = new Intent(GuideJoin.this, GuideDetails.class);
+                               intent.putExtra("ids",documentReference.getId());
                                startActivity(intent);
                            }
                        })

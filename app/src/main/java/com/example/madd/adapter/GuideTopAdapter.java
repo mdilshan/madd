@@ -1,18 +1,21 @@
 package com.example.madd.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.madd.GuideDetails;
 import com.example.madd.R;
-import com.example.madd.model.GuideRecentsData;
 import com.example.madd.model.GuidesTopData;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.List;
 
@@ -20,6 +23,7 @@ public class GuideTopAdapter extends RecyclerView.Adapter<GuideTopAdapter.GuideT
 
     Context context;
     List<GuidesTopData> guidesTopDataList;
+    OnItemClickListner listner;
 
     public GuideTopAdapter(Context context, List<GuidesTopData> guidesTopDataList) {
         this.context = context;
@@ -36,10 +40,22 @@ public class GuideTopAdapter extends RecyclerView.Adapter<GuideTopAdapter.GuideT
     @Override
     public void onBindViewHolder(@NonNull GuideTopViewHolder holder, int position) {
 
-        holder.guidePlace.setText(guidesTopDataList.get(position).getPlace());
         holder.PlaceguideName.setText(guidesTopDataList.get(position).getGuideName());
-        holder.rating.setText(guidesTopDataList.get(position).getPrice());
+        holder.guidePlace.setText(guidesTopDataList.get(position).getPlace());
+        holder.GuideRating.setText(guidesTopDataList.get(position).getRating());
+        holder.GuideRatingBAR.setRating(guidesTopDataList.get(position).getRatingBar());
         holder.PlaceImage.setImageResource(guidesTopDataList.get(position).getImageUrl());
+        holder.document = (guidesTopDataList.get(position).getDocument());
+
+        final String ids = holder.document;
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, GuideDetails.class);
+                i.putExtra("ids",ids);
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -51,16 +67,26 @@ public class GuideTopAdapter extends RecyclerView.Adapter<GuideTopAdapter.GuideT
     public static final class GuideTopViewHolder extends RecyclerView.ViewHolder{
 
         ImageView PlaceImage;
-        TextView PlaceguideName,guidePlace,rating;
+        TextView PlaceguideName,guidePlace,GuideRating;
+        RatingBar GuideRatingBAR;
+        String document;
+
 
 
         public GuideTopViewHolder(@NonNull View itemView) {
             super(itemView);
-
             PlaceImage = itemView.findViewById(R.id.place_image);
             PlaceguideName = itemView.findViewById(R.id.guide_name);
             guidePlace = itemView.findViewById(R.id.guide_place);
-            rating = itemView.findViewById(R.id.guide_review_avg);
+            GuideRating = itemView.findViewById(R.id.guide_review_avg);
+            GuideRatingBAR = itemView.findViewById(R.id.guide_rating_bar);
         }
+    }
+    public interface OnItemClickListner{
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
+    }
+
+    public void setOnItemClickListner(OnItemClickListner listner){
+        this.listner = listner;
     }
 }
