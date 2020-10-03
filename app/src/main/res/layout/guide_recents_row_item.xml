@@ -8,7 +8,7 @@
     android:background="@drawable/card_bg">
 
     <ImageView
-        android:id="@+id/place_image"
+        android:id="@+id/place_recnet_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:adjustViewBounds="true"
@@ -19,35 +19,27 @@
         app:srcCompat="@drawable/recentimage1" />
 
     <TextView
-        android:id="@+id/guide_name"
+        android:id="@+id/guide_recent_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="2dp"
-        android:text="John Cena"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/place_image" />
+        app:layout_constraintTop_toBottomOf="@+id/place_recnet_image" />
 
     <TextView
-        android:id="@+id/guide_place"
+        android:id="@+id/guide_recent_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:text="Kandy"
-        app:layout_constraintStart_toStartOf="@+id/guide_name"
-        app:layout_constraintTop_toBottomOf="@+id/guide_name" />
-
-    <TextView
-        android:id="@+id/guide_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="16dp"
-        android:text="5000LKR"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:textSize="16sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guide_place" />
+        app:layout_constraintStart_toStartOf="@+id/guide_recent_name"
+        app:layout_constraintTop_toBottomOf="@+id/guide_recent_name" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

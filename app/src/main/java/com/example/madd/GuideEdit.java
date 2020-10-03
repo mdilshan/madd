@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +28,7 @@ import java.util.Map;
 public class GuideEdit extends AppCompatActivity {
     FirebaseFirestore myDB;
     Button editsubmit;
-    TextView edit_guide_name,edit_place,edit_price,edit_image;
+    EditText edit_guide_name,edit_place,edit_mobile,edit_image,edit_about;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,24 +40,26 @@ public class GuideEdit extends AppCompatActivity {
 
         edit_guide_name = findViewById(R.id.edit_guide_name);
         edit_place = findViewById(R.id.edit_place);
-        edit_price = findViewById(R.id.edit_price);
+        edit_mobile = findViewById(R.id.edit_mobile);
         edit_image = findViewById(R.id.edit_image);
+        edit_about = findViewById(R.id.edit_about);
 
         readData(id);
-        editsubmit = findViewById(R.id.saveSubmit);
+        editsubmit = findViewById(R.id.editsubmit);
 
         editsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (edit_guide_name.getText().toString().length() > 0 ||
                         edit_place.getText().toString().length() > 0 ||
-                        edit_price.getText().toString().length() > 0 ||
+                        edit_mobile.getText().toString().length() > 0 ||
                         edit_image.getText().toString().length() > 0) {
                     Map<String, Object> data = new HashMap<>();
                     data.put("guide_name", edit_guide_name.getText().toString());
                     data.put("place", edit_place.getText().toString());
-                    data.put("price", edit_price.getText().toString());
-                    data.put("image", edit_image.getText().toString());
+                    data.put("mobile", edit_mobile.getText().toString());
+                    data.put("imageUrl", edit_image.getText().toString());
+                    data.put("about", edit_about.getText().toString());
                     try {
 
                         myDB.collection("guides").document(id).update(data)
@@ -103,8 +106,9 @@ public class GuideEdit extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         edit_guide_name.setText(task.getResult().get("guide_name").toString());
                         edit_place.setText(task.getResult().get("place").toString());
-                        edit_price.setText(task.getResult().get("price").toString());
-                        edit_image.setText(task.getResult().get("imageUrl").toString());
+                        edit_mobile.setText(task.getResult().get("mobile").toString());
+//                        edit_image.setText(task.getResult().get("imageUrl").toString());
+                        edit_about.setText(task.getResult().get("about").toString());
                     }
                 }
             });
