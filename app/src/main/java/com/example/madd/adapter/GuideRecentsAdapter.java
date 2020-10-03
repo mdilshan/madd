@@ -7,13 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.madd.GuideDetails;
 import com.example.madd.R;
 import com.example.madd.model.GuideRecentsData;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.List;
 
@@ -21,6 +20,7 @@ public class GuideRecentsAdapter extends RecyclerView.Adapter<GuideRecentsAdapte
 
     Context context;
     List<GuideRecentsData> recentsDataList;
+    OnItemClickListner listner;
 
     public GuideRecentsAdapter(Context context, List<GuideRecentsData> recentsDataList) {
         this.context = context;
@@ -37,15 +37,17 @@ public class GuideRecentsAdapter extends RecyclerView.Adapter<GuideRecentsAdapte
     @Override
     public void onBindViewHolder(@NonNull GuideRecentsViewHolder holder, int position) {
 
-        holder.guidePlace.setText(recentsDataList.get(position).getPlace());
         holder.PlaceguideName.setText(recentsDataList.get(position).getGuideName());
-        holder.price.setText(recentsDataList.get(position).getPrice());
+        holder.guidePlace.setText(recentsDataList.get(position).getPlace());
         holder.PlaceImage.setImageResource(recentsDataList.get(position).getImageUrl());
+        holder.document = (recentsDataList.get(position).getDocument());
 
+        final String ids = holder.document;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, GuideDetails.class);
+                i.putExtra("ids",ids);
                 context.startActivity(i);
             }
         });
@@ -60,16 +62,22 @@ public class GuideRecentsAdapter extends RecyclerView.Adapter<GuideRecentsAdapte
     public static final class GuideRecentsViewHolder extends RecyclerView.ViewHolder{
 
         ImageView PlaceImage;
-        TextView PlaceguideName,guidePlace,price;
+        TextView PlaceguideName,guidePlace;
+        String document;
 
 
         public GuideRecentsViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            PlaceImage = itemView.findViewById(R.id.place_image);
-            PlaceguideName = itemView.findViewById(R.id.guide_name);
-            guidePlace = itemView.findViewById(R.id.guide_place);
-            price = itemView.findViewById(R.id.guide_price);
+            PlaceImage = itemView.findViewById(R.id.place_recnet_image);
+            PlaceguideName = itemView.findViewById(R.id.guide_recent_name);
+            guidePlace = itemView.findViewById(R.id.guide_recent_place);
         }
+    }
+    public interface OnItemClickListner{
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
+    }
+    public void setOnItemClickListner(OnItemClickListner listner){
+        this.listner = listner;
     }
 }

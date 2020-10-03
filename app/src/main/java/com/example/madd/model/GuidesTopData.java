@@ -1,26 +1,25 @@
 package com.example.madd.model;
 
 public class GuidesTopData {
+
     String GuideName;
     String Place;
-    String Price;
     String Rating;
     Integer ImageUrl;
-
-    public GuidesTopData(String GuideName, String Place, String Price, String Rating, Integer ImageUrl) {
-        this.GuideName = GuideName;
-        this.Place = Place;
-        this.Price = Price;
-        this.Rating = Rating;
-        this.ImageUrl = ImageUrl;
+    Float RatingBar;
+    public String getDocument() {
+        return Document;
     }
 
-    public Integer getImageUrl() {
-        return ImageUrl;
+    public void setDocument(String document) {
+        Document = document;
     }
 
-    public void setImageUrl(Integer imageUrl) {
-        ImageUrl = imageUrl;
+    String Document;
+
+    public Float getRatingBar() {
+        this.RatingBar = Float.parseFloat(Rating);
+        return RatingBar;
     }
 
     public String getGuideName() {
@@ -39,14 +38,6 @@ public class GuidesTopData {
         Place = place;
     }
 
-    public String getPrice() {
-        return Price;
-    }
-
-    public void setPrice(String price) {
-        Price = price;
-    }
-
     public String getRating() {
         return Rating;
     }
@@ -54,4 +45,22 @@ public class GuidesTopData {
     public void setRating(String rating) {
         Rating = rating;
     }
+
+    public Integer getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(Integer imageUrl) {
+        ImageUrl = imageUrl;
+    }
+
+    public GuidesTopData(String document,String GuideName, String Place, String Rating, Integer ImageUrl) {
+        this.GuideName = GuideName;
+        this.Place = Place;
+        this.Rating = Rating;
+        this.ImageUrl =ImageUrl;
+        this.Document = document;
+        this.RatingBar = Float.parseFloat(Rating);
+    }
+
 }
