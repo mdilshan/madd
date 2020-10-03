@@ -5,7 +5,7 @@ public class GuidesTopData {
     String GuideName;
     String Place;
     String Rating;
-    Integer ImageUrl;
+    String ImageUrl;
     Float RatingBar;
     public String getDocument() {
         return Document;
@@ -46,15 +46,15 @@ public class GuidesTopData {
         Rating = rating;
     }
 
-    public Integer getImageUrl() {
+    public String getImageUrl() {
         return ImageUrl;
     }
 
-    public void setImageUrl(Integer imageUrl) {
+    public void setImageUrl(String imageUrl) {
         ImageUrl = imageUrl;
     }
 
-    public GuidesTopData(String document,String GuideName, String Place, String Rating, Integer ImageUrl) {
+    public GuidesTopData(String document,String GuideName, String Place, String Rating, String ImageUrl) {
         this.GuideName = GuideName;
         this.Place = Place;
         this.Rating = Rating;

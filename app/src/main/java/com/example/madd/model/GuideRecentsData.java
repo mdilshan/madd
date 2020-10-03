@@ -4,7 +4,7 @@ public class GuideRecentsData {
 
     String GuideName;
     String Place;
-    Integer ImageUrl;
+    String ImageUrl;
     public String getDocument() {
         return Document;
     }
@@ -31,15 +31,15 @@ public class GuideRecentsData {
         Place = place;
     }
 
-    public Integer getImageUrl() {
+    public String getImageUrl() {
         return ImageUrl;
     }
 
-    public void setImageUrl(Integer imageUrl) {
+    public void setImageUrl(String imageUrl) {
         ImageUrl = imageUrl;
     }
 
-    public GuideRecentsData(String document,String GuideName, String Place, Integer ImageUrl) {
+    public GuideRecentsData(String document,String GuideName, String Place, String ImageUrl) {
         this.GuideName = GuideName;
         this.Place = Place;
         this.ImageUrl =ImageUrl;

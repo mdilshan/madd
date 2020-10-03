@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,23 +33,18 @@ public class GuideJoin extends AppCompatActivity {
         setContentView(R.layout.activity_guide_join);
 
         myDB = FirebaseFirestore.getInstance();
-
+        ImageButton Back  = findViewById(R.id.back_btn);
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         input_guide_name = findViewById(R.id.input_guide_name);
         input_place = findViewById(R.id.input_place);
         input_mobile = findViewById(R.id.input_mobile);
         input_image = findViewById(R.id.input_image);
         input_about = findViewById(R.id.input_about);
-
-
-//        joinsubmit = findViewById(R.id.joinsubmit);
-//
-//        joinsubmit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(GuideJoin.this, GuideDetails.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     public void onAddClicked(View view) {
