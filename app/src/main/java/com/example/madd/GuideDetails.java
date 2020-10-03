@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,11 +28,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class GuideDetails extends AppCompatActivity {
     FirebaseFirestore myDB;
-    TextView guide_joined,guide_name,guide_star,guide_about;
-    ImageView profile_image;
+    TextView guide_joined,guide_name,guide_star,guide_about,guide_mobile,guide_place,guide_review;
+    ImageView guide_image;
     Button joinbtn;
     ImageButton editbtn;
-
+    RatingBar GuideRatingBAR;
     AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +43,19 @@ public class GuideDetails extends AppCompatActivity {
         final String ids = intent.getStringExtra("ids");
 
         myDB = FirebaseFirestore.getInstance();
-        profile_image = findViewById(R.id.profile_image);
+        guide_image = findViewById(R.id.profile_image);
         guide_name= findViewById(R.id.guide_name);
         guide_joined= findViewById(R.id.guide_joined);
         guide_star= findViewById(R.id.guide_star);
+        guide_place= findViewById(R.id.guide_place);
+        guide_mobile= findViewById(R.id.guide_mobile);
         guide_about= findViewById(R.id.guide_about);
-
+        GuideRatingBAR = findViewById(R.id.guide_rating_bars);
         readData(ids);
 
         joinbtn = findViewById(R.id.joinbtn);
         editbtn = (ImageButton) findViewById(R.id.editbtn);
+        guide_review = findViewById(R.id.guide_review);
         joinbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +64,22 @@ public class GuideDetails extends AppCompatActivity {
             }
         });
         editbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DocumentReference documentReference = myDB.collection("guides").document(ids);
+                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Intent intent = new Intent(GuideDetails.this, GuideEdit.class);
+                            intent.putExtra("ids",ids);
+                            startActivity(intent);
+                        }
+                    }
+                });
+            }
+        });
+        guide_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DocumentReference documentReference = myDB.collection("guides").document(ids);
@@ -135,9 +155,13 @@ public class GuideDetails extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         guide_name.setText(task.getResult().get("guide_name").toString());
-                        guide_joined.setText(task.getResult().get("place").toString());
-//                        guide_about.setText(task.getResult().get("guide_about").toString());
-//                        guide_joined.setText(task.getResult().get("joined_on").toString());
+//                        guide_image.setText(task.getResult().get("imageUrl").toString());
+                        guide_mobile.setText(task.getResult().get("mobile").toString());
+                        guide_place.setText(task.getResult().get("place").toString());
+                        guide_star.setText(task.getResult().get("rating").toString());
+                        GuideRatingBAR.setRating(Float.parseFloat(task.getResult().get("rating").toString()));
+                        guide_about.setText(task.getResult().get("about").toString());
+                        guide_joined.setText(task.getResult().get("joined_on").toString());
                     }
                 }
             });

@@ -1,20 +1,23 @@
 package com.example.madd;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.madd.adapter.GuideRecentsAdapter;
 import com.example.madd.adapter.GuideTopAdapter;
 import com.example.madd.model.GuideRecentsData;
 import com.example.madd.model.GuidesTopData;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +26,19 @@ import java.util.List;
 public class GuideHome extends AppCompatActivity {
 
     FirebaseFirestore myDB;
-    RecyclerView guideRecentRecycler, guideTopRecycler;
+
     GuideRecentsAdapter guideRecentsAdapter;
     GuideTopAdapter guideTopAdapter;
     TextView SeeAll;
-
+    List<GuideRecentsData> guideRecentsDataList =  new ArrayList<>();
+    List<GuidesTopData> guidesTopDataList =  new ArrayList<>();
+    RecyclerView guideRecentRecycler, guideTopRecycler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_home);
-
+        guideRecentRecycler = findViewById(R.id.guide_recent_recycler);
+        guideTopRecycler = findViewById(R.id.top_guides_recycler);
         SeeAll  = findViewById(R.id.guide_see_all);
 
         SeeAll.setOnClickListener(new View.OnClickListener() {
@@ -42,46 +48,46 @@ public class GuideHome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
-        List<GuideRecentsData> guideRecentsDataList =  new ArrayList<>();
-        guideRecentsDataList.add(new GuideRecentsData("John Cena","Colombo","500","5",R.drawable.recentimage1));
-        guideRecentsDataList.add(new GuideRecentsData("Michel Jordan","Kandy","6090","4",R.drawable.recentimage2));
-        guideRecentsDataList.add(new GuideRecentsData("John sd","Colombo","580","5",R.drawable.recentimage1));
-        guideRecentsDataList.add(new GuideRecentsData("sd Jordan","Kandy","650","4",R.drawable.recentimage2));
-        guideRecentsDataList.add(new GuideRecentsData("ds Cena","Colombo","600","5",R.drawable.recentimage1));
-        guideRecentsDataList.add(new GuideRecentsData("sd sd","Kandy","650","4",R.drawable.recentimage2));
-
-        setGuideRecentRecycler(guideRecentsDataList);
-
-        List<GuidesTopData> guidesTopDataList =  new ArrayList<>();
-        guidesTopDataList.add(new GuidesTopData("John Cena","Colombo","500","5",R.drawable.recentimage1));
-        guidesTopDataList.add(new GuidesTopData("Michel Jordan","Kandy","6090","4",R.drawable.recentimage2));
-        guidesTopDataList.add(new GuidesTopData("John sd","Colombo","580","5",R.drawable.recentimage1));
-        guidesTopDataList.add(new GuidesTopData("sd Jordan","Kandy","650","4",R.drawable.recentimage2));
-        guidesTopDataList.add(new GuidesTopData("ds Cena","Colombo","600","5",R.drawable.recentimage1));
-        guidesTopDataList.add(new GuidesTopData("sd sd","Kandy","650","4",R.drawable.recentimage2));
-
-        setGuideTopRecycler(guidesTopDataList);
-
-
+        myDB = FirebaseFirestore.getInstance();
+        readGuideRecentsData();
+        readGuideTopData();
     }
 
-    private void setGuideRecentRecycler(List<GuideRecentsData> guideRecentsDataList){
-
-        guideRecentRecycler = findViewById(R.id.guide_recent_recycler);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false);
-        guideRecentRecycler.setLayoutManager(layoutManager);
-        guideRecentsAdapter = new GuideRecentsAdapter(this, guideRecentsDataList);
-        guideRecentRecycler.setAdapter(guideRecentsAdapter);
+    void readGuideRecentsData() {
+        myDB.collection("guides").orderBy("joined_on", Query.Direction.DESCENDING).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                if (e != null)
+                    toastResult(e.getMessage());
+                guideRecentsDataList.clear();
+                for (DocumentSnapshot doc : documentSnapshots) {
+                    guideRecentsDataList.add(new GuideRecentsData(doc.getId(),doc.getString("guide_name"),doc.getString("place"),R.drawable.hotel2));
+                }
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GuideHome.this, RecyclerView.HORIZONTAL, false);
+                guideRecentRecycler.setLayoutManager(layoutManager);
+                guideRecentsAdapter = new GuideRecentsAdapter(GuideHome.this, guideRecentsDataList);
+                guideRecentRecycler.setAdapter(guideRecentsAdapter);
+            }
+        });
     }
-    private void setGuideTopRecycler(List<GuidesTopData> guidesTopDataList){
-
-        guideTopRecycler = findViewById(R.id.top_guides_recycler);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL,false);
-        guideTopRecycler.setLayoutManager(layoutManager);
-        guideTopAdapter = new GuideTopAdapter(this, guidesTopDataList);
-        guideTopRecycler.setAdapter(guideTopAdapter);
+    void readGuideTopData() {
+        myDB.collection("guides").orderBy("rating", Query.Direction.DESCENDING).limit(30).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                if (e != null)
+                    toastResult(e.getMessage());
+                guidesTopDataList.clear();
+                for (DocumentSnapshot doc : documentSnapshots) {
+                    guidesTopDataList.add(new GuidesTopData(doc.getId(),doc.getString("guide_name"),doc.getString("place"),doc.getString("rating"),R.drawable.hotel2));
+                }
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GuideHome.this, RecyclerView.VERTICAL, false);
+                guideTopRecycler.setLayoutManager(layoutManager);
+                guideTopAdapter = new GuideTopAdapter(GuideHome.this, guidesTopDataList);
+                guideTopRecycler.setAdapter(guideTopAdapter);
+            }
+        });
+    }
+    public void toastResult(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

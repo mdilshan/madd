@@ -1,27 +1,19 @@
 package com.example.madd.model;
 
 public class GuideRecentsData {
+
     String GuideName;
     String Place;
-    String Price;
-    String Rating;
     Integer ImageUrl;
-
-    public GuideRecentsData(String GuideName, String Place, String Price, String Rating, Integer ImageUrl) {
-        this.GuideName = GuideName;
-        this.Place = Place;
-        this.Price = Price;
-        this.Rating = Rating;
-        this.ImageUrl = ImageUrl;
+    public String getDocument() {
+        return Document;
     }
 
-    public Integer getImageUrl() {
-        return ImageUrl;
+    public void setDocument(String document) {
+        Document = document;
     }
 
-    public void setImageUrl(Integer imageUrl) {
-        ImageUrl = imageUrl;
-    }
+    String Document;
 
     public String getGuideName() {
         return GuideName;
@@ -39,19 +31,19 @@ public class GuideRecentsData {
         Place = place;
     }
 
-    public String getPrice() {
-        return Price;
+    public Integer getImageUrl() {
+        return ImageUrl;
     }
 
-    public void setPrice(String price) {
-        Price = price;
+    public void setImageUrl(Integer imageUrl) {
+        ImageUrl = imageUrl;
     }
 
-    public String getRating() {
-        return Rating;
+    public GuideRecentsData(String document,String GuideName, String Place, Integer ImageUrl) {
+        this.GuideName = GuideName;
+        this.Place = Place;
+        this.ImageUrl =ImageUrl;
+        this.Document = document;
     }
 
-    public void setRating(String rating) {
-        Rating = rating;
-    }
 }
