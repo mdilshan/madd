@@ -29,7 +29,7 @@ public class EditHotel extends AppCompatActivity {
     private static Build.VERSION_CODES andriod;
     FirebaseFirestore myDB;
     Button edit_hotel_submit;
-    TextView edit_hotel_name,edit_hotel_location,edit_hotel_about;
+    TextView edit_hotel_name,edit_hotel_location,edit_hotel_about,edit_hotel_image,edit_hotel_contact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +42,8 @@ public class EditHotel extends AppCompatActivity {
         edit_hotel_name = findViewById(R.id.etedHotelName);
         edit_hotel_location = findViewById(R.id.etedHotelLocation);
         edit_hotel_about = findViewById(R.id.etedHotelAbout);
+        edit_hotel_image = findViewById(R.id.etedHotelImage);
+        edit_hotel_contact = findViewById(R.id.etedHotelContact);
 
         readData(id);
 
@@ -52,12 +54,16 @@ public class EditHotel extends AppCompatActivity {
             public void onClick(View view) {
                 if( edit_hotel_name.getText().toString().length()>0 ||
                     edit_hotel_location.getText().toString().length()>0 ||
+                        edit_hotel_contact.getText().toString().length()>0 ||
+                     edit_hotel_image.getText().toString().length()>0 ||
                     edit_hotel_about.getText().toString().length()>0
                 ){
                     Map<String, Object> data = new HashMap<>();
                     data.put("hotel_name",edit_hotel_name.getText().toString());
                     data.put("location",edit_hotel_location.getText().toString());
                     data.put("about",edit_hotel_about.getText().toString());
+                    data.put("contact",edit_hotel_about.getText().toString());
+                    data.put("image",edit_hotel_about.getText().toString());
 
                     myDB.collection("hotels").document(id).update(data)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -85,6 +91,8 @@ public class EditHotel extends AppCompatActivity {
                     edit_hotel_name.setText(task.getResult().get("hotel_name").toString());
                     edit_hotel_location.setText(task.getResult().get("location").toString());
                     edit_hotel_about.setText(task.getResult().get("about").toString());
+                    edit_hotel_contact.setText(task.getResult().get("contact").toString());
+                    edit_hotel_image.setText(task.getResult().get("image").toString());
 
 
                 }

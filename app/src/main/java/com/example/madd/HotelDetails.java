@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HotelDetails extends AppCompatActivity {
     FirebaseFirestore myDB;
+    TextView hotel_joined,hotel_name,hotel_star;
     AlertDialog.Builder builder;
     ImageButton HotelEdit,HotelDelete;
 

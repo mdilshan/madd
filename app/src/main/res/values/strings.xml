@@ -98,4 +98,6 @@
     <string name="hotelLocation">Location</string>
     <string name="hotelAbout" />
     <string name="hotelAbout1">Hotel About</string>
+    <string name="hotelImage">Hotel Image</string>
+    <string name="hotelContact">Hotel Contact</string>
 </resources>

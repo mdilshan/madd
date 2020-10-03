@@ -25,60 +25,127 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/join_bottom_bg" />
 
-    <EditText
-        android:id="@+id/etHotelName"
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/textInputLayouth1"
         android:layout_width="248dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="36dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/hotelname"
+        android:hint="Hotel Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.552"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView9">
 
-    <EditText
-        android:id="@+id/etHotelLocation"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etHotelName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayouth2"
         android:layout_width="248dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:hint="Location"
         android:text="@string/hotelLocation"
-        app:layout_constraintEnd_toEndOf="@+id/etHotelName"
-        app:layout_constraintStart_toStartOf="@+id/etHotelName"
-        app:layout_constraintTop_toBottomOf="@+id/etHotelName" />
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayouth1"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayouth1"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayouth1">
 
-    <EditText
-        android:id="@+id/etHotelAbout"
-        android:layout_width="249dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="32dp"
+        <com.google.android.material.textfield.TextInputEditText
+
+            android:id="@+id/etHotelLocation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayouth3"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
+        android:hint="About"
         android:text="@string/hotelAbout1"
-        app:layout_constraintEnd_toEndOf="@+id/etHotelLocation"
-        app:layout_constraintStart_toStartOf="@+id/etHotelLocation"
-        app:layout_constraintTop_toBottomOf="@+id/etHotelLocation" />
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayouth2"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayouth2"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayouth2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etHotelAbout"
+            android:layout_width="249dp"
+            android:layout_height="44dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayouth5"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Contact no"
+        android:text="@string/hotelContact"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayouth3"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayouth3"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayouth3">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etHotelContact"
+            android:layout_width="249dp"
+            android:layout_height="44dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayouth6"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Image"
+        android:text="@string/hotelImage"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayouth5"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayouth5"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayouth5">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etHotelImage"
+            android:layout_width="249dp"
+            android:layout_height="44dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnAddHotel"
         android:layout_width="248dp"
         android:layout_height="45dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/book_button_bg"
         android:fontFamily="@font/rubik_medium"
+        android:onClick="onAddClicked"
         android:text="Add Hotel"
         android:textColor="#FFFFFF"
-        android:onClick="onAddClicked"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/etHotelAbout"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etHotelAbout"
-        app:layout_constraintTop_toBottomOf="@+id/etHotelAbout" />
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayouth6"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayouth6"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayouth6" />
 
     <TextView
         android:id="@+id/etHotel"
@@ -90,7 +157,8 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/imageView9"
         app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

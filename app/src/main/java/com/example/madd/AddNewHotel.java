@@ -24,12 +24,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AddNewHotel extends AppCompatActivity {
 
-    TextView hotelName,hotelLocation,hotelAbout;
+    TextView hotelName,hotelLocation,hotelAbout,hotelContact,hotelImage;
     Button addHotel;
     DatabaseReference dbRef;
     Hoteldto hotel;
@@ -44,6 +45,9 @@ public class AddNewHotel extends AppCompatActivity {
         hotelName = findViewById(R.id.etHotelName);
         hotelLocation = findViewById(R.id.etHotelLocation);
         hotelAbout = findViewById(R.id.etHotelAbout);
+        hotelContact=findViewById(R.id.etHotelContact);
+        hotelImage = findViewById(R.id.etHotelImage);
+
 
         addHotel = findViewById(R.id.btnAddHotel);
 
@@ -52,16 +56,23 @@ public class AddNewHotel extends AppCompatActivity {
     }
     public void onAddClicked(View view) {
 
-
+        String date = LocalDate.now().toString();
         hideKeyboard(this);
         if (hotelName.getText().toString().length() > 0
                 ||hotelLocation.getText().toString().length() > 0
-                ||hotelAbout.getText().toString().length() > 0) {
+                ||hotelAbout.getText().toString().length() > 0
+                ||hotelContact.getText().toString().length() > 0
+                ||hotelImage.getText().toString().length() > 0
+        ) {
             try {
             Map<String, Object> data = new HashMap<>();
             data.put("hotel_name", hotelName.getText().toString());
             data.put("location", hotelLocation.getText().toString());
             data.put("about", hotelAbout.getText().toString());
+            data.put("contact", hotelContact.getText().toString());
+            data.put("rating", "0.0");
+            data.put("image", hotelImage.getText().toString());
+            data.put("joined_on", date);
            /* CollectionReference solarSystem = myDB.collection("myData");
             solarSystem.add(data);
             myDB.collection("myData").document("1").set(data)
