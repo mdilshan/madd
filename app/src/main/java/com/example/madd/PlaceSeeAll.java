@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import android.widget.Button;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceSeeAll extends AppCompatActivity {
-
+    private static final String TAG = "PlaceSeeAll";
     RecyclerView allPlaceRecycler;
     AllPlaceAdapter allPlaceAdapter;
     FirebaseFirestore myDB;
@@ -53,7 +54,9 @@ public class PlaceSeeAll extends AppCompatActivity {
                     toastResult(e.getMessage());
                 allPlaceDataList.clear();
                 for (DocumentSnapshot doc : documentSnapshots) {
-                    allPlaceDataList.add(new AllPlaceData(doc.getId(),doc.getString("placeName"),doc.getString("placeLocation"),doc.getString("distance"),doc.getString("rating"),R.drawable.hotel2));
+                    Log.d(TAG, "onEvent: DOC Place NAME " + doc.getString("place_name") );
+                    Log.d(TAG, "onEvent: ID ====================== " + doc.getId());
+                    allPlaceDataList.add(new AllPlaceData(doc.getId(),doc.getString("place_name"),doc.getString("place_location"),"140KM",doc.getString("rating"),R.drawable.hotel2));
 //                    allGuideDataList.add(new AllGuideData(doc.getString("description"),doc.getString("location"),doc.getString("name"),doc.getString("name"),R.drawable.hotel2));
                 }
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PlaceSeeAll.this, RecyclerView.VERTICAL, false);

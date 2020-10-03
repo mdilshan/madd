@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DetailsActivity extends AppCompatActivity {
-
+    private static final String TAG = "DetailsActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +43,18 @@ public class DetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String ids = intent.getStringExtra("ids");
+    if(ids != null) {
+        myDB.collection("places").document(ids)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()) {
+                            DocumentSnapshot res = task.getResult();
 
+                        }
+                    }
+                });
+    }
         //joinBtn = findViewById(R.id.joinbutton);
         final ImageButton editbutton = (ImageButton) findViewById(R.id.editButton);
         /*
@@ -58,17 +69,10 @@ public class DetailsActivity extends AppCompatActivity {
         editbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DocumentReference documentReference = myDB.collection("places").document(ids);
-                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            Intent intent = new Intent(DetailsActivity.this, EditPlaces.class);
-                            intent.putExtra("ids", ids);
-                            startActivity(intent);
-                        }
-                    }
-                });
+                Log.d(TAG, "onClick: ON CLICK EDIT BUTTON");
+                Intent intent = new Intent(DetailsActivity.this, EditPlaces.class);
+                intent.putExtra("ids",ids);
+                startActivity(intent);
             }
         });
 

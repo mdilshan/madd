@@ -32,6 +32,15 @@ public class AddPlaces extends AppCompatActivity {
     Button addsubmit;
     TextView place_Name, place_Location, place_Description, place_URL;
 
+    public static void hideKeyboard(Activity activity) {
+        View view = activity.findViewById(android.R.id.content);
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            assert imm != null;
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +101,7 @@ public class AddPlaces extends AppCompatActivity {
                         public void onSuccess(DocumentReference documentReference) {
                             toastResult("Data added successfully");
                             Intent intent = new Intent(AddPlaces.this, DetailsActivity.class);
+                            intent.putExtra("ids", documentReference.getId());
                             startActivity(intent);
                         }
                     })
@@ -104,15 +114,6 @@ public class AddPlaces extends AppCompatActivity {
 
         } else {
             place_Name.setError("Value Required");
-        }
-    }
-
-    public static void hideKeyboard(Activity activity) {
-        View view = activity.findViewById(android.R.id.content);
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-            assert imm != null;
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 

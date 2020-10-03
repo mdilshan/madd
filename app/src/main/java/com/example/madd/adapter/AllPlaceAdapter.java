@@ -2,6 +2,7 @@ package com.example.madd.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.List;
 
 public class AllPlaceAdapter extends RecyclerView.Adapter<AllPlaceAdapter.AllPlaceViewHolder> {
+    private static final String TAG = "AllPlaceAdapter";
     Context context;
     List<AllPlaceData> allPlacesDataList;
     AllGuideAdapter.OnItemClickListner listner;
@@ -32,24 +34,24 @@ public class AllPlaceAdapter extends RecyclerView.Adapter<AllPlaceAdapter.AllPla
    @Override
     public AllPlaceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.guide_top_row_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.top_places_row_item,parent,false);
         return new AllPlaceViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AllPlaceViewHolder holder, final int position) {
-
+        Log.d(TAG, "onBindViewHolder: NAME +++++++++++++++++++++++ " +  allPlacesDataList.get(position).getPlaceName());
         holder.PlaceName.setText(allPlacesDataList.get(position).getPlaceName());
         holder.PlaceLocation.setText(allPlacesDataList.get(position).getPlaceLocation());
         holder.Distance.setText(allPlacesDataList.get(position).getDistance());
         holder.PlaceImg.setImageResource(allPlacesDataList.get(position).getImageUrl());
-        holder.document = (allPlacesDataList.get(position).getDocument());
 
-        final String ids = holder.document;
+        final String ids = allPlacesDataList.get(position).getDocument();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, DetailsActivity.class);
+                Log.d(TAG, "onClick: ID ON ALLPLACEADPATER ________________ " + ids);
                 i.putExtra("ids",ids);
                 context.startActivity(i);
             }

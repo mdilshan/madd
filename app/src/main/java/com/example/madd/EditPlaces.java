@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EditPlaces extends AppCompatActivity {
+    private static final String TAG = "EditPlaces";
     FirebaseFirestore myDB;
     Button updatebtn;
     TextView edit_placeName,edit_placeLocation,edit_placeDescription,edit_placeURL;
@@ -42,6 +43,7 @@ public class EditPlaces extends AppCompatActivity {
         myDB = FirebaseFirestore.getInstance();
         Intent intent = getIntent();
         final String id = intent.getStringExtra("ids");
+        Log.d(TAG, "onCreate: ID RECIEVED " + id);
 
         edit_placeName = findViewById(R.id.editPlace);
         edit_placeLocation = findViewById(R.id.editPlaceLocation);
@@ -49,7 +51,8 @@ public class EditPlaces extends AppCompatActivity {
         edit_placeURL = findViewById(R.id.editURL);
 
         readData(id);
-        updatebtn = findViewById(R.id.saveSubmit);
+
+        updatebtn = findViewById(R.id.updateSubmit);
 
         updatebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +97,7 @@ public class EditPlaces extends AppCompatActivity {
     }
 
     void readData(String id) {
-        DocumentReference documentReference = myDB.collection("guides").document(id);
+        DocumentReference documentReference = myDB.collection("places").document(id);
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -102,7 +105,7 @@ public class EditPlaces extends AppCompatActivity {
                     edit_placeName.setText(task.getResult().get("place_name").toString());
                     edit_placeLocation.setText(task.getResult().get("place_location").toString());
                     edit_placeDescription.setText(task.getResult().get("place_description").toString());
-                    edit_placeURL.setText(task.getResult().get("place_URL").toString());
+                    edit_placeURL.setText(task.getResult().get("imageUrl").toString());
                 }
             }
         });
