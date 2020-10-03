@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -25,13 +26,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 public class GuideDetails extends AppCompatActivity {
     FirebaseFirestore myDB;
     TextView guide_joined,guide_name,guide_star,guide_about,guide_mobile,guide_place,guide_review;
     ImageView guide_image;
-    Button joinbtn;
     ImageButton editbtn;
+    Button callbtn;
     RatingBar GuideRatingBAR;
     AlertDialog.Builder builder;
     @Override
@@ -52,17 +54,16 @@ public class GuideDetails extends AppCompatActivity {
         guide_about= findViewById(R.id.guide_about);
         GuideRatingBAR = findViewById(R.id.guide_rating_bars);
         readData(ids);
-
-        joinbtn = findViewById(R.id.joinbtn);
-        editbtn = (ImageButton) findViewById(R.id.editbtn);
-        guide_review = findViewById(R.id.guide_review);
-        joinbtn.setOnClickListener(new View.OnClickListener() {
+        bottomnav();
+        ImageButton Back  = findViewById(R.id.back_btn);
+        Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GuideDetails.this, GuideJoin.class);
-                startActivity(intent);
+                finish();
             }
         });
+        editbtn = (ImageButton) findViewById(R.id.editbtn);
+        guide_review = findViewById(R.id.guide_review);
         editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +75,23 @@ public class GuideDetails extends AppCompatActivity {
                             Intent intent = new Intent(GuideDetails.this, GuideEdit.class);
                             intent.putExtra("ids",ids);
                             startActivity(intent);
+                        }
+                    }
+                });
+            }
+        });
+        callbtn = findViewById(R.id.callbtn);
+        callbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DocumentReference documentReference = myDB.collection("guides").document(ids);
+                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                            callIntent.setData(Uri.parse("tel:"+task.getResult().get("mobile").toString()));
+                            startActivity(callIntent);
                         }
                     }
                 });
@@ -155,7 +173,7 @@ public class GuideDetails extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         guide_name.setText(task.getResult().get("guide_name").toString());
-//                        guide_image.setText(task.getResult().get("imageUrl").toString());
+                        Picasso.get().load(task.getResult().get("imageUrl").toString()).into(guide_image);
                         guide_mobile.setText(task.getResult().get("mobile").toString());
                         guide_place.setText(task.getResult().get("place").toString());
                         guide_star.setText(task.getResult().get("rating").toString());
@@ -168,7 +186,42 @@ public class GuideDetails extends AppCompatActivity {
 
         }catch (Exception e){}
     }
+    public void bottomnav() {
+        Activity A = GuideDetails.this;
+        ImageView home_btn_nav1 =  (ImageView)findViewById(R.id.home_btn_nav);
+        ImageView guide_btn_nav1 =(ImageView)findViewById(R.id.guide_btn_nav);
+        ImageView places_btn_nav1 =(ImageView)findViewById(R.id.places_btn_nav);
+        ImageView hotel_btn_nav1 = (ImageView)findViewById(R.id.hotel_btn_nav);
 
+        home_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        guide_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A,GuideHome.class);
+                startActivity(intent);
+            }
+        });
+        places_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A, PlaceActivity.class);
+                startActivity(intent);
+            }
+        });
+        hotel_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A, HotelMainPage.class);
+                startActivity(intent);
+            }
+        });
+    }
     public void toastResult(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

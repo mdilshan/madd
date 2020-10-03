@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,13 @@ public class GuideEdit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_edit);
-
+        ImageButton Back  = findViewById(R.id.back_btn);
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         myDB = FirebaseFirestore.getInstance();
         Intent intent = getIntent();
         final String id = intent.getStringExtra("ids");
@@ -107,7 +114,7 @@ public class GuideEdit extends AppCompatActivity {
                         edit_guide_name.setText(task.getResult().get("guide_name").toString());
                         edit_place.setText(task.getResult().get("place").toString());
                         edit_mobile.setText(task.getResult().get("mobile").toString());
-//                        edit_image.setText(task.getResult().get("imageUrl").toString());
+                        edit_image.setText(task.getResult().get("imageUrl").toString());
                         edit_about.setText(task.getResult().get("about").toString());
                     }
                 }
