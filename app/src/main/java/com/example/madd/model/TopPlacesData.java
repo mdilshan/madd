@@ -6,6 +6,13 @@ public class TopPlacesData {
     String cityName;
     String distance;
     Integer imageUrl;
+    String Rating;
+    Float PlaceRateBar;
+
+    public Float getPlaceRateBar() {
+        this.PlaceRateBar = Float.parseFloat(Rating);
+        return PlaceRateBar;
+    }
 
     public Integer getImageUrl() {
         return imageUrl;
@@ -15,11 +22,13 @@ public class TopPlacesData {
         this.imageUrl = imageUrl;
     }
 
-    public TopPlacesData(String placeName, String cityName, String distance, Integer imageUrl) {
+    public TopPlacesData(String placeName, String cityName, String distance,String Rating, Integer imageUrl) {
         this.placeName = placeName;
         this.cityName = cityName;
         this.distance = distance;
         this.imageUrl = imageUrl;
+        this.Rating = Rating;
+        this.PlaceRateBar = Float.parseFloat(Rating);
     }
 
     public String getPlaceName() {
@@ -44,5 +53,13 @@ public class TopPlacesData {
 
     public void setDistance(String distance) {
         this.distance = distance;
+    }
+
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
     }
 }

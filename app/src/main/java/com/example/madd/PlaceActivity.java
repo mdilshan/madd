@@ -9,27 +9,38 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.madd.adapter.RecentsAdapter;
 import com.example.madd.adapter.TopPlacesAdapter;
 import com.example.madd.model.RecentsData;
 import com.example.madd.model.TopPlacesData;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceActivity extends AppCompatActivity {
+    FirebaseFirestore myDB;
     ImageButton btn1;
     Button btn2;
     RecyclerView recentRecycler, topPlacesRecycler;
     RecentsAdapter recentsAdapter;
     TopPlacesAdapter topPlacesAdapter;
+    List<RecentsData> recentsDataList =  new ArrayList<>();
+    List<TopPlacesData> topPlacesDataList =  new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place);
-
+        recentRecycler = findViewById(R.id.recent_recycler);
+        topPlacesRecycler = findViewById(R.id.see_all_places_recycler);
         btn1 = findViewById(R.id.btnAdd);
 
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +52,7 @@ public class PlaceActivity extends AppCompatActivity {
         });
 
 
-        btn2=findViewById(R.id.button3);
+        btn2 = findViewById(R.id.button3);
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,49 +61,49 @@ public class PlaceActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        // Now here we will add some dummy data in our model class
+        myDB = FirebaseFirestore.getInstance();
+        readPlaceRecentsData();
+        readPlaceTopData();
+    }
+        void readPlaceRecentsData() {
+            myDB.collection("places").orderBy("joined_on", Query.Direction.DESCENDING).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                    if (e != null)
+                        toastResult(e.getMessage());
+                    recentsDataList.clear();
+                    for (DocumentSnapshot doc : documentSnapshots) {
+                        recentsDataList.add(new RecentsData(doc.getId(),doc.getString("place_name"),doc.getString("place_location"),R.drawable.hotel2));
+                    }
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PlaceActivity.this, RecyclerView.HORIZONTAL, false);
+                    recentRecycler.setLayoutManager(layoutManager);
+                    recentsAdapter = new RecentsAdapter(PlaceActivity.this, recentsDataList);
+                    recentRecycler.setAdapter(recentsAdapter);
+                }
+            });
+        }
 
-        List<RecentsData> recentsDataList = new ArrayList<>();
-        recentsDataList.add(new RecentsData("Temple of Tooth Relic","Kandy","50km",R.drawable.im3));
-        recentsDataList.add(new RecentsData("Angel falls","Nuwareliya","75km",R.drawable.im2));
-        recentsDataList.add(new RecentsData("Light House","Colombo","190km",R.drawable.im1));
-//        recentsDataList.add(new RecentsData("Sigiriya","Sigiriya","200km",R.drawable.im6));
-        recentsDataList.add(new RecentsData("Elephant Hall","Pinnawala","250km",R.drawable.im5));
-        recentsDataList.add(new RecentsData("Thirukoneswaram Temple","Trincomalee","120km",R.drawable.im4));
-
-        setRecentRecycler(recentsDataList);
-
-        List<TopPlacesData> topPlacesDataList = new ArrayList<>();
-        topPlacesDataList.add(new TopPlacesData("Narigama Beach","Hikkaduwa","200km",R.drawable.slide1));
-        topPlacesDataList.add(new TopPlacesData("Adams Peak","Ratnapura","150km",R.drawable.slide2));
-        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","100km",R.drawable.slide1));
-        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","250km",R.drawable.slide2));
-        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","120km",R.drawable.slide1));
-
-        setTopPlacesRecycler(topPlacesDataList);
+    void readPlaceTopData() {
+        myDB.collection("places").orderBy("rating", Query.Direction.DESCENDING).limit(30).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                if (e != null)
+                    toastResult(e.getMessage());
+                topPlacesDataList.clear();
+                for (DocumentSnapshot doc : documentSnapshots) {
+                    topPlacesDataList.add(new TopPlacesData(doc.getId(),doc.getString("place_name"),doc.getString("place_location"),doc.getString("rating"),R.drawable.hotel2));
+                }
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PlaceActivity.this, RecyclerView.VERTICAL, false);
+                topPlacesRecycler.setLayoutManager(layoutManager);
+                topPlacesAdapter = new TopPlacesAdapter(PlaceActivity.this, topPlacesDataList);
+                topPlacesRecycler.setAdapter(topPlacesAdapter);
+            }
+        });
     }
 
-    private  void setRecentRecycler(List<RecentsData> recentsDataList){
-
-        recentRecycler = findViewById(R.id.recent_recycler);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        recentRecycler.setLayoutManager(layoutManager);
-        recentsAdapter = new RecentsAdapter(this, recentsDataList);
-        recentRecycler.setAdapter(recentsAdapter);
-
+    public void toastResult(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-
-    private  void setTopPlacesRecycler(List<TopPlacesData> topPlacesDataList){
-
-        topPlacesRecycler = findViewById(R.id.see_all_places_recycler);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        topPlacesRecycler.setLayoutManager(layoutManager);
-        topPlacesAdapter = new TopPlacesAdapter(this, topPlacesDataList);
-        topPlacesRecycler.setAdapter(topPlacesAdapter);
-
-    }
-
-
 
 
 }

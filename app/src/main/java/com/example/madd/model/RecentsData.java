@@ -4,8 +4,16 @@ public class RecentsData {
 
     String placeName;
     String cityName;
-    String distance;
     int imageUrl;
+    String Document;
+
+    public String getDocument() {
+        return Document;
+    }
+
+    public void setDocument(String document) {
+        Document = document;
+    }
 
     public int getImageUrl() {
         return imageUrl;
@@ -15,11 +23,11 @@ public class RecentsData {
         this.imageUrl = imageUrl;
     }
 
-    public RecentsData(String placeName, String cityName, String distance, int imageUrl) {
+    public RecentsData(String document,String placeName, String cityName,  int imageUrl) {
         this.placeName = placeName;
         this.cityName = cityName;
-        this.distance = distance;
         this.imageUrl = imageUrl;
+        this.Document = document;
     }
 
     public String getPlaceName() {
@@ -36,11 +44,5 @@ public class RecentsData {
         this.cityName = cityName;
     }
 
-    public String getDistance() {
-        return distance;
-    }
 
-    public void setDistance(String distance) {
-        this.distance = distance;
-    }
 }

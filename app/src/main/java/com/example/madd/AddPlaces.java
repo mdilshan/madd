@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -63,6 +64,7 @@ public class AddPlaces extends AppCompatActivity {
     }
 
     public void onAddClicked(View view) {
+        String date = LocalDate.now().toString();
         hideKeyboard(this);
         if (place_Name.getText().toString().length() > 0
                 || place_Location.getText().toString().length() > 0
@@ -73,6 +75,8 @@ public class AddPlaces extends AppCompatActivity {
             data.put("place_location", place_Location.getText().toString());
             data.put("place_description", place_Description.getText().toString());
             data.put("imageUrl", place_URL.getText().toString());
+            data.put("rating", "0.0");
+            data.put("joined_on", date);
            /* CollectionReference solarSystem = myDB.collection("myData");
             solarSystem.add(data);
             myDB.collection("myData").document("1").set(data)

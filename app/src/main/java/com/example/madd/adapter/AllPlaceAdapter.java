@@ -43,7 +43,7 @@ public class AllPlaceAdapter extends RecyclerView.Adapter<AllPlaceAdapter.AllPla
         Log.d(TAG, "onBindViewHolder: NAME +++++++++++++++++++++++ " +  allPlacesDataList.get(position).getPlaceName());
         holder.PlaceName.setText(allPlacesDataList.get(position).getPlaceName());
         holder.PlaceLocation.setText(allPlacesDataList.get(position).getPlaceLocation());
-        holder.Distance.setText(allPlacesDataList.get(position).getDistance());
+       // holder.Distance.setText(allPlacesDataList.get(position).getDistance());
         holder.PlaceImg.setImageResource(allPlacesDataList.get(position).getImageUrl());
 
         final String ids = allPlacesDataList.get(position).getDocument();

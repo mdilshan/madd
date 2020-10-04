@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,12 @@ import java.util.Map;
 
 public class DetailsActivity extends AppCompatActivity {
     private static final String TAG = "DetailsActivity";
+    FirebaseFirestore myDB;
+    TextView plce_joined,plce_name,plce_star,plce_about,plce_location,plce_review;
+    ImageView plce_image;
+    RatingBar PlaceRatingBAR;
+    AlertDialog.Builder builder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,17 +50,30 @@ public class DetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String ids = intent.getStringExtra("ids");
-    if(ids != null) {
-        myDB.collection("places").document(ids)
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful()) {
-                            DocumentSnapshot res = task.getResult();
 
-                        }
+        if(ids != null) {
+            myDB.collection("places").document(ids)
+                    .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if(task.isSuccessful()) {
+                        DocumentSnapshot res = task.getResult();
+
                     }
-                });
+                }
+            });
+
+            plce_image=findViewById(R.id.profile_img);
+            plce_name=findViewById(R.id.plc_name);
+            plce_joined=findViewById(R.id.place_joined);
+            plce_star=findViewById(R.id.place_star);
+            plce_location=findViewById(R.id.plc_location);
+            plce_about=findViewById(R.id.plc_about);
+            PlaceRatingBAR=findViewById(R.id.place_rating_bars);
+            readData(ids);
+
+
+
     }
         //joinBtn = findViewById(R.id.joinbutton);
         final ImageButton editbutton = (ImageButton) findViewById(R.id.editButton);
@@ -75,6 +95,22 @@ public class DetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+   /*     plce_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DocumentReference documentReference = myDB.collection("places").document(ids);
+                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Intent intent = new Intent(DetailsActivity.this, EditPlaces.class);
+                            intent.putExtra("ids",ids);
+                            startActivity(intent);
+                        }
+                    }
+                });
+            }
+        });*/
 
         final ImageView deleteProfile = findViewById(R.id.deleteBtnPlace);
 
@@ -125,6 +161,27 @@ public class DetailsActivity extends AppCompatActivity {
         });
     }
 
+    void readData(String ids) {
+        hideKeyboard(this);
+        try {
+            DocumentReference documentReference = myDB.collection("places").document(ids);
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        plce_name.setText(task.getResult().get("place_name").toString());
+//                        guide_image.setText(task.getResult().get("imageUrl").toString());
+                        plce_location.setText(task.getResult().get("place_location").toString());
+                        plce_star.setText(task.getResult().get("rating").toString());
+                        PlaceRatingBAR.setRating(Float.parseFloat(task.getResult().get("rating").toString()));
+                        plce_about.setText(task.getResult().get("place_description").toString());
+                        plce_joined.setText(task.getResult().get("joined_on").toString());
+                    }
+                }
+            });
+
+        }catch (Exception e){}
+    }
     public void toastResult(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
