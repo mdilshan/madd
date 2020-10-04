@@ -4,31 +4,35 @@ public class TopPlacesData {
 
     String placeName;
     String cityName;
-    String distance;
-    Integer imageUrl;
+    //String distance;
+    String ImageUrl;
     String Rating;
     Float PlaceRateBar;
+    String Document;
+
+    public String getDocument() {
+        return Document;
+    }
+
+    public void setDocument(String document) {
+        Document = document;
+    }
+
 
     public Float getPlaceRateBar() {
         this.PlaceRateBar = Float.parseFloat(Rating);
         return PlaceRateBar;
     }
 
-    public Integer getImageUrl() {
-        return imageUrl;
-    }
 
-    public void setImageUrl(Integer imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public TopPlacesData(String placeName, String cityName, String distance,String Rating, Integer imageUrl) {
+    public TopPlacesData(String placeName, String cityName, String Rating, String imageUrl,String document ) {
         this.placeName = placeName;
         this.cityName = cityName;
-        this.distance = distance;
-        this.imageUrl = imageUrl;
+        //this.distance = distance;
+        this.ImageUrl = imageUrl;
         this.Rating = Rating;
         this.PlaceRateBar = Float.parseFloat(Rating);
+        this.Document=document;
     }
 
     public String getPlaceName() {
@@ -47,13 +51,6 @@ public class TopPlacesData {
         this.cityName = cityName;
     }
 
-    public String getDistance() {
-        return distance;
-    }
-
-    public void setDistance(String distance) {
-        this.distance = distance;
-    }
 
     public String getRating() {
         return Rating;
@@ -62,4 +59,13 @@ public class TopPlacesData {
     public void setRating(String rating) {
         Rating = rating;
     }
+
+    public String getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
+    }
 }
+

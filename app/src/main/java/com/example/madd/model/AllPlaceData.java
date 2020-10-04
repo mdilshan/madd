@@ -3,17 +3,17 @@ package com.example.madd.model;
 public class AllPlaceData {
     String PlaceName;
     String PlaceLocation;
-    String Distance;
+    //String Distance;
     String Rating;
-    Integer ImageUrl;
+    String ImageUrl;
     String Document;
 
-    public AllPlaceData(String id, String placeName, String placeLocation, String distance, String rating, int hotel2) {
+    public AllPlaceData(String id, String placeName, String placeLocation,  String rating, String imageUrl) {
         PlaceName = placeName;
         PlaceLocation = placeLocation;
-        Distance = distance;
+        //Distance = distance;
         Rating = rating;
-        ImageUrl = hotel2;
+        ImageUrl = imageUrl;
         Document = id;
 
     }
@@ -34,13 +34,13 @@ public class AllPlaceData {
         PlaceLocation = placeLocation;
     }
 
-    public String getDistance() {
-        return Distance;
-    }
+    //public String getDistance() {
+     //   return Distance;
+   // }
 
-    public void setDistance(String distance) {
-        Distance = distance;
-    }
+   // public void setDistance(String distance) {
+        //Distance = distance;
+    //}
 
     public String getRating() {
         return Rating;
@@ -50,11 +50,11 @@ public class AllPlaceData {
         Rating = rating;
     }
 
-    public Integer getImageUrl() {
+    public String getImageUrl() {
         return ImageUrl;
     }
 
-    public void setImageUrl(Integer imageUrl) {
+    public void setImageUrl(String imageUrl) {
         ImageUrl = imageUrl;
     }
 

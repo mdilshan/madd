@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +45,7 @@ public class AllPlaceAdapter extends RecyclerView.Adapter<AllPlaceAdapter.AllPla
         holder.PlaceName.setText(allPlacesDataList.get(position).getPlaceName());
         holder.PlaceLocation.setText(allPlacesDataList.get(position).getPlaceLocation());
        // holder.Distance.setText(allPlacesDataList.get(position).getDistance());
-        holder.PlaceImg.setImageResource(allPlacesDataList.get(position).getImageUrl());
+        Picasso.get().load(allPlacesDataList.get(position).getImageUrl()).into(holder.PlaceImg);
 
         final String ids = allPlacesDataList.get(position).getDocument();
         holder.itemView.setOnClickListener(new View.OnClickListener() {

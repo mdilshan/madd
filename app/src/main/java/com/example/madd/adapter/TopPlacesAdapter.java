@@ -16,6 +16,7 @@ import com.example.madd.GuideDetails;
 import com.example.madd.R;
 import com.example.madd.model.TopPlacesData;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -46,8 +47,9 @@ public class TopPlacesAdapter extends RecyclerView.Adapter<TopPlacesAdapter.TopP
         holder.cityName.setText(topPlacesDataList.get(position).getCityName());
         holder.placeName.setText(topPlacesDataList.get(position).getPlaceName());
         //holder.distance.setText(topPlacesDataList.get(position).getDistance());
-        holder.placeImage.setImageResource(topPlacesDataList.get(position).getImageUrl());
+        Picasso.get().load(topPlacesDataList.get(position).getImageUrl()).into(holder.placeImage);
         holder.PlaceRating.setText(topPlacesDataList.get(position).getRating());
+        holder.document = (topPlacesDataList.get(position).getDocument());
         //holder.PlaceRateBar.setRating(topPlacesDataList.get(position).getPlaceRateBar());
 
 

@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.madd.adapter.RecentsAdapter;
@@ -64,6 +66,7 @@ public class PlaceActivity extends AppCompatActivity {
         myDB = FirebaseFirestore.getInstance();
         readPlaceRecentsData();
         readPlaceTopData();
+        bottomnav();
     }
         void readPlaceRecentsData() {
             myDB.collection("places").orderBy("joined_on", Query.Direction.DESCENDING).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -73,7 +76,7 @@ public class PlaceActivity extends AppCompatActivity {
                         toastResult(e.getMessage());
                     recentsDataList.clear();
                     for (DocumentSnapshot doc : documentSnapshots) {
-                        recentsDataList.add(new RecentsData(doc.getId(),doc.getString("place_name"),doc.getString("place_location"),R.drawable.hotel2));
+                        recentsDataList.add(new RecentsData(doc.getId(),doc.getString("place_name"),doc.getString("place_location"),doc.getString("imageUrl")));
                     }
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PlaceActivity.this, RecyclerView.HORIZONTAL, false);
                     recentRecycler.setLayoutManager(layoutManager);
@@ -91,12 +94,49 @@ public class PlaceActivity extends AppCompatActivity {
                     toastResult(e.getMessage());
                 topPlacesDataList.clear();
                 for (DocumentSnapshot doc : documentSnapshots) {
-                    topPlacesDataList.add(new TopPlacesData(doc.getId(),doc.getString("place_name"),doc.getString("place_location"),doc.getString("rating"),R.drawable.hotel2));
+                    topPlacesDataList.add(new TopPlacesData(doc.getId(),doc.getString("place_name"),doc.getString("place_location"),doc.getString("rating"),doc.getString("imageUrl")));
                 }
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PlaceActivity.this, RecyclerView.VERTICAL, false);
                 topPlacesRecycler.setLayoutManager(layoutManager);
                 topPlacesAdapter = new TopPlacesAdapter(PlaceActivity.this, topPlacesDataList);
                 topPlacesRecycler.setAdapter(topPlacesAdapter);
+            }
+        });
+    }
+
+    public void bottomnav() {
+        Activity A = PlaceActivity.this;
+        ImageView home_btn_nav1 =  (ImageView)findViewById(R.id.homee);
+        ImageView guide_btn_nav1 =(ImageView)findViewById(R.id.guidee);
+        ImageView places_btn_nav1 =(ImageView)findViewById(R.id.placee);
+        ImageView hotel_btn_nav1 = (ImageView)findViewById(R.id.hoteel);
+
+        home_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        guide_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A,GuideHome.class);
+                startActivity(intent);
+            }
+        });
+        places_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A, PlaceActivity.class);
+                startActivity(intent);
+            }
+        });
+        hotel_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A, HotelMainPage.class);
+                startActivity(intent);
             }
         });
     }

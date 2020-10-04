@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.squareup.picasso.Picasso;
 
 import com.example.madd.DetailsActivity;
 import com.example.madd.R;
@@ -45,7 +46,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
         holder.cityName.setText(recentsDataList.get(position).getCityName());
         holder.placeName.setText(recentsDataList.get(position).getPlaceName());
         //holder.distance.setText(recentsDataList.get(position).getDistance());
-        holder.placeImage.setImageResource(recentsDataList.get(position).getImageUrl());
+        Picasso.get().load(recentsDataList.get(position).getImageUrl()).into(holder.placeImage);
         holder.document = (recentsDataList.get(position).getDocument());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +67,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
     public static final class RecentsViewHolder extends RecyclerView.ViewHolder{
 
         ImageView placeImage;
-        TextView placeName, cityName, distance;
+        TextView placeName, cityName;
         String document;
 
         public RecentsViewHolder(@NonNull View itemView) {
@@ -75,7 +76,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
             placeImage = itemView.findViewById(R.id.place_image);
             placeName = itemView.findViewById(R.id.place_name);
             cityName = itemView.findViewById(R.id.city_name);
-            distance = itemView.findViewById(R.id.distance);
+           // distance = itemView.findViewById(R.id.distance);
 
         }
     }

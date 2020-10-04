@@ -6,7 +6,7 @@ public class AllGuideData {
     String Place;
     String Rating;
     String ImageUrl;
-Float RatingBar;
+    Float RatingBar;
     public String getDocument() {
         return Document;
     }

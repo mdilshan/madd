@@ -56,7 +56,7 @@ public class PlaceSeeAll extends AppCompatActivity {
                 for (DocumentSnapshot doc : documentSnapshots) {
                     Log.d(TAG, "onEvent: DOC Place NAME " + doc.getString("place_name") );
                     Log.d(TAG, "onEvent: ID ====================== " + doc.getId());
-                    allPlaceDataList.add(new AllPlaceData(doc.getId(),doc.getString("place_name"),doc.getString("place_location"),"140KM",doc.getString("rating"),R.drawable.hotel2));
+                    allPlaceDataList.add(new AllPlaceData(doc.getId(),doc.getString("place_name"),doc.getString("place_location"),doc.getString("rating"),doc.getString("imageURL")));
 //                    allGuideDataList.add(new AllGuideData(doc.getString("description"),doc.getString("location"),doc.getString("name"),doc.getString("name"),R.drawable.hotel2));
                 }
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PlaceSeeAll.this, RecyclerView.VERTICAL, false);
