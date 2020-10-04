@@ -28,6 +28,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+/**
+ * Guide Profile
+ * @Author - https://github.com/MhmdAsq
+ */
 public class GuideDetails extends AppCompatActivity {
     FirebaseFirestore myDB;
     TextView guide_joined,guide_name,guide_star,guide_about,guide_mobile,guide_place,guide_review;
@@ -187,7 +191,7 @@ public class GuideDetails extends AppCompatActivity {
         }catch (Exception e){}
     }
     public void bottomnav() {
-        Activity A = GuideDetails.this;
+        final Activity A = GuideDetails.this;
         ImageView home_btn_nav1 =  (ImageView)findViewById(R.id.home_btn_nav);
         ImageView guide_btn_nav1 =(ImageView)findViewById(R.id.guide_btn_nav);
         ImageView places_btn_nav1 =(ImageView)findViewById(R.id.places_btn_nav);

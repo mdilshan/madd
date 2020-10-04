@@ -22,4 +22,6 @@ public class UtilityUnitTest {
     public void getAverage_isCorrect() {
         assertEquals("get average value rounded to 1 decimal point",5.6, Utils.getAverage(30,169), 0);
     }
+
+
 }

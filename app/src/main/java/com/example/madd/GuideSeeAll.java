@@ -24,6 +24,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Guide See All
+ * @Author - https://github.com/MhmdAsq
+ */
 public class GuideSeeAll extends AppCompatActivity {
     FirebaseFirestore myDB;
     RecyclerView allGuideRecycler;
@@ -92,7 +96,7 @@ public class GuideSeeAll extends AppCompatActivity {
         }
     }
     public void bottomnav() {
-        Activity A = GuideSeeAll.this;
+       // Activity A = GuideSeeAll.this;
         ImageView home_btn_nav1 =  (ImageView)findViewById(R.id.home_btn_nav);
         ImageView guide_btn_nav1 =(ImageView)findViewById(R.id.guide_btn_nav);
         ImageView places_btn_nav1 =(ImageView)findViewById(R.id.places_btn_nav);
@@ -104,34 +108,34 @@ public class GuideSeeAll extends AppCompatActivity {
                 finish();
             }
         });
-        home_btn_nav1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(A,MainActivity.class);
-                startActivity(intent);
-            }
-        });
-        guide_btn_nav1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(A,GuideHome.class);
-                startActivity(intent);
-            }
-        });
-        places_btn_nav1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(A, PlaceActivity.class);
-                startActivity(intent);
-            }
-        });
-        hotel_btn_nav1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(A, HotelMainPage.class);
-                startActivity(intent);
-            }
-        });
+//        home_btn_nav1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(A,MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        guide_btn_nav1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(A,GuideHome.class);
+//                startActivity(intent);
+//            }
+//        });
+//        places_btn_nav1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(A, PlaceActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        hotel_btn_nav1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(A, HotelMainPage.class);
+//                startActivity(intent);
+//            }
+//        });
     }
     public void toastResult(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

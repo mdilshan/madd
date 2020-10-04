@@ -20,6 +20,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * Adapter for Top Guide
+ * @Author - https://github.com/MhmdAsq
+ */
 public class GuideTopAdapter extends RecyclerView.Adapter<GuideTopAdapter.GuideTopViewHolder> {
 
     Context context;

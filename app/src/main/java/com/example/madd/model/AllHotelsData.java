@@ -3,19 +3,20 @@ package com.example.madd.model;
 public class AllHotelsData {
 
     String hotelName;
-    String CityName;
+    String location;
+    String about;
     String price;
-    Integer imageUrl;
+    String imageUrl;
+    String Rating;
+    Float RatingBar;
+    String Document;
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
-
-
-
-    public AllHotelsData(String hotelName, String CityName, String Price, Integer imageUrl) {
-        this.hotelName = hotelName;
-        this.CityName = CityName;
-        this.price = Price;
-        this.imageUrl =imageUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getHotelName() {
@@ -26,12 +27,20 @@ public class AllHotelsData {
         this.hotelName = hotelName;
     }
 
-    public String getCityName() {
-        return CityName;
+    public String getLocation() {
+        return location;
     }
 
-    public void setCityName(String cityName) {
-        CityName = cityName;
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 
     public String getPrice() {
@@ -39,13 +48,43 @@ public class AllHotelsData {
     }
 
     public void setPrice(String price) {
-        price = price;
-    }
-    public Integer getImageUrl() {
-        return imageUrl;
+        this.price = price;
     }
 
-    public void setImageUrl(Integer imageUrl) {
+
+
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
+    }
+
+    public Float getRatingBar() {
+        return RatingBar;
+    }
+
+    public void setRatingBar(Float ratingBar)
+    {this.RatingBar = Float.parseFloat(Rating);
+        RatingBar = ratingBar;
+    }
+
+    public String getDocument() {
+        return Document;
+    }
+
+    public void setDocument(String document) {
+        Document = document;
+    }
+
+    public AllHotelsData(String document,String hotelName, String location,String rating, String imageUrl) {
+        this.hotelName = hotelName;
+        this.location = location;
         this.imageUrl = imageUrl;
+        Rating = rating;
+        Document = document;
+        this.RatingBar = Float.parseFloat(Rating);
+
     }
 }
