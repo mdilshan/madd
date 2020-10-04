@@ -15,13 +15,20 @@ import static org.junit.Assert.assertEquals;
 public class UtilityUnitTest {
     @Test
     public void roundFloat_isCorrect() {
-        Assert.assertThat(Utils.roundFloat(5.632f, 1), CoreMatchers.equalTo(5.6));
+        Assert.assertThat(
+                Utils.roundFloat(5.632f, 1),
+                CoreMatchers.equalTo(5.6)
+        );
     }
 
     @Test
     public void getAverage_isCorrect() {
-        assertEquals("get average value rounded to 1 decimal point",5.6, Utils.getAverage(30,169), 0);
+        assertEquals(
+                "get average value rounded to 1 decimal point",
+                5.6,
+                 Utils.getAverage(30,169),
+                0
+        );
     }
-
 
 }
