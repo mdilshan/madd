@@ -20,6 +20,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madd.util.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,10 +32,10 @@ import com.squareup.picasso.Picasso;
 
 public class HotelDetails extends AppCompatActivity {
     FirebaseFirestore myDB;
-    TextView hotel_joined,hotel_name,hotel_star,hotel_about,hotel_mobile,hotel_location,hotel_review;
+    TextView hotel_joined, hotel_name, hotel_star, hotel_about, hotel_mobile, hotel_location, hotel_review;
     ImageView hotel_image;
     AlertDialog.Builder builder;
-    ImageButton HotelEdit,HotelDelete,backButton;
+    ImageButton HotelEdit, HotelDelete, backButton;
     RatingBar HotelRatingBAR;
     Button hCallbutton;
 
@@ -57,7 +58,7 @@ public class HotelDetails extends AppCompatActivity {
         hotel_mobile = findViewById(R.id.dt_hotel_mobile);
         hotel_location = findViewById(R.id.dt_hotel_place);
         hotel_review = findViewById(R.id.dt_hotel_review);
-       hotel_image = findViewById(R.id.dt_hotel_profile_image);
+        hotel_image = findViewById(R.id.dt_hotel_profile_image);
         HotelEdit = findViewById(R.id.btnHotelEdit);
         HotelDelete = findViewById(R.id.btnHotelDelete);
         HotelRatingBAR = findViewById(R.id.dt_hotel_rating_bars);
@@ -65,7 +66,7 @@ public class HotelDetails extends AppCompatActivity {
         readData(ids);
         bottomnav();
         backButton = findViewById(R.id.h_back_btn);
-        backButton.setOnClickListener(new View.OnClickListener(){
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -89,23 +90,23 @@ public class HotelDetails extends AppCompatActivity {
 
             }
         });
-        hCallbutton.setOnClickListener(new View.OnClickListener(){
+        hCallbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DocumentReference documentReference = myDB.collection("hotels").document(ids);
                 documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()){
-                        Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                            callIntent.setData(Uri.parse("tel:"+task.getResult().get("contact").toString()));
+                        if (task.isSuccessful()) {
+                            Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                            callIntent.setData(Uri.parse("tel:" + task.getResult().get("contact").toString()));
                             startActivity(callIntent);
                         }
                     }
-                    });
-                }
+                });
+            }
         });
-        hotel_review.setOnClickListener(new View.OnClickListener(){
+        hotel_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DocumentReference documentReference = myDB.collection("hotels").document(ids);
@@ -113,8 +114,10 @@ public class HotelDetails extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.isSuccessful()){
-                            Intent intent = new Intent(HotelDetails.this,EditHotel.class);
+                            Intent intent = new Intent(HotelDetails.this, Reviews.class);
                             intent.putExtra("ids",ids);
+                            intent.putExtra( "resource_type", "HOTEL");
+
                             startActivity(intent);
                         }
                     }
@@ -168,29 +171,30 @@ public class HotelDetails extends AppCompatActivity {
             }
         });
     }
-void readData(String ids){
-    hideKeyboard(this);
-    try{
-        DocumentReference documentReference = myDB.collection("hotels").document(ids);
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    hotel_name.setText(task.getResult().get("hotel_name").toString());
-                    Picasso.get().load(task.getResult().get("image").toString()).into(hotel_image);
-                    hotel_mobile.setText(task.getResult().get("contact").toString());
-                    hotel_location.setText(task.getResult().get("location").toString());
-                    hotel_star.setText(task.getResult().get("rating").toString());
-                    hotel_about.setText(task.getResult().get("about").toString());
-                    hotel_joined.setText(task.getResult().get("joined_on").toString());
-                    HotelRatingBAR.setRating(Float.parseFloat(task.getResult().get("rating").toString()));
-                }
-            }
-        });
-        }
-    catch (Exception e){}
 
+    void readData(String ids) {
+        hideKeyboard(this);
+        try {
+            DocumentReference documentReference = myDB.collection("hotels").document(ids);
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        hotel_name.setText(task.getResult().get("hotel_name").toString());
+                        Picasso.get().load(task.getResult().get("image").toString()).into(hotel_image);
+                        hotel_mobile.setText(task.getResult().get("contact").toString());
+                        hotel_location.setText(task.getResult().get("location").toString());
+                        hotel_star.setText(task.getResult().get("rating").toString());
+                        hotel_about.setText(task.getResult().get("about").toString());
+                        hotel_joined.setText(task.getResult().get("joined_on").toString());
+                        HotelRatingBAR.setRating(Float.parseFloat(task.getResult().get("rating").toString()));
+                    }
+                }
+            });
+        } catch (Exception e) {
         }
+
+    }
 
     public void toastResult(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -203,27 +207,27 @@ void readData(String ids){
             assert imm != null;
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-            }
+    }
 
 
     public void bottomnav() {
         final Activity A = HotelDetails.this;
-        ImageView home_btn_nav1 =  (ImageView)findViewById(R.id.home_btn_nav);
-        ImageView guide_btn_nav1 =(ImageView)findViewById(R.id.guide_btn_nav);
-        ImageView places_btn_nav1 =(ImageView)findViewById(R.id.places_btn_nav);
-        ImageView hotel_btn_nav1 = (ImageView)findViewById(R.id.hotel_btn_nav);
+        ImageView home_btn_nav1 = (ImageView) findViewById(R.id.home_btn_nav);
+        ImageView guide_btn_nav1 = (ImageView) findViewById(R.id.guide_btn_nav);
+        ImageView places_btn_nav1 = (ImageView) findViewById(R.id.places_btn_nav);
+        ImageView hotel_btn_nav1 = (ImageView) findViewById(R.id.hotel_btn_nav);
 
         home_btn_nav1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(A,MainActivity.class);
+                Intent intent = new Intent(A, MainActivity.class);
                 startActivity(intent);
             }
         });
         guide_btn_nav1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(A,GuideHome.class);
+                Intent intent = new Intent(A, GuideHome.class);
                 startActivity(intent);
             }
         });
@@ -241,4 +245,5 @@ void readData(String ids){
                 startActivity(intent);
             }
         });
-    }}
+    }
+}

@@ -18,12 +18,22 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
+        <ImageButton
+            android:id="@+id/back_btn2"
+            style="@android:style/Widget.Material.Button.Borderless"
+            android:layout_width="35dp"
+            android:layout_height="31dp"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="48dp"
             android:fontFamily="@font/rubik"
             android:text="Find Your"
             android:textColor="@android:color/background_dark"
@@ -53,11 +63,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/profile" />
 
-        <EditText
-            android:id="@+id/editText"
+        <SearchView
+            android:id="@+id/search_see_all"
+            style="@android:style/Widget.Material.SearchView"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/search_bg"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             android:drawablePadding="16dp"
@@ -67,6 +78,7 @@
             android:text="Search Destinations"
             android:textColor="#62878F"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -83,5 +95,13 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
 
         />
+    <include
+        android:id="@+id/include2"
+        layout="@layout/bottom_nav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

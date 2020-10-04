@@ -27,6 +27,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
 
+
         android:id="@+id/textInputLayouth1"
         android:layout_width="248dp"
         android:layout_height="wrap_content"
@@ -44,7 +45,17 @@
             android:layout_height="match_parent" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
+    <ImageButton
+        android:id="@+id/back_btn"
+        style="@android:style/Widget.Material.Button.Borderless"
+        android:layout_width="35dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayouth2"
         android:layout_width="248dp"
