@@ -82,23 +82,23 @@ public class PlaceActivity extends AppCompatActivity {
         readPlaceTopData();
         bottomnav();
     }
-        void readPlaceRecentsData() {
-            myDB.collection("places").orderBy("joined_on", Query.Direction.DESCENDING).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                    if (e != null)
-                        toastResult(e.getMessage());
-                    recentsDataList.clear();
-                    for (DocumentSnapshot doc : documentSnapshots) {
-                        recentsDataList.add(new RecentsData(doc.getId(),doc.getString("place_name"),doc.getString("place_location"),doc.getString("imageUrl")));
-                    }
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PlaceActivity.this, RecyclerView.HORIZONTAL, false);
-                    recentRecycler.setLayoutManager(layoutManager);
-                    recentsAdapter = new RecentsAdapter(PlaceActivity.this, recentsDataList);
-                    recentRecycler.setAdapter(recentsAdapter);
+    void readPlaceRecentsData() {
+        myDB.collection("places").orderBy("joined_on", Query.Direction.DESCENDING).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                if (e != null)
+                    toastResult(e.getMessage());
+                recentsDataList.clear();
+                for (DocumentSnapshot doc : documentSnapshots) {
+                    recentsDataList.add(new RecentsData(doc.getId(),doc.getString("place_name"),doc.getString("place_location"),doc.getString("imageUrl")));
                 }
-            });
-        }
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PlaceActivity.this, RecyclerView.HORIZONTAL, false);
+                recentRecycler.setLayoutManager(layoutManager);
+                recentsAdapter = new RecentsAdapter(PlaceActivity.this, recentsDataList);
+                recentRecycler.setAdapter(recentsAdapter);
+            }
+        });
+    }
 
     void readPlaceTopData() {
         myDB.collection("places").orderBy("rating", Query.Direction.DESCENDING).limit(30).addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -119,7 +119,7 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     public void bottomnav() {
-        Activity A = PlaceActivity.this;
+        final Activity A = PlaceActivity.this;
         ImageView home_btn_nav1 =  (ImageView)findViewById(R.id.home_btn_nav);
         ImageView guide_btn_nav1 =(ImageView)findViewById(R.id.guide_btn_nav);
         ImageView places_btn_nav1 =(ImageView)findViewById(R.id.places_btn_nav);

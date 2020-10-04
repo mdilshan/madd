@@ -48,14 +48,14 @@ public class DetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final String ids = intent.getStringExtra("ids");
         plce_image=findViewById(R.id.profile_img);
-            plce_review=findViewById(R.id.place_review);
-            plce_name=findViewById(R.id.plc_name);
-            plce_joined=findViewById(R.id.place_joined);
-            plce_star=findViewById(R.id.place_star);
-            plce_location=findViewById(R.id.plc_location);
-            plce_about=findViewById(R.id.plc_about);
-            PlaceRatingBAR=findViewById(R.id.place_rating_bars);
-            readData(ids);
+        plce_review=findViewById(R.id.place_review);
+        plce_name=findViewById(R.id.plc_name);
+        plce_joined=findViewById(R.id.place_joined);
+        plce_star=findViewById(R.id.place_star);
+        plce_location=findViewById(R.id.plc_location);
+        plce_about=findViewById(R.id.plc_about);
+        PlaceRatingBAR=findViewById(R.id.place_rating_bars);
+        readData(ids);
 
         ImageView Bck_bttn = findViewById(R.id.imageV4);
         Bck_bttn.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +97,7 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
-      plce_review.setOnClickListener(new View.OnClickListener() {
+        plce_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DocumentReference documentReference = myDB.collection("places").document(ids);
@@ -200,4 +200,3 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 }
-

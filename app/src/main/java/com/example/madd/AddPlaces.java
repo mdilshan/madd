@@ -1,11 +1,13 @@
 package com.example.madd;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -94,6 +96,7 @@ public class AddPlaces extends AppCompatActivity implements Validator.Validation
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void onValidationSucceeded()  {
         String date = LocalDate.now().toString();
         hideKeyboard(this);

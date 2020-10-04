@@ -9,7 +9,6 @@ android {
         applicationId "com.example.madd"
         minSdkVersion 16
         targetSdkVersion 30
-        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -23,10 +22,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
-    }
+
 }
 
 dependencies {
@@ -43,9 +39,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    //Picasso
+    implementation 'com.google.firebase:firebase-analytics:17.2.1'
+    implementation 'com.google.firebase:firebase-database:19.2.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     //Validator
     implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
-
 }
