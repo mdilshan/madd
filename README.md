@@ -6,12 +6,12 @@
 </p>
 <p align='center'> This project is developed by SLIIT students as their Mobile Application Develpoment assignment.</p>
 
-### ! DISCLAIMER !
+<h2 align = 'center'> DISCLAIMER ! </h2>
 
 The submission is supplied without any WARRANTY. This project may have serious security vulnerability and may also have considerable performance drops as
 this project is developed by university studends who learned Android Development for the first time. If you are going to use this project for a 
 production level application, review the code and make sure it is good enough for your use case.
-
+<hr />
 
 ## 1) Installation
 
@@ -20,3 +20,9 @@ reposotory may no longer working.
 
 `git clone https://github.com/mdilshan/madd.git`
 
+
+## LINKS
+
+ 1) [CODE OF CONDUCT](https://github.com/mdilshan/madd/blob/master/CODE_OF_CONDUCT.md)
+ 2) [CONTRIBUTING](https://github.com/mdilshan/madd/blob/master/CONTRIBUTING.md)
+ 3) [LICENSE](https://github.com/mdilshan/madd/blob/master/LICENSE)
