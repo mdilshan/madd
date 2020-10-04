@@ -39,7 +39,7 @@ public class ReviewTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviews);
-        Utils.seed();
+        //Utils.seed();
         items = new ArrayList<ReviewInterface>();
 
         ReviewListAdapter adapter = new ReviewListAdapter(ReviewTestActivity.this, items);
