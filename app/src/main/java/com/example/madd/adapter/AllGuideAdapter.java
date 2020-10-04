@@ -2,7 +2,6 @@ package com.example.madd.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+/**
+ * Adapter for See All Guide
+ * @Author - https://github.com/MhmdAsq
+ */
 
 public class AllGuideAdapter extends RecyclerView.Adapter<AllGuideAdapter.AllGuidesViewHolder> {
 

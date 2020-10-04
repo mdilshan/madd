@@ -161,6 +161,7 @@ public class ReviewListAdapter extends ArrayAdapter<ReviewInterface> {
             viewHolder.editButton.setVisibility(View.VISIBLE);
             viewHolder.deletBUtton.setVisibility(View.VISIBLE);
         }
+
         viewHolder.img.setImageResource(R.drawable.profile_pic);
         viewHolder.name.setText(items.get(position).name);
         //img.setImageResource(R.drawable.profile_pic);

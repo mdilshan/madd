@@ -7,7 +7,9 @@
     android:layout_marginStart="8dp"
     android:layout_marginEnd="5dp"
     android:layout_marginBottom="8dp"
-    android:background="@drawable/card_bg">
+    android:background="@drawable/card_bg"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="5dp">
 
     <ImageView
         android:id="@+id/place_image"
@@ -19,12 +21,12 @@
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/recentimage1" />
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/place_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="58dp"
+        android:layout_height="23dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="20dp"
         android:text="AM Lake"
@@ -40,14 +42,30 @@
         app:layout_constraintStart_toStartOf="@+id/place_name"
         app:layout_constraintTop_toBottomOf="@+id/place_name" />
 
-    <TextView
-        android:id="@+id/distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:text="From $200"
+    <RatingBar
+        android:id="@+id/placee_rating_bar"
+        style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
+        android:layout_width="80dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="8dp"
+        android:background="#FFFFFF"
+        android:max="5"
+        android:rating="3.5"
         app:layout_constraintStart_toStartOf="@+id/city_name"
         app:layout_constraintTop_toBottomOf="@+id/city_name" />
+
+    <TextView
+        android:id="@+id/place_review_avg"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="0.0"
+        app:layout_constraintEnd_toEndOf="@+id/ratingBar"
+        app:layout_constraintStart_toEndOf="@+id/placee_rating_bar"
+        app:layout_constraintTop_toTopOf="@+id/placee_rating_bar" />
 
     <ImageView
         android:id="@+id/imageView2"

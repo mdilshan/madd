@@ -10,10 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.squareup.picasso.Picasso;
 
 import com.example.madd.DetailsActivity;
 import com.example.madd.R;
 import com.example.madd.model.RecentsData;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
 
     Context context;
     List<RecentsData> recentsDataList;
+    RecentsAdapter.OnItemClickListner listner;
 
     public RecentsAdapter(Context context, List<RecentsData> recentsDataList) {
         this.context = context;
@@ -38,17 +41,19 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecentsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecentsViewHolder holder, int position) {
 
         holder.cityName.setText(recentsDataList.get(position).getCityName());
         holder.placeName.setText(recentsDataList.get(position).getPlaceName());
-        holder.distance.setText(recentsDataList.get(position).getDistance());
-        holder.placeImage.setImageResource(recentsDataList.get(position).getImageUrl());
+        //holder.distance.setText(recentsDataList.get(position).getDistance());
+        Picasso.get().load(recentsDataList.get(position).getImageUrl()).into(holder.placeImage);
+        holder.document = (recentsDataList.get(position).getDocument());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i= new Intent(context, DetailsActivity.class);
+                i.putExtra("ids",holder.document);
                 context.startActivity(i);
             }
         });
@@ -63,7 +68,8 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
     public static final class RecentsViewHolder extends RecyclerView.ViewHolder{
 
         ImageView placeImage;
-        TextView placeName, cityName, distance;
+        TextView placeName, cityName;
+        String document;
 
         public RecentsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,8 +77,14 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
             placeImage = itemView.findViewById(R.id.place_image);
             placeName = itemView.findViewById(R.id.place_name);
             cityName = itemView.findViewById(R.id.city_name);
-            distance = itemView.findViewById(R.id.distance);
+           // distance = itemView.findViewById(R.id.distance);
 
         }
+    }
+    public interface OnItemClickListner{
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
+    }
+    public void setOnItemClickListner(RecentsAdapter.OnItemClickListner listner){
+        this.listner = listner;
     }
 }

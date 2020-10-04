@@ -28,6 +28,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+/**
+ * Guide Profile
+ * @Author - https://github.com/MhmdAsq
+ */
 public class GuideDetails extends AppCompatActivity {
     FirebaseFirestore myDB;
     TextView guide_joined,guide_name,guide_star,guide_about,guide_mobile,guide_place,guide_review;
