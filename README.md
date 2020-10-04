@@ -1,7 +1,7 @@
 <h1 align = 'center'>M.A.D.D Mini Android Project</h1>
 <p align='center'>
   <img src="https://img.shields.io/badge/Android-success"/>
-  <img src="https://img.shields.io/badge/JavaEE-8-important"/>
+  <img src="https://img.shields.io/badge/Java-8-important"/>
   <img src="https://img.shields.io/badge/Firestore-blue"/>
 </p>
 <p align='center'> This project is developed by SLIIT students as their Mobile Application Develpoment assignment.</p>
