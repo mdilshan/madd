@@ -37,6 +37,7 @@
         android:fontFamily="@font/roboto_medium"
         android:textColor="@android:color/background_dark"
         android:textSize="16sp"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_img" />
 
@@ -70,35 +71,35 @@
         android:id="@+id/textV8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="8dp"
         android:text="Joined"
         android:textColor="#044363"
         app:layout_constraintStart_toStartOf="@+id/plc_name"
         app:layout_constraintTop_toBottomOf="@+id/plc_name" />
 
+
     <TextView
         android:id="@+id/place_joined"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginLeft="3dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
         android:textColor="#363737"
         app:layout_constraintStart_toEndOf="@+id/textV8"
-        app:layout_constraintTop_toBottomOf="@+id/plc_name"
-        tools:layout_editor_absoluteX="81dp"
-        tools:layout_editor_absoluteY="351dp" />
+        app:layout_constraintTop_toBottomOf="@+id/plc_name" />
 
     <TextView
         android:id="@+id/plc_about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/textV26"
         app:layout_constraintStart_toEndOf="@+id/textV26"
-        app:layout_constraintTop_toTopOf="@+id/textV26" />
-
+        app:layout_constraintTop_toTopOf="@+id/textV26"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/place_review"
@@ -131,8 +132,8 @@
         android:id="@+id/textV4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_bold"
         android:text="Location"
@@ -176,10 +177,10 @@
         android:textColor="@android:color/background_dark"
         app:layout_constraintBottom_toTopOf="@+id/imageView8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textV8"
-        app:layout_constraintVertical_bias="0.286" />
+        app:layout_constraintVertical_bias="0.288" />
 
     <ImageButton
         android:id="@+id/editButton"
@@ -187,6 +188,7 @@
         android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:background="#00FFFFFF"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="@+id/plc_name"
         app:layout_constraintStart_toEndOf="@+id/plc_name"
         app:layout_constraintTop_toTopOf="@+id/plc_name"
@@ -199,6 +201,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:background="#00FFFFFF"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="@+id/editbtn"
         app:layout_constraintStart_toEndOf="@+id/editButton"
         app:layout_constraintTop_toTopOf="@+id/editButton"

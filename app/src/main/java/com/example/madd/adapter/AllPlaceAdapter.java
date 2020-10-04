@@ -2,13 +2,13 @@ package com.example.madd.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
-import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +17,7 @@ import com.example.madd.DetailsActivity;
 import com.example.madd.R;
 import com.example.madd.model.AllPlaceData;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -41,18 +42,20 @@ public class AllPlaceAdapter extends RecyclerView.Adapter<AllPlaceAdapter.AllPla
 
     @Override
     public void onBindViewHolder(@NonNull AllPlaceViewHolder holder, final int position) {
-        Log.d(TAG, "onBindViewHolder: NAME +++++++++++++++++++++++ " +  allPlacesDataList.get(position).getPlaceName());
-        holder.PlaceName.setText(allPlacesDataList.get(position).getPlaceName());
-        holder.PlaceLocation.setText(allPlacesDataList.get(position).getPlaceLocation());
-       // holder.Distance.setText(allPlacesDataList.get(position).getDistance());
-        Picasso.get().load(allPlacesDataList.get(position).getImageUrl()).into(holder.PlaceImg);
+        holder.cityName.setText(allPlacesDataList.get(position).getCityName());
+        holder.placeName.setText(allPlacesDataList.get(position).getPlaceName());
+        //holder.distance.setText(topPlacesDataList.get(position).getDistance());
+        Picasso.get().load(allPlacesDataList.get(position).getImageUrl()).into(holder.placeImage);
+        holder.PlaceRating.setText(allPlacesDataList.get(position).getRating());
+        holder.document = (allPlacesDataList.get(position).getDocument());
+        //holder.PlaceRateBar.setRating(topPlacesDataList.get(position).getPlaceRateBar());
 
-        final String ids = allPlacesDataList.get(position).getDocument();
+
+        final String ids = holder.document;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, DetailsActivity.class);
-                Log.d(TAG, "onClick: ID ON ALLPLACEADPATER ________________ " + ids);
                 i.putExtra("ids",ids);
                 context.startActivity(i);
             }
@@ -66,22 +69,22 @@ public class AllPlaceAdapter extends RecyclerView.Adapter<AllPlaceAdapter.AllPla
 
     class AllPlaceViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView PlaceImg;
-        TextView PlaceName,PlaceLocation,Distance;
+        ImageView placeImage;
+        TextView placeName, cityName, distance,PlaceRating,PlaceRateBar;
         String document;
 
         public AllPlaceViewHolder(@NonNull View itemView) {
             super(itemView);
-            PlaceImg = itemView.findViewById(R.id.place_image);
-            PlaceName = itemView.findViewById(R.id.place_name);
-            PlaceLocation = itemView.findViewById(R.id.city_name);
-            Distance = itemView.findViewById(R.id.distance);
+            placeImage = itemView.findViewById(R.id.place_image);
+            placeName = itemView.findViewById(R.id.place_name);
+            cityName = itemView.findViewById(R.id.city_name);
+            // distance = itemView.findViewById(R.id.distance);
+            PlaceRating = itemView.findViewById(R.id.place_review_avg);
+            PlaceRateBar = itemView.findViewById(R.id.place_rating_bars);
         }
     }
 
     public interface OnItemClickListner{
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
     }
-
-
 }

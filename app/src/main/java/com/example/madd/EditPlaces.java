@@ -26,15 +26,47 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.mobsandgeeks.saripaar.annotation.Pattern;
+import com.mobsandgeeks.saripaar.annotation.Url;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class EditPlaces extends AppCompatActivity {
+public class EditPlaces extends AppCompatActivity implements Validator.ValidationListener {
     private static final String TAG = "EditPlaces";
     FirebaseFirestore myDB;
     Button updatebtn;
-    TextView edit_placeName,edit_placeLocation,edit_placeDescription,edit_placeURL;
+
+    @NotEmpty
+    private TextView edit_placeName;
+
+    @NotEmpty
+    private TextView edit_placeLocation;
+
+    @NotEmpty
+    @Url
+    private TextView edit_placeURL;
+
+    @NotEmpty
+    private TextView edit_placeDescription;
+
+    private Validator validator;
+
+    public String doc_id;
+
+    public String getDoc_id() {
+        return doc_id;
+    }
+
+    public void setDoc_id(String doc_id) {
+        doc_id = doc_id;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,20 +75,38 @@ public class EditPlaces extends AppCompatActivity {
         myDB = FirebaseFirestore.getInstance();
         Intent intent = getIntent();
         final String id = intent.getStringExtra("ids");
+        setDoc_id(intent.getStringExtra("ids"));
+        doc_id =intent.getStringExtra("ids");
         Log.d(TAG, "onCreate: ID RECIEVED " + id);
 
         edit_placeName = findViewById(R.id.editPlace);
         edit_placeLocation = findViewById(R.id.editPlaceLocation);
         edit_placeDescription = findViewById(R.id.editPlaceAbout);
         edit_placeURL = findViewById(R.id.editURL);
-
         readData(id);
-
         updatebtn = findViewById(R.id.updateSubmit);
+        if(id != null){
+            updatebtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    UpdatePlace(view);
+                }
+            });
+            validator = new Validator(this);
+            validator.setValidationListener(this);
+        }else{
+            setDoc_id(intent.getStringExtra("ids"));
+            doc_id =intent.getStringExtra("ids");
+        }
+    }
+    private void UpdatePlace(View view) {
+        hideKeyboard(this);
+        validator.validate();
+    }
 
-        updatebtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View view) {
+            public void onValidationSucceeded() {
                 if (edit_placeName.getText().toString().length() > 0 ||
                         edit_placeLocation.getText().toString().length() > 0 ||
                         edit_placeDescription.getText().toString().length() > 0 ||
@@ -66,7 +116,7 @@ public class EditPlaces extends AppCompatActivity {
                     data.put("place_location", edit_placeLocation.getText().toString());
                     data.put("place_description", edit_placeDescription.getText().toString());
                     data.put("place_URL", edit_placeURL.getText().toString());
-                    myDB.collection("places").document(id).update(data)
+                    myDB.collection("places").document(doc_id).update(data)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -92,7 +142,24 @@ public class EditPlaces extends AppCompatActivity {
                     edit_placeName.setError("Value Required");
                 }
             }
-        });
+
+
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+            // Display error messages
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 

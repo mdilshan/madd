@@ -5,10 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -17,6 +20,7 @@ import com.example.madd.adapter.RecentsAdapter;
 import com.example.madd.adapter.TopPlacesAdapter;
 import com.example.madd.model.RecentsData;
 import com.example.madd.model.TopPlacesData;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,8 +33,9 @@ import java.util.List;
 
 public class PlaceActivity extends AppCompatActivity {
     FirebaseFirestore myDB;
-    ImageButton btn1;
+    FloatingActionButton join_place;
     Button btn2;
+    EditText place_search_home;
     RecyclerView recentRecycler, topPlacesRecycler;
     RecentsAdapter recentsAdapter;
     TopPlacesAdapter topPlacesAdapter;
@@ -42,20 +47,29 @@ public class PlaceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place);
         recentRecycler = findViewById(R.id.recent_recycler);
-        topPlacesRecycler = findViewById(R.id.see_all_places_recycler);
-        btn1 = findViewById(R.id.btnAdd);
+        topPlacesRecycler = findViewById(R.id.top_places_recycler);
+        join_place = findViewById(R.id.join_place);
 
-        btn1.setOnClickListener(new View.OnClickListener() {
+        join_place.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PlaceActivity.this, AddPlaces.class);
                 startActivity(intent);
             }
         });
+        place_search_home  = findViewById(R.id.place_search_home);
+        place_search_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(place_search_home.getWindowToken(), 0);
+                Intent intent = new Intent(PlaceActivity.this, PlaceSeeAll.class);
+                startActivity(intent);
+            }
+        });
 
 
         btn2 = findViewById(R.id.button3);
-
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,10 +120,10 @@ public class PlaceActivity extends AppCompatActivity {
 
     public void bottomnav() {
         Activity A = PlaceActivity.this;
-        ImageView home_btn_nav1 =  (ImageView)findViewById(R.id.homee);
-        ImageView guide_btn_nav1 =(ImageView)findViewById(R.id.guidee);
-        ImageView places_btn_nav1 =(ImageView)findViewById(R.id.placee);
-        ImageView hotel_btn_nav1 = (ImageView)findViewById(R.id.hoteel);
+        ImageView home_btn_nav1 =  (ImageView)findViewById(R.id.home_btn_nav);
+        ImageView guide_btn_nav1 =(ImageView)findViewById(R.id.guide_btn_nav);
+        ImageView places_btn_nav1 =(ImageView)findViewById(R.id.places_btn_nav);
+        ImageView hotel_btn_nav1 = (ImageView)findViewById(R.id.hotel_btn_nav);
 
         home_btn_nav1.setOnClickListener(new View.OnClickListener() {
             @Override

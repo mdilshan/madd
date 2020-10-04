@@ -1,13 +1,11 @@
 package com.example.madd;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,26 +17,25 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.madd.model.PlaceDto;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.squareup.picasso.Picasso;
 
 public class DetailsActivity extends AppCompatActivity {
     private static final String TAG = "DetailsActivity";
     FirebaseFirestore myDB;
     TextView plce_joined,plce_name,plce_star,plce_about,plce_location,plce_review;
     ImageView plce_image;
+    ImageButton editbtn;
+    Button callbtn;
     RatingBar PlaceRatingBAR;
     AlertDialog.Builder builder;
 
@@ -46,24 +43,12 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-        final FirebaseFirestore myDB = FirebaseFirestore.getInstance();
+        myDB = FirebaseFirestore.getInstance();
 
         Intent intent = getIntent();
         final String ids = intent.getStringExtra("ids");
-
-        if(ids != null) {
-            myDB.collection("places").document(ids)
-                    .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if(task.isSuccessful()) {
-                        DocumentSnapshot res = task.getResult();
-
-                    }
-                }
-            });
-
-            plce_image=findViewById(R.id.profile_img);
+        plce_image=findViewById(R.id.profile_img);
+            plce_review=findViewById(R.id.place_review);
             plce_name=findViewById(R.id.plc_name);
             plce_joined=findViewById(R.id.place_joined);
             plce_star=findViewById(R.id.place_star);
@@ -72,9 +57,25 @@ public class DetailsActivity extends AppCompatActivity {
             PlaceRatingBAR=findViewById(R.id.place_rating_bars);
             readData(ids);
 
-
-
-    }
+        ImageView Bck_bttn = findViewById(R.id.imageV4);
+        Bck_bttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+//        if(ids != null) {
+//            myDB.collection("places").document(ids)
+//                    .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                    if(task.isSuccessful()) {
+//                        DocumentSnapshot res = task.getResult();
+//
+//                    }
+//                }
+//            });
+//        }
         //joinBtn = findViewById(R.id.joinbutton);
         final ImageButton editbutton = (ImageButton) findViewById(R.id.editButton);
         /*
@@ -95,7 +96,8 @@ public class DetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-   /*     plce_review.setOnClickListener(new View.OnClickListener() {
+
+      plce_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DocumentReference documentReference = myDB.collection("places").document(ids);
@@ -110,7 +112,7 @@ public class DetailsActivity extends AppCompatActivity {
                     }
                 });
             }
-        });*/
+        });
 
         final ImageView deleteProfile = findViewById(R.id.deleteBtnPlace);
 
@@ -170,8 +172,9 @@ public class DetailsActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         plce_name.setText(task.getResult().get("place_name").toString());
-//                        guide_image.setText(task.getResult().get("imageUrl").toString());
+                        Picasso.get().load(task.getResult().get("imageUrl").toString()).into(plce_image);
                         plce_location.setText(task.getResult().get("place_location").toString());
+
                         plce_star.setText(task.getResult().get("rating").toString());
                         PlaceRatingBAR.setRating(Float.parseFloat(task.getResult().get("rating").toString()));
                         plce_about.setText(task.getResult().get("place_description").toString());
@@ -180,7 +183,9 @@ public class DetailsActivity extends AppCompatActivity {
                 }
             });
 
-        }catch (Exception e){}
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public void toastResult(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

@@ -82,7 +82,7 @@ public class TopPlacesAdapter extends RecyclerView.Adapter<TopPlacesAdapter.TopP
             placeImage = itemView.findViewById(R.id.place_image);
             placeName = itemView.findViewById(R.id.place_name);
             cityName = itemView.findViewById(R.id.city_name);
-            distance = itemView.findViewById(R.id.distance);
+           // distance = itemView.findViewById(R.id.distance);
             PlaceRating = itemView.findViewById(R.id.place_review_avg);
             PlaceRateBar = itemView.findViewById(R.id.place_rating_bars);
 

@@ -22,16 +22,38 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.mobsandgeeks.saripaar.annotation.Pattern;
+import com.mobsandgeeks.saripaar.annotation.Url;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class AddPlaces extends AppCompatActivity {
+
+public class AddPlaces extends AppCompatActivity implements Validator.ValidationListener {
     FirebaseFirestore myDB;
     Button addsubmit;
-    TextView place_Name, place_Location, place_Description, place_URL;
+    //TextView place_Name, place_Location, place_Description, place_URL;
+
+    @NotEmpty
+    private TextView place_Name;
+
+    @NotEmpty
+    private TextView place_Location;
+
+    @NotEmpty
+    @Url
+    private TextView place_URL;
+
+    @NotEmpty
+    private TextView place_Description;
+
+    private Validator validator;
 
     public static void hideKeyboard(Activity activity) {
         View view = activity.findViewById(android.R.id.content);
@@ -54,6 +76,9 @@ public class AddPlaces extends AppCompatActivity {
         place_Description = findViewById(R.id.etPlaceAbout);
         place_URL = findViewById(R.id.etURL);
 
+        validator = new Validator(this);
+        validator.setValidationListener(this);
+
         addsubmit = findViewById(R.id.addSubmit);
         addsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +89,12 @@ public class AddPlaces extends AppCompatActivity {
     }
 
     public void onAddClicked(View view) {
+        hideKeyboard(this);
+        validator.validate();
+
+    }
+
+    public void onValidationSucceeded()  {
         String date = LocalDate.now().toString();
         hideKeyboard(this);
         if (place_Name.getText().toString().length() > 0
@@ -123,6 +154,24 @@ public class AddPlaces extends AppCompatActivity {
 
     public void toastResult(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+            // Display error messages
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 
 }

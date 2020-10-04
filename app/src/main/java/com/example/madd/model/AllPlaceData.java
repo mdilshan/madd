@@ -1,46 +1,55 @@
 package com.example.madd.model;
 
 public class AllPlaceData {
-    String PlaceName;
-    String PlaceLocation;
-    //String Distance;
-    String Rating;
+    String placeName;
+    String cityName;
+    //String distance;
     String ImageUrl;
+    String Rating;
+    Float PlaceRateBar;
     String Document;
 
-    public AllPlaceData(String id, String placeName, String placeLocation,  String rating, String imageUrl) {
-        PlaceName = placeName;
-        PlaceLocation = placeLocation;
-        //Distance = distance;
-        Rating = rating;
-        ImageUrl = imageUrl;
-        Document = id;
+    public String getDocument() {
+        return Document;
+    }
 
+    public void setDocument(String document) {
+        Document = document;
+    }
+
+
+    public Float getPlaceRateBar() {
+        this.PlaceRateBar = Float.parseFloat(Rating);
+        return PlaceRateBar;
+    }
+
+
+    public AllPlaceData(String document,String placeName, String cityName, String Rating, String imageUrl ) {
+        this.placeName = placeName;
+        this.cityName = cityName;
+        //this.distance = distance;
+        this.ImageUrl = imageUrl;
+        this.Rating = Rating;
+        this.PlaceRateBar = Float.parseFloat(Rating);
+        this.Document=document;
     }
 
     public String getPlaceName() {
-        return PlaceName;
+        return placeName;
     }
 
     public void setPlaceName(String placeName) {
-        PlaceName = placeName;
+        this.placeName = placeName;
     }
 
-    public String getPlaceLocation() {
-        return PlaceLocation;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setPlaceLocation(String placeLocation) {
-        PlaceLocation = placeLocation;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
-    //public String getDistance() {
-     //   return Distance;
-   // }
-
-   // public void setDistance(String distance) {
-        //Distance = distance;
-    //}
 
     public String getRating() {
         return Rating;
@@ -56,13 +65,5 @@ public class AllPlaceData {
 
     public void setImageUrl(String imageUrl) {
         ImageUrl = imageUrl;
-    }
-
-    public String getDocument() {
-        return Document;
-    }
-
-    public void setDocument(String document) {
-        Document = document;
     }
 }

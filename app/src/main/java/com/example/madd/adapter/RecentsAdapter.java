@@ -53,6 +53,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
             @Override
             public void onClick(View view) {
                 Intent i= new Intent(context, DetailsActivity.class);
+                i.putExtra("ids",holder.document);
                 context.startActivity(i);
             }
         });

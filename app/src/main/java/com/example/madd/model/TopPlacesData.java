@@ -25,7 +25,7 @@ public class TopPlacesData {
     }
 
 
-    public TopPlacesData(String placeName, String cityName, String Rating, String imageUrl,String document ) {
+    public TopPlacesData(String document,String placeName, String cityName, String Rating, String imageUrl ) {
         this.placeName = placeName;
         this.cityName = cityName;
         //this.distance = distance;
