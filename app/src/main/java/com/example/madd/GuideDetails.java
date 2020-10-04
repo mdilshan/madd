@@ -109,8 +109,9 @@ public class GuideDetails extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(GuideDetails.this, GuideEdit.class);
+                            Intent intent = new Intent(GuideDetails.this, Reviews.class);
                             intent.putExtra("ids",ids);
+                            intent.putExtra( "resource_type", "GUIDE");
                             startActivity(intent);
                         }
                     }

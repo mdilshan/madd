@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -33,12 +35,15 @@ import java.util.UUID;
 
 /**
  * Review Screen
+ *
  * @Author - https://github.com/mdilshan
  */
 public class Reviews extends AppCompatActivity {
     private static final String TAG = "Reviews";
     ArrayList<ReviewInterface> items;
     double overall_rating = 0.0;
+    private String resource_id = null;
+    private String resource_type = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +52,12 @@ public class Reviews extends AppCompatActivity {
         //Utils.seed();
         items = new ArrayList<ReviewInterface>();
 
+        Intent intent = getIntent();
+        this.resource_id = intent.getStringExtra("ids");
+        this.resource_type = intent.getStringExtra("resource_type");
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("reviews").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("reviews").whereEqualTo("resource_id", resource_id).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
                 if (e != null)
@@ -67,17 +76,20 @@ public class Reviews extends AppCompatActivity {
                     itemCount++;
                     review_sum += doc.getDouble("rating");
                     items.add(r);
+                }
 
+                if (itemCount > 0) {
                     ReviewListAdapter adapter = new ReviewListAdapter(Reviews.this, items);
                     ListView listview = (ListView) findViewById(R.id.reviews_list);
                     listview.setAdapter(adapter);
-                }
-                overall_rating = Utils.getAverage(itemCount, review_sum);
-                TextView summary = (TextView) findViewById(R.id.textViewSummary);
-                RatingBar summaryRating = (RatingBar) findViewById(R.id.ratingBarSummary);
 
-                summary.setText(String.format("%1.1f", overall_rating));
-                summaryRating.setRating((float)overall_rating);
+                    overall_rating = Utils.getAverage(itemCount, review_sum);
+                    TextView summary = (TextView) findViewById(R.id.textViewSummary);
+                    RatingBar summaryRating = (RatingBar) findViewById(R.id.ratingBarSummary);
+
+                    summary.setText(String.format("%1.1f", overall_rating));
+                    summaryRating.setRating((float) overall_rating);
+                }
             }
         });
 
@@ -95,11 +107,13 @@ public class Reviews extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // Save review
                         String comment = ((TextView) addReview.findViewById(R.id.newTextReview)).getText().toString();
-                        float review = ((RatingBar) addReview.findViewById(R.id.newRatingBar)).getRating();
+                        final float review = ((RatingBar) addReview.findViewById(R.id.newRatingBar)).getRating();
                         String date = LocalDate.now().toString();
                         String user_id = "user_99";
                         String user_name = "You";
-                        String id = UUID.randomUUID().toString();
+
+                        Intent intent = getIntent();
+                        final String resource_id = intent.getStringExtra("ids");
 
                         HashMap<String, Object> data = new HashMap<>();
                         data.put("comment", comment);
@@ -107,8 +121,9 @@ public class Reviews extends AppCompatActivity {
                         data.put("posted_by", date);
                         data.put("rating", Utils.roundFloat(review, 1));
                         data.put("user_id", user_id);
+                        data.put("resource_id", resource_id);
 
-                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        final FirebaseFirestore db = FirebaseFirestore.getInstance();
                         db.collection("reviews").add(data)
                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
@@ -117,6 +132,23 @@ public class Reviews extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                 if (documentSnapshot.exists()) {
+                                                    String path = null;
+
+                                                    switch (resource_type) {
+                                                        case "HOTEL":
+                                                            path = "hotels";
+                                                            break;
+                                                        case "GUIDE":
+                                                            path = "guides";
+                                                            break;
+                                                        case "PLACE":
+                                                            path = "places";
+                                                    }
+
+                                                    if (path != null) {
+                                                        update_review_summary(db, path, resource_id, "" + Utils.roundFloat(review, 1));
+                                                    }
+
                                                 }
                                             }
                                         });
@@ -131,6 +163,15 @@ public class Reviews extends AppCompatActivity {
                     }
                 });
         builder.show();
+    }
+
+    public void update_review_summary(FirebaseFirestore db, String collection, String path_id, String review) {
+        HashMap<String, Object> d = new HashMap<>();
+        d.put("rating", review);
+        Log.d(TAG, "update_review_summary: Collection " + collection);
+        Log.d(TAG, "update_review_summary: Path " + path_id);
+        Log.d(TAG, "update_review_summary: Review " + review);
+        db.collection(collection).document(path_id).update(d);
     }
 
     @Override

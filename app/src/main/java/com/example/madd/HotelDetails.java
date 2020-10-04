@@ -20,6 +20,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madd.util.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -112,9 +113,11 @@ public class HotelDetails extends AppCompatActivity {
                 documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            Intent intent = new Intent(HotelDetails.this, EditHotel.class);
-                            intent.putExtra("ids", ids);
+                        if(task.isSuccessful()){
+                            Intent intent = new Intent(HotelDetails.this, Reviews.class);
+                            intent.putExtra("ids",ids);
+                            intent.putExtra( "resource_type", "HOTEL");
+
                             startActivity(intent);
                         }
                     }

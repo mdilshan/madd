@@ -13,7 +13,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Utils {
-    public static double getAverage(int length, double sum) {
+
+    public static enum ResourceTypes {
+        HOTEL,
+        PLACE,
+        GUIDE
+    }
+
+    public static double getAverage(int length, double sum) throws NumberFormatException {
+        if(length == 0) {
+            throw new NumberFormatException();
+        }
         double cal = sum / length;
         return roundFloat(cal, 1);
     }
