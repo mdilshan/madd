@@ -4,45 +4,72 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.madd.adapter.RecentsAdapter;
 import com.example.madd.adapter.TopPlacesAdapter;
 import com.example.madd.model.RecentsData;
 import com.example.madd.model.TopPlacesData;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceActivity extends AppCompatActivity {
-    ImageButton btn1;
+    FirebaseFirestore myDB;
+    FloatingActionButton join_place;
     Button btn2;
+    EditText place_search_home;
     RecyclerView recentRecycler, topPlacesRecycler;
     RecentsAdapter recentsAdapter;
     TopPlacesAdapter topPlacesAdapter;
+    List<RecentsData> recentsDataList =  new ArrayList<>();
+    List<TopPlacesData> topPlacesDataList =  new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place);
+        recentRecycler = findViewById(R.id.recent_recycler);
+        topPlacesRecycler = findViewById(R.id.top_places_recycler);
+        join_place = findViewById(R.id.join_place);
 
-        btn1 = findViewById(R.id.btnAdd);
-
-        btn1.setOnClickListener(new View.OnClickListener() {
+        join_place.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(PlaceActivity.this, AddPlaces.class);
-                //startActivity(intent);
+                Intent intent = new Intent(PlaceActivity.this, AddPlaces.class);
+                startActivity(intent);
+            }
+        });
+        place_search_home  = findViewById(R.id.place_search_home);
+        place_search_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(place_search_home.getWindowToken(), 0);
+                Intent intent = new Intent(PlaceActivity.this, PlaceSeeAll.class);
+                startActivity(intent);
             }
         });
 
 
-        btn2=findViewById(R.id.button3);
-
+        btn2 = findViewById(R.id.button3);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,49 +77,87 @@ public class PlaceActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        // Now here we will add some dummy data in our model class
-
-        List<RecentsData> recentsDataList = new ArrayList<>();
-        recentsDataList.add(new RecentsData("Temple of Tooth Relic","Kandy","50km",R.drawable.im3));
-        recentsDataList.add(new RecentsData("Angel falls","Nuwareliya","75km",R.drawable.im2));
-        recentsDataList.add(new RecentsData("Light House","Colombo","190km",R.drawable.im1));
-        //recentsDataList.add(new RecentsData("Sigiriya","Sigiriya","200km",R.drawable.im6));
-        recentsDataList.add(new RecentsData("Elephant Hall","Pinnawala","250km",R.drawable.im5));
-        recentsDataList.add(new RecentsData("Thirukoneswaram Temple","Trincomalee","120km",R.drawable.im4));
-
-        setRecentRecycler(recentsDataList);
-
-        List<TopPlacesData> topPlacesDataList = new ArrayList<>();
-        topPlacesDataList.add(new TopPlacesData("Narigama Beach","Hikkaduwa","200km",R.drawable.slide1));
-        topPlacesDataList.add(new TopPlacesData("Adams Peak","Ratnapura","150km",R.drawable.slide2));
-        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","100km",R.drawable.slide1));
-        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","250km",R.drawable.slide2));
-        topPlacesDataList.add(new TopPlacesData("Kasimir Hill","India","120km",R.drawable.slide1));
-
-        setTopPlacesRecycler(topPlacesDataList);
+        myDB = FirebaseFirestore.getInstance();
+        readPlaceRecentsData();
+        readPlaceTopData();
+        bottomnav();
+    }
+    void readPlaceRecentsData() {
+        myDB.collection("places").orderBy("joined_on", Query.Direction.DESCENDING).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                if (e != null)
+                    toastResult(e.getMessage());
+                recentsDataList.clear();
+                for (DocumentSnapshot doc : documentSnapshots) {
+                    recentsDataList.add(new RecentsData(doc.getId(),doc.getString("place_name"),doc.getString("place_location"),doc.getString("imageUrl")));
+                }
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PlaceActivity.this, RecyclerView.HORIZONTAL, false);
+                recentRecycler.setLayoutManager(layoutManager);
+                recentsAdapter = new RecentsAdapter(PlaceActivity.this, recentsDataList);
+                recentRecycler.setAdapter(recentsAdapter);
+            }
+        });
     }
 
-    private  void setRecentRecycler(List<RecentsData> recentsDataList){
-
-        recentRecycler = findViewById(R.id.recent_recycler);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        recentRecycler.setLayoutManager(layoutManager);
-        recentsAdapter = new RecentsAdapter(this, recentsDataList);
-        recentRecycler.setAdapter(recentsAdapter);
-
+    void readPlaceTopData() {
+        myDB.collection("places").orderBy("rating", Query.Direction.DESCENDING).limit(30).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                if (e != null)
+                    toastResult(e.getMessage());
+                topPlacesDataList.clear();
+                for (DocumentSnapshot doc : documentSnapshots) {
+                    topPlacesDataList.add(new TopPlacesData(doc.getId(),doc.getString("place_name"),doc.getString("place_location"),doc.getString("rating"),doc.getString("imageUrl")));
+                }
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PlaceActivity.this, RecyclerView.VERTICAL, false);
+                topPlacesRecycler.setLayoutManager(layoutManager);
+                topPlacesAdapter = new TopPlacesAdapter(PlaceActivity.this, topPlacesDataList);
+                topPlacesRecycler.setAdapter(topPlacesAdapter);
+            }
+        });
     }
 
-    private  void setTopPlacesRecycler(List<TopPlacesData> topPlacesDataList){
+    public void bottomnav() {
+        final Activity A = PlaceActivity.this;
+        ImageView home_btn_nav1 =  (ImageView)findViewById(R.id.home_btn_nav);
+        ImageView guide_btn_nav1 =(ImageView)findViewById(R.id.guide_btn_nav);
+        ImageView places_btn_nav1 =(ImageView)findViewById(R.id.places_btn_nav);
+        ImageView hotel_btn_nav1 = (ImageView)findViewById(R.id.hotel_btn_nav);
 
-        topPlacesRecycler = findViewById(R.id.see_all_places_recycler);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        topPlacesRecycler.setLayoutManager(layoutManager);
-        topPlacesAdapter = new TopPlacesAdapter(this, topPlacesDataList);
-        topPlacesRecycler.setAdapter(topPlacesAdapter);
-
+        home_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        guide_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A,GuideHome.class);
+                startActivity(intent);
+            }
+        });
+        places_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A, PlaceActivity.class);
+                startActivity(intent);
+            }
+        });
+        hotel_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A, HotelMainPage.class);
+                startActivity(intent);
+            }
+        });
     }
 
-
+    public void toastResult(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 
 
 }

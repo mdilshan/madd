@@ -4,7 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E8E8E8"
     tools:context=".EditPlaces">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInLayout"
+        android:layout_width="249dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="URL"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="@+id/txtInLayout3"
+        app:layout_constraintStart_toStartOf="@+id/txtInLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/txtInLayout3" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editURL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/imageView9"
@@ -24,58 +45,81 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/join_bottom_bg" />
 
-    <EditText
-        android:id="@+id/etHotelLocation"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInLayout1"
         android:layout_width="248dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Place Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editPlace"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInLayout2"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Place Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+        android:hint="Address"
+        app:layout_constraintEnd_toEndOf="@+id/txtInLayout1"
+        app:layout_constraintStart_toStartOf="@+id/txtInLayout1"
+        app:layout_constraintTop_toBottomOf="@+id/txtInLayout1" >
 
-    <EditText
-        android:id="@+id/etPlaceLocation"
-        android:layout_width="248dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Address"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etHotelLocation" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editPlaceLocation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <EditText
-        android:id="@+id/etPlaceAbout"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInLayout3"
         android:layout_width="249dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="Description"
         android:inputType="textMultiLine"
-        android:text="Price"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPlaceLocation" />
+        app:layout_constraintEnd_toEndOf="@+id/txtInLayout2"
+        app:layout_constraintStart_toStartOf="@+id/txtInLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/txtInLayout2" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editPlaceAbout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/updateSubmit"
         android:layout_width="248dp"
         android:layout_height="45dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginTop="31dp"
         android:background="@drawable/book_button_bg"
         android:fontFamily="@font/rubik_medium"
         android:text="Update"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView10"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPlaceAbout" />
+        app:layout_constraintTop_toBottomOf="@+id/txtInLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView13"

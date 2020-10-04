@@ -1,81 +1,125 @@
 package com.example.madd;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.madd.model.PlaceDto;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 public class DetailsActivity extends AppCompatActivity {
     private static final String TAG = "DetailsActivity";
+    FirebaseFirestore myDB;
+    TextView plce_joined,plce_name,plce_star,plce_about,plce_location,plce_review;
+    ImageView plce_image;
+    ImageButton editbtn;
+    Button callbtn;
+    RatingBar PlaceRatingBAR;
     AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        myDB = FirebaseFirestore.getInstance();
 
-        Bundle extras = getIntent().getExtras();
-        if(extras != null) {
-            String item_id = extras.getString("item_id");
-            if (item_id == null) {
-                Log.e(TAG, "onCreate: Item Id is null");
-            } else {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                CollectionReference col = db.collection("places");
-                col
-                        .whereEqualTo("id", item_id)
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        Map<String, Object> d = document.getData();
-                                        PlaceDto data = new PlaceDto(
-                                                (String) d.get("id"),
-                                                (String) d.get("user_id"),
-                                                (String) d.get("name"),
-                                                (String) d.get("location"),
-                                                (String) d.get("description"),
-                                                (String) d.get("img_url")
-                                        );
-                                        // SET data to the View
-                                    }
-                                } else {
-                                    Log.e(TAG, "onComplete: ", task.getException());
-                                }
-                            }
-                        });
+        Intent intent = getIntent();
+        final String ids = intent.getStringExtra("ids");
+        plce_image=findViewById(R.id.profile_img);
+        plce_review=findViewById(R.id.place_review);
+        plce_name=findViewById(R.id.plc_name);
+        plce_joined=findViewById(R.id.place_joined);
+        plce_star=findViewById(R.id.place_star);
+        plce_location=findViewById(R.id.plc_location);
+        plce_about=findViewById(R.id.plc_about);
+        PlaceRatingBAR=findViewById(R.id.place_rating_bars);
+        readData(ids);
 
+        ImageView Bck_bttn = findViewById(R.id.imageV4);
+        Bck_bttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
-        }
-        ImageView deleteProfile = findViewById(R.id.deleteBtn);
+        });
+//        if(ids != null) {
+//            myDB.collection("places").document(ids)
+//                    .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                    if(task.isSuccessful()) {
+//                        DocumentSnapshot res = task.getResult();
+//
+//                    }
+//                }
+//            });
+//        }
+        //joinBtn = findViewById(R.id.joinbutton);
+        final ImageButton editbutton = (ImageButton) findViewById(R.id.editButton);
+        /*
+        joinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailsActivity.this, AddPlaces.class);
+                startActivity(intent);
+            }
+        }); */
 
-        builder = new AlertDialog.Builder(this);
+        editbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ON CLICK EDIT BUTTON");
+                Intent intent = new Intent(DetailsActivity.this, EditPlaces.class);
+                intent.putExtra("ids",ids);
+                startActivity(intent);
+            }
+        });
+
+        plce_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DocumentReference documentReference = myDB.collection("places").document(ids);
+                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Intent intent = new Intent(DetailsActivity.this, EditPlaces.class);
+                            intent.putExtra("ids",ids);
+                            startActivity(intent);
+                        }
+                    }
+                });
+            }
+        });
+
+        final ImageView deleteProfile = findViewById(R.id.deleteBtnPlace);
 
         deleteProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailsActivity.this);
                 //Uncomment the below code to Set the message and title from the strings.xml file
                 builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
 
@@ -84,10 +128,22 @@ public class DetailsActivity extends AppCompatActivity {
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Toast.makeText(getApplicationContext(), "your account is deleted successfully",
-                                        Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(DetailsActivity.this, PlaceActivity.class);
-//                                startActivity(intent);
+                                myDB.collection("places").document(ids).delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(getApplicationContext(), "your account is deleted successfully",
+                                                        Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(DetailsActivity.this, PlaceActivity.class);
+                                                startActivity(intent);
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                toastResult("Error while deleting the data : " + e.getMessage());
+                                            }
+                                        });
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -105,53 +161,42 @@ public class DetailsActivity extends AppCompatActivity {
                 alert.show();
             }
         });
+    }
 
-        ImageView editProfile = findViewById(R.id.editButton);
+    void readData(String ids) {
+        hideKeyboard(this);
+        try {
+            DocumentReference documentReference = myDB.collection("places").document(ids);
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        plce_name.setText(task.getResult().get("place_name").toString());
+                        Picasso.get().load(task.getResult().get("imageUrl").toString()).into(plce_image);
+                        plce_location.setText(task.getResult().get("place_location").toString());
 
-        builder = new AlertDialog.Builder(this);
+                        plce_star.setText(task.getResult().get("rating").toString());
+                        PlaceRatingBAR.setRating(Float.parseFloat(task.getResult().get("rating").toString()));
+                        plce_about.setText(task.getResult().get("place_description").toString());
+                        plce_joined.setText(task.getResult().get("joined_on").toString());
+                    }
+                }
+            });
 
-        editProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void toastResult(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 
-                //Uncomment the below code to Set the message and title from the strings.xml file
-                builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
-
-                //Setting message manually and performing action on button click
-                builder.setMessage("Do you need to edit your Account ?")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Toast.makeText(getApplicationContext(), "your can edit the information",
-                                        Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(DetailsActivity.this, EditPlaces.class);
-                                startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                //  Action for 'NO' Button
-                                dialog.cancel();
-                                Toast.makeText(getApplicationContext(), "you choose no action for alertbox",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                //Creating dialog box
-                AlertDialog alert = builder.create();
-                //Setting the title manually
-                alert.setTitle("Edit Profile");
-                alert.show();
-            }
-        });
-
-        TextView review = (TextView) findViewById(R.id.reviewTxt);
-        review.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DetailsActivity.this, Reviews.class);
-                intent.putExtra("id", "dummyId");
-                startActivity(intent);
-            }
-        });
+    public static void hideKeyboard(Activity activity) {
+        View view = activity.findViewById(android.R.id.content);
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            assert imm != null;
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

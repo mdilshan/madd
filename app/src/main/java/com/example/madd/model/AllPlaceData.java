@@ -1,7 +1,6 @@
 package com.example.madd.model;
 
-public class TopPlacesData {
-
+public class AllPlaceData {
     String placeName;
     String cityName;
     //String distance;
@@ -25,7 +24,7 @@ public class TopPlacesData {
     }
 
 
-    public TopPlacesData(String document,String placeName, String cityName, String Rating, String imageUrl ) {
+    public AllPlaceData(String document,String placeName, String cityName, String Rating, String imageUrl ) {
         this.placeName = placeName;
         this.cityName = cityName;
         //this.distance = distance;
@@ -68,4 +67,3 @@ public class TopPlacesData {
         ImageUrl = imageUrl;
     }
 }
-
