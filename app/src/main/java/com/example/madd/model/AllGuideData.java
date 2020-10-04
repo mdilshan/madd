@@ -1,12 +1,16 @@
 package com.example.madd.model;
 
+/**
+ * Model for See All Guide
+ * @Author - https://github.com/MhmdAsq
+ */
 public class AllGuideData {
 
     String GuideName;
     String Place;
     String Rating;
     String ImageUrl;
-Float RatingBar;
+    Float RatingBar;
     public String getDocument() {
         return Document;
     }

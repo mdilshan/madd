@@ -33,6 +33,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Guide Profile Edit
+ * @Author - https://github.com/MhmdAsq
+ */
 public class GuideEdit extends AppCompatActivity implements Validator.ValidationListener{
     FirebaseFirestore myDB;
     Button editsubmit;
@@ -109,7 +113,7 @@ public class GuideEdit extends AppCompatActivity implements Validator.Validation
     }
     @Override
     public void onValidationSucceeded() {
-        String id_doc = getDoc_id();
+        final String id_doc = getDoc_id();
         Map<String, Object> data = new HashMap<>();
         data.put("guide_name", edit_guide_name.getText().toString());
         data.put("place", edit_place.getText().toString());

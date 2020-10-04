@@ -20,6 +20,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * Adapter for Recents Guide
+ * @Author - https://github.com/MhmdAsq
+ */
+
 public class GuideRecentsAdapter extends RecyclerView.Adapter<GuideRecentsAdapter.GuideRecentsViewHolder> {
 
     Context context;
