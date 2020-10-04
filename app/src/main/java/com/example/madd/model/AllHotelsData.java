@@ -6,38 +6,17 @@ public class AllHotelsData {
     String location;
     String about;
     String price;
-    Integer imageUrl;
+    String imageUrl;
     String Rating;
+    Float RatingBar;
     String Document;
 
-
-    public AllHotelsData(String id, String hotel_name, String about, String location, String rating, int hotel2) {
-        this.hotelName = hotel_name;
-        this.location = location;
-        //this.price = Price;
-        this.about = about;
-        this.imageUrl =hotel2;
-        this.Document = id;
-
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-//    public AllHotelsData(String id, String hotel_name, String place, String location, String rating, int hotel2) {
-//    }
-
-    public String getRating() {
-        return Rating;
-    }
-
-    public void setRating(String rating) {
-        Rating = rating;
-    }
-
-    public String getDocument() {
-        return Document;
-    }
-
-    public void setDocument(String document) {
-        Document = document;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getHotelName() {
@@ -48,12 +27,20 @@ public class AllHotelsData {
         this.hotelName = hotelName;
     }
 
-    public String getCityName() {
+    public String getLocation() {
         return location;
     }
 
-    public void setCityName(String cityName) {
-        location = cityName;
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 
     public String getPrice() {
@@ -61,13 +48,43 @@ public class AllHotelsData {
     }
 
     public void setPrice(String price) {
-        price = price;
-    }
-    public Integer getImageUrl() {
-        return imageUrl;
+        this.price = price;
     }
 
-    public void setImageUrl(Integer imageUrl) {
+
+
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
+    }
+
+    public Float getRatingBar() {
+        return RatingBar;
+    }
+
+    public void setRatingBar(Float ratingBar)
+    {this.RatingBar = Float.parseFloat(Rating);
+        RatingBar = ratingBar;
+    }
+
+    public String getDocument() {
+        return Document;
+    }
+
+    public void setDocument(String document) {
+        Document = document;
+    }
+
+    public AllHotelsData(String document,String hotelName, String location,String rating, String imageUrl) {
+        this.hotelName = hotelName;
+        this.location = location;
         this.imageUrl = imageUrl;
+        Rating = rating;
+        Document = document;
+        this.RatingBar = Float.parseFloat(Rating);
+
     }
 }

@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.madd.adapter.AllHotelsAdapter;
@@ -26,7 +30,7 @@ public class HotelSeeAll extends AppCompatActivity {
     FirebaseFirestore myDB;
     RecyclerView allHotelRecycler;
     AllHotelsAdapter allHotelsAdapter;
-    ImageButton home,place,guide,hotel;
+    ImageButton home,place,guide,hotel,backbtn;
     List<AllHotelsData> allHotelDataList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +38,29 @@ public class HotelSeeAll extends AppCompatActivity {
         setContentView(R.layout.activity_hotel_see_all);
 
         allHotelRecycler = findViewById(R.id.all_hotels_recycler);
-
+        backbtn = findViewById(R.id.back_btn);
         myDB = FirebaseFirestore.getInstance();
         readData();
+        bottomnav();
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HotelSeeAll.this,HotelMainPage.class);
+                startActivity(intent);
+            }
+        });
     }
 
     void readData(){
         myDB.collection("hotels").addSnapshotListener(new EventListener<QuerySnapshot>() {
 
             @Override
-            public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
+            public void onEvent(QuerySnapshot documentSnapshots,FirebaseFirestoreException e) {
                 if (e != null)
                     toastResult(e.getMessage());
-                    allHotelDataList.clear();
-                    for (DocumentSnapshot doc : documentSnapshots){
-                        allHotelDataList.add(new AllHotelsData(doc.getId(),doc.getString("hotel_name"),doc.getString("about"),doc.getString("location"),doc.getString("rating"),R.drawable.hotel2));
-                    }
+                allHotelDataList.clear();
+                for (DocumentSnapshot doc : documentSnapshots)
+                    allHotelDataList.add(new AllHotelsData(doc.getId(), doc.getString("hotel_name"), doc.getString("location"), doc.getString("rating"), doc.getString("image")));
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(HotelSeeAll.this, RecyclerView.VERTICAL, false);
                  allHotelRecycler.setLayoutManager(layoutManager);
@@ -67,6 +78,44 @@ public class HotelSeeAll extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
+
+    public void bottomnav() {
+        final Activity A = HotelSeeAll.this;
+        ImageView home_btn_nav1 =  (ImageView)findViewById(R.id.home_btn_nav);
+        ImageView guide_btn_nav1 =(ImageView)findViewById(R.id.guide_btn_nav);
+        ImageView places_btn_nav1 =(ImageView)findViewById(R.id.places_btn_nav);
+        ImageView hotel_btn_nav1 = (ImageView)findViewById(R.id.hotel_btn_nav);
+
+        home_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        guide_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A,GuideHome.class);
+                startActivity(intent);
+            }
+        });
+        places_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A, PlaceActivity.class);
+                startActivity(intent);
+            }
+        });
+        hotel_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A, HotelMainPage.class);
+                startActivity(intent);
+            }
+        });
+    }
+
 }
 
 

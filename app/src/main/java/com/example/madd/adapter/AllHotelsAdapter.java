@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import com.example.madd.HotelDetails;
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import java.util.List;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.AllHotelsViewHolder> {
 
@@ -42,11 +44,12 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.AllH
     @Override
     public void onBindViewHolder(@NonNull AllHotelsViewHolder holder, int position) {
 
-            holder.cityName.setText(allHotelsDataList.get(position).getCityName());
+            holder.cityName.setText(allHotelsDataList.get(position).getLocation());
             holder.hotelName.setText(allHotelsDataList.get(position).getHotelName());
-            holder.price.setText(allHotelsDataList.get(position).getPrice());
-            holder.hotelImage.setImageResource(allHotelsDataList.get(position).getImageUrl());
-            holder.document = (allHotelsDataList.get(position).getDocument());
+        holder.HotelRating.setText(allHotelsDataList.get(position).getRating());
+        holder.HotelRatingBAR.setRating(allHotelsDataList.get(position).getRatingBar());
+        Picasso.get().load(allHotelsDataList.get(position).getImageUrl()).into(holder.hotelImage);
+        holder.document = (allHotelsDataList.get(position).getDocument());
 
             final String ids = holder.document;
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +74,8 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.AllH
 
 
         ImageView hotelImage;
-        TextView hotelName,cityName,price;
+        TextView hotelName,cityName,HotelRating;
+        RatingBar HotelRatingBAR;
         String document;
 
         public AllHotelsViewHolder(@NonNull View itemView) {
@@ -79,7 +83,8 @@ public class AllHotelsAdapter extends RecyclerView.Adapter<AllHotelsAdapter.AllH
         hotelImage = itemView.findViewById(R.id.hotel_image);
         hotelName = itemView.findViewById(R.id.hotel_name);
         cityName = itemView.findViewById(R.id.city_name);
-        price = itemView.findViewById(R.id.distance);
+        HotelRating = itemView.findViewById(R.id.hotel_review_avg);
+        HotelRatingBAR = itemView.findViewById(R.id.hotel_rating_bar);
 
 
         }

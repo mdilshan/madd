@@ -4,17 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.madd.adapter.RecentHotelAdapter;
 import com.example.madd.adapter.TopHotelsAdapter;
 import com.example.madd.model.RecentHotelData;
 import com.example.madd.model.TopHotelsData;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,13 +33,14 @@ import javax.annotation.Nullable;
 
 public class HotelMainPage extends AppCompatActivity {
     FirebaseFirestore myDB;
-    Button SeeAll;
-    ImageButton AddHotel,home,place,guide,hotel;
-    RecyclerView recentRecycler, topHotelsRecycler;
+    TextView SeeAll;
+    ImageButton home,place,guide,hotel;
+    RecyclerView hotel_recentRecycler, topHotelsRecycler;
     RecentHotelAdapter recentHotelAdapter;
     TopHotelsAdapter topHotelsAdapters;
-    List<RecentHotelData> hotelRecentsDataList = new ArrayList<>();
+    List<RecentHotelData> hotelRecentDataList = new ArrayList<>();
     List<TopHotelsData> hotelTopDataList = new ArrayList<>();
+    FloatingActionButton add_hotel ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,32 +49,36 @@ public class HotelMainPage extends AppCompatActivity {
 
 
         SeeAll = findViewById(R.id.btnSeeAll);
-        AddHotel = findViewById(R.id.btnHotelAdd1);
-        recentRecycler = findViewById(R.id.recent_recycler);
-        topHotelsRecycler = findViewById(R.id.all_hotels_recycler);
+        //AddHotel = findViewById(R.id.btnHotelAdd1);
+        hotel_recentRecycler = findViewById(R.id.recent_recycler);
+        topHotelsRecycler = findViewById(R.id.top_hotels_recycler);
 
-        home = findViewById(R.id.btnHome);
+       // home = findViewById(R.id.btnHome);
         place = findViewById(R.id.btnPlace);
         guide = findViewById(R.id.btnGuide);
-        hotel = findViewById(R.id.btnHotel);
+      //  hotel = findViewById(R.id.btnHotel);
+        add_hotel = findViewById(R.id.add_hotel);
 
 
-        myDB = FirebaseFirestore.getInstance();
-        readHotelRecentsData();
-       readHotelTopData();
 
-        AddHotel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HotelMainPage.this,AddNewHotel.class);
-                startActivity(intent);
-            }
-        });
+        bottomnav();
+
 
         SeeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HotelMainPage.this, HotelSeeAll.class);
+                startActivity(intent);
+            }
+        });
+        myDB = FirebaseFirestore.getInstance();
+        readHotelRecentsData();
+        readHotelTopData();
+
+        add_hotel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HotelMainPage.this,AddNewHotel.class);
                 startActivity(intent);
             }
         });
@@ -112,14 +121,14 @@ public class HotelMainPage extends AppCompatActivity {
                 public void onEvent( QuerySnapshot documentSnapshots,  FirebaseFirestoreException e) {
                     if(e!=null)
                         toastResult(e.getMessage());
-                    hotelRecentsDataList.clear();
+                    hotelRecentDataList.clear();
                     for(DocumentSnapshot doc : documentSnapshots){
-                        hotelRecentsDataList.add(new RecentHotelData(doc.getId(),doc.getString("hotel_name"),doc.getString("location"),R.drawable.hotel2));
+                        hotelRecentDataList.add(new RecentHotelData(doc.getId(),doc.getString("hotel_name"),doc.getString("location"),doc.getString("image")));
                     }
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(HotelMainPage.this,RecyclerView.HORIZONTAL,false);
-                    recentRecycler.setLayoutManager(layoutManager);
-                    recentHotelAdapter = new RecentHotelAdapter(HotelMainPage.this,hotelRecentsDataList);
-                    recentRecycler.setAdapter(recentHotelAdapter);
+                    hotel_recentRecycler.setLayoutManager(layoutManager);
+                    recentHotelAdapter = new RecentHotelAdapter(HotelMainPage.this,hotelRecentDataList);
+                    hotel_recentRecycler.setAdapter(recentHotelAdapter);
                 }
             });
         }
@@ -132,9 +141,9 @@ public class HotelMainPage extends AppCompatActivity {
                         toastResult(e.getMessage());
                     hotelTopDataList.clear();
                     for(DocumentSnapshot doc : documentSnapshots){
-                        hotelTopDataList.add(new TopHotelsData(doc.getId(),doc.getString("hotel_name"),doc.getString("location"),R.drawable.hotel2));
+                        hotelTopDataList.add(new TopHotelsData(doc.getId(),doc.getString("hotel_name"),doc.getString("location"),doc.getString("rating"),doc.getString("image")));
                     }
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(HotelMainPage.this,RecyclerView.HORIZONTAL,false);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(HotelMainPage.this,RecyclerView.VERTICAL,false);
                     topHotelsRecycler.setLayoutManager(layoutManager);
                     topHotelsAdapters = new TopHotelsAdapter(HotelMainPage.this,hotelTopDataList);
                     topHotelsRecycler.setAdapter(topHotelsAdapters);
@@ -167,6 +176,43 @@ public class HotelMainPage extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+
+    public void bottomnav() {
+        final Activity A = HotelMainPage.this;
+        ImageView home_btn_nav1 =  (ImageView)findViewById(R.id.home_btn_nav);
+        ImageView guide_btn_nav1 =(ImageView)findViewById(R.id.guide_btn_nav);
+        ImageView places_btn_nav1 =(ImageView)findViewById(R.id.places_btn_nav);
+        ImageView hotel_btn_nav1 = (ImageView)findViewById(R.id.hotel_btn_nav);
+
+        home_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        guide_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A,GuideHome.class);
+                startActivity(intent);
+            }
+        });
+        places_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A, PlaceActivity.class);
+                startActivity(intent);
+            }
+        });
+        hotel_btn_nav1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(A, HotelMainPage.class);
+                startActivity(intent);
+            }
+        });
+    }
   //  }
 //
 //    private  void setRecentRecycler(List<RecentHotelData> recentsDataList){

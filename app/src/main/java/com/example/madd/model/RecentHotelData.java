@@ -6,16 +6,22 @@ public class RecentHotelData {
 
     String hotelName;
     String CityName;
-    Integer imageUrl;
+    String  imageUrl;
     String Document;
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
-    public RecentHotelData(String id, String hotel_name, String location, int hotel2) {
+    public RecentHotelData(String document, String hotelName, String location, String ImageUrl) {
         this.hotelName = hotelName;
-        CityName = location;
-        this.imageUrl = hotel2;
-        Document = id;
+        this.CityName = location;
+        this.imageUrl = ImageUrl;
+        this.Document = document;
     }
 
     public String getDocument() {
@@ -43,11 +49,4 @@ public class RecentHotelData {
         CityName = cityName;
     }
 
-    public Integer getImageUrl() {
-        return imageUrl;
     }
-
-    public void setImageUrl(Integer imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-}
