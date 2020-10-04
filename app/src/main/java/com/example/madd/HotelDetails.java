@@ -20,6 +20,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madd.util.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -57,7 +58,7 @@ public class HotelDetails extends AppCompatActivity {
         hotel_mobile = findViewById(R.id.dt_hotel_mobile);
         hotel_location = findViewById(R.id.dt_hotel_place);
         hotel_review = findViewById(R.id.dt_hotel_review);
-       hotel_image = findViewById(R.id.dt_hotel_profile_image);
+        hotel_image = findViewById(R.id.dt_hotel_profile_image);
         HotelEdit = findViewById(R.id.btnHotelEdit);
         HotelDelete = findViewById(R.id.btnHotelDelete);
         HotelRatingBAR = findViewById(R.id.dt_hotel_rating_bars);
@@ -113,8 +114,9 @@ public class HotelDetails extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.isSuccessful()){
-                            Intent intent = new Intent(HotelDetails.this,EditHotel.class);
+                            Intent intent = new Intent(HotelDetails.this, Reviews.class);
                             intent.putExtra("ids",ids);
+                            intent.putExtra( "resource_type", "HOTEL");
                             startActivity(intent);
                         }
                     }
