@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.madd.adapter.AllHotelsAdapter;
@@ -25,6 +26,7 @@ public class HotelSeeAll extends AppCompatActivity {
     FirebaseFirestore myDB;
     RecyclerView allHotelRecycler;
     AllHotelsAdapter allHotelsAdapter;
+    ImageButton home,place,guide,hotel;
     List<AllHotelsData> allHotelDataList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -6,19 +6,26 @@ public class RecentHotelData {
 
     String hotelName;
     String CityName;
-    String price;
     Integer imageUrl;
+    String Document;
 
 
 
-
-
-    public RecentHotelData(String hotelName, String CityName, String Price, Integer imageUrl) {
+    public RecentHotelData(String id, String hotel_name, String location, int hotel2) {
         this.hotelName = hotelName;
-        this.CityName = CityName;
-        this.price = Price;
-        this.imageUrl =imageUrl;
+        CityName = location;
+        this.imageUrl = hotel2;
+        Document = id;
     }
+
+    public String getDocument() {
+        return Document;
+    }
+
+    public void setDocument(String document) {
+        Document = document;
+    }
+
 
     public String getHotelName() {
         return hotelName;
@@ -36,13 +43,6 @@ public class RecentHotelData {
         CityName = cityName;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        price = price;
-    }
     public Integer getImageUrl() {
         return imageUrl;
     }

@@ -40,7 +40,7 @@ public class RecentHotelAdapter extends RecyclerView.Adapter<RecentHotelAdapter.
 
             holder.cityName.setText(recentHotelDataList.get(position).getCityName());
             holder.hotelName.setText(recentHotelDataList.get(position).getHotelName());
-            holder.price.setText(recentHotelDataList.get(position).getPrice());
+            //holder.price.setText(recentHotelDataList.get(position).getPrice());
             holder.hotelImage.setImageResource(recentHotelDataList.get(position).getImageUrl());
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {

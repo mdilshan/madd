@@ -12,7 +12,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +29,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HotelDetails extends AppCompatActivity {
     FirebaseFirestore myDB;
-    TextView hotel_joined,hotel_name,hotel_star;
+    TextView hotel_joined,hotel_name,hotel_star,hotel_about,hotel_mobile,hotel_location,hotel_review;
+    ImageView hotel_image;
     AlertDialog.Builder builder;
     ImageButton HotelEdit,HotelDelete;
+    RatingBar HotelRatingBAR;
+    Button AddHotel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +46,29 @@ public class HotelDetails extends AppCompatActivity {
         Intent intent = getIntent();
         final String ids = intent.getStringExtra("ids");
 
+
+        hotel_joined = findViewById(R.id.dt_hotel_joined);
+        hotel_name = findViewById(R.id.dt_hotel_name);
+        hotel_star = findViewById(R.id.dt_hotel_star);
+        hotel_about = findViewById(R.id.dt_hotel_about);
+        hotel_mobile = findViewById(R.id.dt_hotel_mobile);
+        hotel_location = findViewById(R.id.dt_hotel_place);
+        hotel_review = findViewById(R.id.dt_hotel_review);
+       hotel_image = findViewById(R.id.dt_hotel_profile_image);
         HotelEdit = findViewById(R.id.btnHotelEdit);
         HotelDelete = findViewById(R.id.btnHotelDelete);
+        HotelRatingBAR = findViewById(R.id.dt_hotel_rating_bars);
+        readData(ids);
+
+        AddHotel = findViewById(R.id.AddHotelbtn);
+
+        AddHotel.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HotelDetails.this,AddNewHotel.class);
+                startActivity(intent);
+            }
+        });
 
         HotelEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +88,22 @@ public class HotelDetails extends AppCompatActivity {
             }
         });
 
+        hotel_review.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                DocumentReference documentReference = myDB.collection("hotels").document(ids);
+                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            Intent intent = new Intent(HotelDetails.this,EditHotel.class);
+                            intent.putExtra("ids",ids);
+                            startActivity(intent);
+                        }
+                    }
+                });
+            }
+        });
         builder = new AlertDialog.Builder(this);
 
         HotelDelete.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +113,7 @@ public class HotelDetails extends AppCompatActivity {
                 builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
 
                 //Setting message manually and performing action on button click
-                builder.setMessage("Do you need to delete your Account ?")
+                builder.setMessage("Do you need to delete this hotel Account ?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -107,9 +150,31 @@ public class HotelDetails extends AppCompatActivity {
                 alert.show();
             }
         });
-
-
     }
+void readData(String ids){
+    hideKeyboard(this);
+    try{
+        DocumentReference documentReference = myDB.collection("hotels").document(ids);
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    hotel_name.setText(task.getResult().get("hotel_name").toString());
+                   // hotel_image.setText(task.getResult().get("image").toString());
+                    hotel_mobile.setText(task.getResult().get("contact").toString());
+                    hotel_location.setText(task.getResult().get("location").toString());
+                    hotel_star.setText(task.getResult().get("rating").toString());
+                    hotel_about.setText(task.getResult().get("about").toString());
+                    hotel_joined.setText(task.getResult().get("joined_on").toString());
+                    HotelRatingBAR.setRating(Float.parseFloat(task.getResult().get("rating").toString()));
+                }
+            }
+        });
+        }
+    catch (Exception e){}
+
+        }
+
     public void toastResult(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
