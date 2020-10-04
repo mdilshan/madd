@@ -129,6 +129,7 @@ public class EditPlaces extends AppCompatActivity implements Validator.Validatio
                                     toastResult("Data update Completed");
 
                                     Intent intent = new Intent(EditPlaces.this, DetailsActivity.class);
+                                    intent.putExtra("ids",doc_id);
                                     startActivity(intent);
                                 }
                             })
