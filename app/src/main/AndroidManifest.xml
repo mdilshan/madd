@@ -18,8 +18,6 @@
         <activity android:name=".GuideSeeAll"></activity>
 
 
-
-
         <activity android:name=".HotelDetails" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -41,7 +39,6 @@
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
 <!--        </activity>-->
-
         <!-- <activity android:name=".HotelContentList"> -->
         <!-- <intent-filter> -->
         <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -54,7 +51,6 @@
         <activity android:name=".PlaceSeeAll" />
         <activity android:name=".EditPlaces" />
         <activity android:name=".DetailsActivity" />
-        <activity android:name=".AddPlaces" />
         <activity android:name=".GuideJoin" />
         <activity android:name=".GuideEdit" />
         <activity android:name=".GuideDetails" />
