@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.madd.adapter.AllHotelsAdapter;
@@ -32,16 +33,19 @@ public class HotelSeeAll extends AppCompatActivity {
     AllHotelsAdapter allHotelsAdapter;
     ImageButton home,place,guide,hotel,backbtn;
     List<AllHotelsData> allHotelDataList = new ArrayList<>();
+    SearchView search_hotels_seeall;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotel_see_all);
 
         allHotelRecycler = findViewById(R.id.all_hotels_recycler);
+
+        search_hotels_seeall = findViewById(R.id.search_hotel_seeall);
         backbtn = findViewById(R.id.back_btn);
         myDB = FirebaseFirestore.getInstance();
         readData();
-        bottomnav();
+        bottomnav(); 
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +72,35 @@ public class HotelSeeAll extends AppCompatActivity {
                  allHotelRecycler.setAdapter(allHotelsAdapter);
             }
         });
+
+        if(search_hotels_seeall != null){
+            search_hotels_seeall.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                search(s);
+                return true;
+            }
+        });
     }
+}
+    public void search(String str){
+        List<AllHotelsData> searchHotelDataList = new ArrayList<>();
+        for (AllHotelsData object : allHotelDataList){
+            if(object.getLocation().toLowerCase().contains(str.toLowerCase())){
+                searchHotelDataList.add(object);
+            }
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(HotelSeeAll.this, RecyclerView.VERTICAL, false);
+            allHotelRecycler.setLayoutManager(layoutManager);
+            allHotelsAdapter = new AllHotelsAdapter(HotelSeeAll.this, searchHotelDataList);
+            allHotelRecycler.setAdapter(allHotelsAdapter);
+        }
+    }
+
     public void toastResult(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
