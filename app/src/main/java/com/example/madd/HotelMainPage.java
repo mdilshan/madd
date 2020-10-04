@@ -58,8 +58,8 @@ public class HotelMainPage extends AppCompatActivity {
         topHotelsRecycler = findViewById(R.id.top_hotels_recycler);
 
        // home = findViewById(R.id.btnHome);
-        place = findViewById(R.id.btnPlace);
-        guide = findViewById(R.id.btnGuide);
+       // place = findViewById(R.id.btnPlace);
+       // guide = findViewById(R.id.btnGuide);
       //  hotel = findViewById(R.id.btnHotel);
         add_hotel = findViewById(R.id.add_hotel);
         search_hotels_home = findViewById(R.id.search_hotel_home);
