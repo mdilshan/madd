@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,34 +29,67 @@ public class GuideSeeAll extends AppCompatActivity {
     RecyclerView allGuideRecycler;
     AllGuideAdapter allGuidesAdapter;
     List<AllGuideData> allGuideDataList = new ArrayList<>();
+    SearchView search_guides_seeall;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_see_all);
         allGuideRecycler = findViewById(R.id.all_guides_recycler);
+        search_guides_seeall = findViewById(R.id.search_guides_seeall);
+
         myDB = FirebaseFirestore.getInstance();
         readData();
 
         bottomnav();
     }
     void readData() {
-        myDB.collection("guides").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                if (e != null)
-                    toastResult(e.getMessage());
-                allGuideDataList.clear();
-//                allGuideDataList.add(new AllGuideData("Fresh Up","Hambantota","From Rs.7499","5",R.drawable.hotel2));
-                for (DocumentSnapshot doc : documentSnapshots) {
-                    allGuideDataList.add(new AllGuideData(doc.getId(),doc.getString("guide_name"),doc.getString("place"),doc.getString("rating"),doc.getString("imageUrl")));
-//                    allGuideDataList.add(new AllGuideData(doc.getString("description"),doc.getString("location"),doc.getString("name"),doc.getString("name"),R.drawable.hotel2));
+        try {
+            myDB.collection("guides").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+
+                    if (e != null)
+                        toastResult(e.getMessage());
+                    allGuideDataList.clear();
+                    for (DocumentSnapshot doc : documentSnapshots) {
+                        allGuideDataList.add(new AllGuideData(doc.getId(),doc.getString("guide_name"),doc.getString("place"),doc.getString("rating"),doc.getString("imageUrl")));
+                    }
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GuideSeeAll.this, RecyclerView.VERTICAL, false);
+                    allGuideRecycler.setLayoutManager(layoutManager);
+                    allGuidesAdapter = new AllGuideAdapter(GuideSeeAll.this, allGuideDataList);
+                    allGuideRecycler.setAdapter(allGuidesAdapter);
                 }
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GuideSeeAll.this, RecyclerView.VERTICAL, false);
-                allGuideRecycler.setLayoutManager(layoutManager);
-                allGuidesAdapter = new AllGuideAdapter(GuideSeeAll.this, allGuideDataList);
-                allGuideRecycler.setAdapter(allGuidesAdapter);
+
+
+            });
+        }catch (Exception e){}
+
+        if(search_guides_seeall != null){
+            search_guides_seeall.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    search(s);
+                    return true;
+                }
+            });
+        }
+    }
+    public void search(String str){
+        List<AllGuideData> searchGuideDataList = new ArrayList<>();
+        for (AllGuideData object : allGuideDataList){
+            if(object.getPlace().toLowerCase().contains(str.toLowerCase())){
+                searchGuideDataList.add(object);
             }
-        });
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GuideSeeAll.this, RecyclerView.VERTICAL, false);
+            allGuideRecycler.setLayoutManager(layoutManager);
+            allGuidesAdapter = new AllGuideAdapter(GuideSeeAll.this, searchGuideDataList);
+            allGuideRecycler.setAdapter(allGuidesAdapter);
+        }
     }
     public void bottomnav() {
         Activity A = GuideSeeAll.this;

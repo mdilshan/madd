@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/search_guides_home"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
@@ -55,6 +55,7 @@
             android:drawableLeft="@drawable/ic_search_black_24dp"
             android:drawablePadding="16dp"
             android:ems="10"
+            android:focusable="false"
             android:hint="Search Guides"
             android:inputType="textPersonName"
             android:paddingLeft="16dp"
@@ -148,17 +149,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-    <Spinner
-        android:id="@+id/spinner3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
