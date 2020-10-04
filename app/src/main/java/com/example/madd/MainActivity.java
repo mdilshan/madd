@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity {
 
 Button Hotel,addHotel;
 
-
     //Button home;
     TextView guides;
     TextView places;

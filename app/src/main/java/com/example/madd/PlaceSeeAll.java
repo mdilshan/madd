@@ -96,7 +96,7 @@ public class PlaceSeeAll extends AppCompatActivity {
     public void search(String str){
         List<AllPlaceData> searchPlaceDataList = new ArrayList<>();
         for (AllPlaceData object : allPlaceDataList){
-            if(object.getPlaceName().toLowerCase().contains(str.toLowerCase())){
+            if(object.getCityName().toLowerCase().contains(str.toLowerCase())){
                 searchPlaceDataList.add(object);
             }
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PlaceSeeAll.this, RecyclerView.VERTICAL, false);
