@@ -2,17 +2,21 @@ package com.example.madd.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.madd.GuideDetails;
 import com.example.madd.R;
 import com.example.madd.model.GuideRecentsData;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -36,11 +40,19 @@ public class GuideRecentsAdapter extends RecyclerView.Adapter<GuideRecentsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull GuideRecentsViewHolder holder, int position) {
+//        try {
+//            Uri myUri = Uri.parse("http://www.google.com");
+//            URI image = Uri.parse(recentsDataList.get(position).getImageUrl());
+//            holder.PlaceImage.setImageURI(image);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
 
         holder.PlaceguideName.setText(recentsDataList.get(position).getGuideName());
         holder.guidePlace.setText(recentsDataList.get(position).getPlace());
-        holder.PlaceImage.setImageResource(recentsDataList.get(position).getImageUrl());
         holder.document = (recentsDataList.get(position).getDocument());
+
+        Picasso.get().load(recentsDataList.get(position).getImageUrl()).into(holder.PlaceImage);
 
         final String ids = holder.document;
         holder.itemView.setOnClickListener(new View.OnClickListener() {

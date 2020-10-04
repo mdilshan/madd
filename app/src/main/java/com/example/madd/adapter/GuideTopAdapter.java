@@ -16,6 +16,7 @@ import com.example.madd.GuideDetails;
 import com.example.madd.R;
 import com.example.madd.model.GuidesTopData;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class GuideTopAdapter extends RecyclerView.Adapter<GuideTopAdapter.GuideT
         holder.guidePlace.setText(guidesTopDataList.get(position).getPlace());
         holder.GuideRating.setText(guidesTopDataList.get(position).getRating());
         holder.GuideRatingBAR.setRating(guidesTopDataList.get(position).getRatingBar());
-        holder.PlaceImage.setImageResource(guidesTopDataList.get(position).getImageUrl());
+        Picasso.get().load(guidesTopDataList.get(position).getImageUrl()).into(holder.PlaceImage);
         holder.document = (guidesTopDataList.get(position).getDocument());
 
         final String ids = holder.document;
