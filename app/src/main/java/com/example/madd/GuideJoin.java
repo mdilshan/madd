@@ -30,6 +30,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Guide Add
+ * @Author - https://github.com/MhmdAsq
+ */
 public class GuideJoin extends AppCompatActivity implements Validator.ValidationListener {
     FirebaseFirestore myDB;
     Button joinsubmit;
