@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,14 +34,13 @@ import java.util.List;
 public class GuideHome extends AppCompatActivity {
 
     FirebaseFirestore myDB;
-Context context;
     GuideRecentsAdapter guideRecentsAdapter;
     GuideTopAdapter guideTopAdapter;
     TextView SeeAll;
+    EditText search_guides_home;
     List<GuideRecentsData> guideRecentsDataList =  new ArrayList<>();
     List<GuidesTopData> guidesTopDataList =  new ArrayList<>();
     RecyclerView guideRecentRecycler, guideTopRecycler;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,18 @@ Context context;
         SeeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(GuideHome.this, GuideSeeAll.class);
+                startActivity(intent);
+            }
+        });
+
+        search_guides_home  = findViewById(R.id.search_guides_home);
+
+        search_guides_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(search_guides_home.getWindowToken(), 0);
                 Intent intent = new Intent(GuideHome.this, GuideSeeAll.class);
                 startActivity(intent);
             }
@@ -69,7 +82,6 @@ Context context;
             }
         });
     }
-
     void readGuideRecentsData() {
         myDB.collection("guides").orderBy("joined_on", Query.Direction.DESCENDING).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
