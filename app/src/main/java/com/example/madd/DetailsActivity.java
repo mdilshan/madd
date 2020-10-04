@@ -105,8 +105,9 @@ public class DetailsActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(DetailsActivity.this, EditPlaces.class);
+                            Intent intent = new Intent(DetailsActivity.this, Reviews.class);
                             intent.putExtra("ids",ids);
+                            intent.putExtra( "resource_type", "PLACE");
                             startActivity(intent);
                         }
                     }
