@@ -148,7 +148,7 @@
             app:srcCompat="@drawable/home" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/btnPlace"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -166,7 +166,7 @@
             app:srcCompat="@drawable/flights" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/btnGuide"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
