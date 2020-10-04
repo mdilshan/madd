@@ -1,5 +1,9 @@
 package com.example.madd.model;
 
+/**
+ * Model for Recents Guide
+ * @Author - https://github.com/MhmdAsq
+ */
 public class GuideRecentsData {
 
     String GuideName;

@@ -24,6 +24,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Guide See All
+ * @Author - https://github.com/MhmdAsq
+ */
 public class GuideSeeAll extends AppCompatActivity {
     FirebaseFirestore myDB;
     RecyclerView allGuideRecycler;

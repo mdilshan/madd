@@ -30,7 +30,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Guide Home Page
+ * @Author - https://github.com/MhmdAsq
+ */
 public class GuideHome extends AppCompatActivity {
 
     FirebaseFirestore myDB;
