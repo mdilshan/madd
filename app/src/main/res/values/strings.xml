@@ -98,9 +98,12 @@
     <string name="hotelLocation">Location</string>
     <string name="hotelAbout" />
     <string name="hotelAbout1">Hotel About</string>
+    <string name="hotelImage">Hotel Image</string>
+  <string name="hotelContact">Hotel Contact</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="website">Website</string>
     <string name="phone">Phone</string>
+
 </resources>

@@ -113,7 +113,7 @@ public class GuideEdit extends AppCompatActivity implements Validator.Validation
     }
     @Override
     public void onValidationSucceeded() {
-        String id_doc = getDoc_id();
+        final String id_doc = getDoc_id();
         Map<String, Object> data = new HashMap<>();
         data.put("guide_name", edit_guide_name.getText().toString());
         data.put("place", edit_place.getText().toString());

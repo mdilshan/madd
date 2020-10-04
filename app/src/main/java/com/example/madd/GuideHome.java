@@ -120,7 +120,7 @@ public class GuideHome extends AppCompatActivity {
         });
     }
     public void bottomnav() {
-        Activity A = GuideHome.this;
+        final Activity A = GuideHome.this;
         ImageView home_btn_nav1 =  (ImageView)findViewById(R.id.home_btn_nav);
         ImageView guide_btn_nav1 =(ImageView)findViewById(R.id.guide_btn_nav);
         ImageView places_btn_nav1 =(ImageView)findViewById(R.id.places_btn_nav);

@@ -35,8 +35,8 @@ public class PlaceActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PlaceActivity.this, AddPlaces.class);
-                startActivity(intent);
+                //Intent intent = new Intent(PlaceActivity.this, AddPlaces.class);
+                //startActivity(intent);
             }
         });
 
@@ -56,7 +56,7 @@ public class PlaceActivity extends AppCompatActivity {
         recentsDataList.add(new RecentsData("Temple of Tooth Relic","Kandy","50km",R.drawable.im3));
         recentsDataList.add(new RecentsData("Angel falls","Nuwareliya","75km",R.drawable.im2));
         recentsDataList.add(new RecentsData("Light House","Colombo","190km",R.drawable.im1));
-//        recentsDataList.add(new RecentsData("Sigiriya","Sigiriya","200km",R.drawable.im6));
+        //recentsDataList.add(new RecentsData("Sigiriya","Sigiriya","200km",R.drawable.im6));
         recentsDataList.add(new RecentsData("Elephant Hall","Pinnawala","250km",R.drawable.im5));
         recentsDataList.add(new RecentsData("Thirukoneswaram Temple","Trincomalee","120km",R.drawable.im4));
 
