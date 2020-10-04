@@ -5,10 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,6 +44,7 @@ public class HotelMainPage extends AppCompatActivity {
     List<RecentHotelData> hotelRecentDataList = new ArrayList<>();
     List<TopHotelsData> hotelTopDataList = new ArrayList<>();
     FloatingActionButton add_hotel ;
+    EditText search_hotels_home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +62,17 @@ public class HotelMainPage extends AppCompatActivity {
         guide = findViewById(R.id.btnGuide);
       //  hotel = findViewById(R.id.btnHotel);
         add_hotel = findViewById(R.id.add_hotel);
+        search_hotels_home = findViewById(R.id.search_hotel_home);
 
-
+        search_hotels_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(search_hotels_home.getWindowToken(), 0);
+                Intent intent = new Intent(HotelMainPage.this, HotelSeeAll.class);
+                startActivity(intent);
+            }
+        });
 
         bottomnav();
 
