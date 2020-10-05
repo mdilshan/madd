@@ -82,19 +82,19 @@ public class ReviewListAdapterTest {
 
     /**
      * Custom Matcher for get the raw by Author of the review
-     * @param id - Name of the Author / user
+     * @param displayed_name - Name of the Author / user
      * @return
      */
-    public static Matcher withContentName(final String id) {
+    public static Matcher withContentName(final String displayed_name) {
         return new BoundedMatcher<Object, ReviewInterface>(ReviewInterface.class) {
             @Override
             protected boolean matchesSafely(ReviewInterface item) {
-                return item.name.equals(id);
+                return item.name.equals(displayed_name);
             }
 
             @Override
             public void describeTo(Description description) {
-                description.appendText("with id ' " + id + " '");
+                description.appendText("with id ' " + displayed_name + " '");
             }
         };
     }

@@ -49,6 +49,7 @@
         <activity android:name=".AddNewHotel" />
         <activity android:name=".PlaceActivity" />
         <activity android:name=".PlaceSeeAll" />
+        <activity android:name=".AddPlaces" />
         <activity android:name=".EditPlaces" />
         <activity android:name=".DetailsActivity" />
         <activity android:name=".GuideJoin" />
