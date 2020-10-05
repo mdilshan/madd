@@ -22,8 +22,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editURL"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="248dp"
+            android:layout_height="42dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,19 +63,22 @@
         android:id="@+id/txtInLayout1"
         android:layout_width="248dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Place Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView9">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editPlace"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="248dp"
+            android:layout_height="42dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,8 +96,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editPlaceLocation"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="248dp"
+            android:layout_height="42dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,8 +119,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editPlaceAbout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="248dp"
+            android:layout_height="42dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,10 +139,10 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtInLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.695" />
 
     <TextView
         android:id="@+id/textView13"

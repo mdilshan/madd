@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -101,7 +102,7 @@ public class PlaceSeeAll extends AppCompatActivity {
             }
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PlaceSeeAll.this, RecyclerView.VERTICAL, false);
             allPlaceRecycler.setLayoutManager(layoutManager);
-            allPlaceAdapter = new AllPlaceAdapter(PlaceSeeAll.this, allPlaceDataList);
+            allPlaceAdapter = new AllPlaceAdapter(PlaceSeeAll.this, searchPlaceDataList);
             allPlaceRecycler.setAdapter(allPlaceAdapter);
         }
     }
@@ -144,6 +145,12 @@ public class PlaceSeeAll extends AppCompatActivity {
 
     public void toastResult(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        return super.onCreateOptionsMenu(menu);
     }
 
 }
