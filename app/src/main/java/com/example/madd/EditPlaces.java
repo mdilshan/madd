@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class EditPlaces extends AppCompatActivity implements Validator.Validatio
     private static final String TAG = "EditPlaces";
     FirebaseFirestore myDB;
     Button updatebtn;
+
 
     @NotEmpty
     private TextView edit_placeName;
@@ -79,13 +81,21 @@ public class EditPlaces extends AppCompatActivity implements Validator.Validatio
         doc_id =intent.getStringExtra("ids");
         Log.d(TAG, "onCreate: ID RECIEVED " + id);
 
+        ImageView Bck_bttn = findViewById(R.id.back_btn3);
+        Bck_bttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         edit_placeName = findViewById(R.id.editPlace);
         edit_placeLocation = findViewById(R.id.editPlaceLocation);
         edit_placeDescription = findViewById(R.id.editPlaceAbout);
         edit_placeURL = findViewById(R.id.editURL);
         readData(id);
         updatebtn = findViewById(R.id.updateSubmit);
-        if(id != null){
+        if(doc_id != null){
             updatebtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -107,6 +117,7 @@ public class EditPlaces extends AppCompatActivity implements Validator.Validatio
 
             @Override
             public void onValidationSucceeded() {
+                final String doc_id=getDoc_id();
                 if (edit_placeName.getText().toString().length() > 0 ||
                         edit_placeLocation.getText().toString().length() > 0 ||
                         edit_placeDescription.getText().toString().length() > 0 ||
@@ -165,20 +176,26 @@ public class EditPlaces extends AppCompatActivity implements Validator.Validatio
     }
 
     void readData(String id) {
-        DocumentReference documentReference = myDB.collection("places").document(id);
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    edit_placeName.setText(task.getResult().get("place_name").toString());
-                    edit_placeLocation.setText(task.getResult().get("place_location").toString());
-                    edit_placeDescription.setText(task.getResult().get("place_description").toString());
-                    edit_placeURL.setText(task.getResult().get("imageUrl").toString());
+        setDoc_id(id);
+        try {
+            DocumentReference documentReference = myDB.collection("places").document(id);
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        edit_placeName.setText(task.getResult().get("place_name").toString());
+                        edit_placeLocation.setText(task.getResult().get("place_location").toString());
+                        edit_placeDescription.setText(task.getResult().get("place_description").toString());
+                        edit_placeURL.setText(task.getResult().get("imageUrl").toString());
+                    }
                 }
-            }
-        });
+            });
+        }catch (Exception e){
 
-    }
+        }
+
+        }
+
 
     public void toastResult(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

@@ -88,7 +88,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/see_all_places_recycler"
         android:layout_width="407dp"
-        android:layout_height="502dp"
+        android:layout_height="588dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"

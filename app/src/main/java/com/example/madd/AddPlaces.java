@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,6 +72,14 @@ public class AddPlaces extends AppCompatActivity implements Validator.Validation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_places);
         myDB = FirebaseFirestore.getInstance();
+
+        ImageView Bck_bttn = findViewById(R.id.back_btn4);
+        Bck_bttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         addsubmit = findViewById(R.id.addSubmit);
         place_Name = findViewById(R.id.etPlace);
