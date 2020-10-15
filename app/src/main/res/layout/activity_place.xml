@@ -87,8 +87,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recent_recycler"
-        android:layout_width="404dp"
-        android:layout_height="275dp"
+        android:layout_width="409dp"
+        android:layout_height="239dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -144,7 +144,8 @@
         android:id="@+id/button3"
         android:layout_width="70dp"
         android:layout_height="20dp"
-        android:layout_marginStart="224dp"
+        android:layout_marginStart="252dp"
+        android:layout_marginLeft="252dp"
         android:background="@android:color/transparent"
         android:text="See all"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"

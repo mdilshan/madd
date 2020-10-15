@@ -50,13 +50,6 @@ public class PlaceActivity extends AppCompatActivity {
         topPlacesRecycler = findViewById(R.id.top_places_recycler);
         join_place = findViewById(R.id.join_place);
 
-        join_place.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PlaceActivity.this, AddPlaces.class);
-                startActivity(intent);
-            }
-        });
         place_search_home  = findViewById(R.id.place_search_home);
         place_search_home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +74,14 @@ public class PlaceActivity extends AppCompatActivity {
         readPlaceRecentsData();
         readPlaceTopData();
         bottomnav();
+
+        join_place.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PlaceActivity.this, AddPlaces.class);
+                startActivity(intent);
+            }
+        });
     }
     void readPlaceRecentsData() {
         myDB.collection("places").orderBy("joined_on", Query.Direction.DESCENDING).limit(20).addSnapshotListener(new EventListener<QuerySnapshot>() {

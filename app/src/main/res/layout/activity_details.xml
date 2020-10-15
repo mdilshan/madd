@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".DetailsActivity">
 
+
+
     <ImageView
         android:id="@+id/profile_img"
         android:layout_width="411dp"
@@ -35,9 +37,9 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_medium"
+        android:text=""
         android:textColor="@android:color/background_dark"
         android:textSize="16sp"
-        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_img" />
 
@@ -67,39 +69,30 @@
         app:layout_constraintEnd_toStartOf="@+id/place_rating_bars"
         app:layout_constraintTop_toBottomOf="@+id/profile_img" />
 
+
     <TextView
         android:id="@+id/textV8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="24dp"
+        android:textStyle="bold"
         android:text="Joined"
         android:textColor="#044363"
         app:layout_constraintStart_toStartOf="@+id/plc_name"
         app:layout_constraintTop_toBottomOf="@+id/plc_name" />
 
-
     <TextView
         android:id="@+id/place_joined"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:textColor="#363737"
         app:layout_constraintStart_toEndOf="@+id/textV8"
         app:layout_constraintTop_toBottomOf="@+id/plc_name" />
-
-    <TextView
-        android:id="@+id/plc_about"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textV26"
-        app:layout_constraintStart_toEndOf="@+id/textV26"
-        app:layout_constraintTop_toTopOf="@+id/textV26"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/place_review"
@@ -115,31 +108,18 @@
         app:layout_constraintBottom_toBottomOf="@+id/place_joined"
         app:layout_constraintEnd_toEndOf="@+id/place_rating_bars"
         app:layout_constraintTop_toBottomOf="@+id/place_rating_bars"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@drawable/like"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintVertical_bias="0.473" />
 
     <TextView
         android:id="@+id/textV4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_bold"
         android:text="Location"
         android:textColor="@android:color/background_dark"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textV8"
         app:layout_constraintTop_toBottomOf="@+id/textV8" />
 
     <RatingBar
@@ -154,38 +134,22 @@
         app:layout_constraintTop_toTopOf="@+id/place_star"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="233dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="640dp"
-        android:background="@drawable/book_button_bg"
-        android:fontFamily="@font/rubik"
-        android:text="Start Booking Your Trip"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView8" />
-
     <TextView
         android:id="@+id/textV26"
-        android:layout_width="60dp"
+        android:layout_width="383dp"
         android:layout_height="23dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_bold"
+        android:textSize="16sp"
         android:text="About "
         android:textColor="@android:color/background_dark"
-        app:layout_constraintBottom_toTopOf="@+id/imageView8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textV8"
-        app:layout_constraintVertical_bias="0.288" />
+        app:layout_constraintStart_toStartOf="@+id/textV4"
+        app:layout_constraintTop_toBottomOf="@+id/textV4" />
 
     <ImageButton
         android:id="@+id/editButton"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="23dp"
+        android:layout_height="27dp"
         android:layout_marginStart="8dp"
         android:background="#00FFFFFF"
         android:scaleType="centerInside"
@@ -196,8 +160,8 @@
 
     <ImageButton
         android:id="@+id/deleteBtnPlace"
-        android:layout_width="19dp"
-        android:layout_height="19dp"
+        android:layout_width="30dp"
+        android:layout_height="27dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:background="#00FFFFFF"
@@ -206,5 +170,54 @@
         app:layout_constraintStart_toEndOf="@+id/editButton"
         app:layout_constraintTop_toTopOf="@+id/editButton"
         app:srcCompat="@android:drawable/ic_menu_delete" />
+
+    <ScrollView
+        android:id="@+id/Scroll_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textV26"
+        android:scrollbars="vertical"
+        android:fillViewport="true"
+        app:layout_constraintStart_toStartOf="@+id/textV26"
+        app:layout_constraintTop_toBottomOf="@+id/textV26">
+
+        <TextView
+            android:id="@+id/plc_about1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:scrollbars="vertical"/>
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/Scroll_id1"
+        android:layout_width="382dp"
+        android:layout_height="271dp"
+        android:layout_marginTop="4dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="@id/textV26"
+        app:layout_constraintStart_toStartOf="@+id/textV26"
+        app:layout_constraintTop_toBottomOf="@+id/textV26">
+
+        <TextView
+            android:id="@+id/plc_about"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"></TextView>
+
+    </ScrollView>
+
+    <include
+        android:id="@+id/include3"
+        layout="@layout/bottom_nav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
