@@ -67,19 +67,20 @@ public class EditHotel extends AppCompatActivity implements Validator.Validation
     }
 
     public void setDoc_id(String doc_id) {
-        doc_id = doc_id;
+        this.doc_id = doc_id;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_hotel);
-
-        myDB = FirebaseFirestore.getInstance();
         Intent intent = getIntent();
+
         final String id = intent.getStringExtra("ids");
         setDoc_id(intent.getStringExtra("ids"));
         doc_id = intent.getStringExtra("ids");
+
+        myDB = FirebaseFirestore.getInstance();
 
         edit_hotel_name = findViewById(R.id.etedHotelName);
         edit_hotel_location = findViewById(R.id.etedHotelLocation);
@@ -127,8 +128,8 @@ public class EditHotel extends AppCompatActivity implements Validator.Validation
         data.put("hotel_name", edit_hotel_name.getText().toString());
         data.put("location", edit_hotel_location.getText().toString());
         data.put("about", edit_hotel_about.getText().toString());
-        data.put("contact", edit_hotel_about.getText().toString());
-        data.put("image", edit_hotel_about.getText().toString());
+        data.put("contact", edit_hotel_contact.getText().toString());
+        data.put("image", edit_hotel_image.getText().toString());
     try {
         myDB.collection("hotels").document(id_doc).update(data)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -87,16 +87,24 @@
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/dt_hotel_name" />
 
-    <TextView
-        android:id="@+id/dt_hotel_about"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/hcallbtn"
+
+    <ScrollView
+        android:id="@+id/SCROLLER_ID1"
+        android:layout_width="382dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="4dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/textView12"
         app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
-        app:layout_constraintVertical_bias="0.008"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView12">
+
+        <TextView
+            android:id="@+id/dt_hotel_about"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"></TextView>
+    </ScrollView>
 
     <TextView
         android:id="@+id/dt_hotel_review"
@@ -120,7 +128,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/dt_hotel_name"
         app:layout_constraintStart_toEndOf="@+id/dt_hotel_name"
         app:layout_constraintTop_toTopOf="@+id/dt_hotel_name"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
+        app:srcCompat="@drawable/icons8_edit_24" />
 
     <ImageButton
         android:id="@+id/btnHotelDelete"
@@ -137,8 +145,8 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="383dp"
+        android:layout_height="23dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_bold"
         android:text="About"
@@ -200,6 +208,8 @@
         app:layout_constraintBottom_toTopOf="@+id/include"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"  />
+
+
 
     <RatingBar
         android:id="@+id/dt_hotel_rating_bars"

@@ -33,7 +33,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="AM Lake"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/hotel_image"
         app:layout_constraintTop_toTopOf="@+id/hotel_image" />
